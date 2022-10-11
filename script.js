@@ -1,16 +1,21 @@
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
     const sidebarText = document.querySelectorAll("#sidebar span");
+    const sidebarMenu = document.getElementById("sidebar-menu");
 
     if (sidebarText.item(0).classList.contains("d-none")) {
         sidebarText.forEach(text => {
             text.classList.remove("d-none");
         })
+
+        sidebarMenu.style.width = "130px";
     }
     else {
         sidebarText.forEach(text => {
             text.classList.add("d-none");
         })
+
+        sidebarMenu.style.width = "30px";
     }
 }
 
