@@ -1,4 +1,18 @@
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const sidebarText = document.querySelectorAll("#sidebar span");
 
+    if (sidebarText.item(0).classList.contains("d-none")) {
+        sidebarText.forEach(text => {
+            text.classList.remove("d-none");
+        })
+    }
+    else {
+        sidebarText.forEach(text => {
+            text.classList.add("d-none");
+        })
+    }
+}
 
 document.getElementById("simpleEditor").addEventListener('click', () => {
     document.getElementById("simpleEditor").classList.add("d-none");
@@ -12,6 +26,11 @@ document.getElementById("fullEditor").addEventListener('focusout', (event) => {
     document.getElementById("fullEditor").classList.add("d-none");
     document.getElementById("simpleEditor").classList.remove("d-none");
 })
+
+document.getElementById("sidebar-btn").addEventListener('click', toggleSidebar);
+
+
+
 
 /*
 window.addEventListener("click", (event) => {

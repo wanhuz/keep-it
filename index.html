@@ -13,9 +13,9 @@
 
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-warning text-light fixed-top w-100">
+    <nav class="navbar navbar-expand-lg bg-warning text-light sticky-top w-100">
         <div class="container-fluid w-100">
-            <button class="btn" type="button" data-bs-target="#sidebar" data-bs-toggle="collapse"><span class="navbar-toggler-icon"></span></button>
+            <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon"></span></button>
             <a class="navbar-brand" href="#">Keep-it</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <h5>/Anime List</h5>
@@ -31,28 +31,32 @@
 
     <!-- Contents -->
 
-  <div class="container-fluid">
-        <div class="row">        
-            <div class="col-2 bg-light vh-100 collapse collapse-horizontal overflow-hidden " id="sidebar">
-                <div class="d-flex flex-column gap-2 text-left mt-4 mx-auto" role="group" aria-label="Vertical button group" id="sidebar-menu">
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Anime List</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Cash shop</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>To do List</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Reminder</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Emergency</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>To do List</button>
+  <div class="container-fluid" >
+        <div class="row">    
+            <!-- <div class="col-2 bg-light vh-100 collapse collapse-horizontal overflow-hidden w-auto pe-4"  id="sidebar" > -->
+            <div class="col-2 bg-light vh-100 overflow-hidden pe-4 w-auto"  id="sidebar" >
+                <div class="d-flex flex-column gap-2 text-left mt-4 mx-auto" style="width: 160px;" role="group" aria-label="Vertical button group" id="sidebar-menu">
+                    <div class="d-flex flex-column position-fixed bg-light vh-100 ms-4">
+                        <button type="button" class="btn btn-light ml-n4 text-start "><i class="bi bi-arrow-through-heart-fill"></i><span>Anime List</span></button>
+                        <button type="button" class="btn btn-light ml-n4 text-start"><i class="bi bi-arrow-through-heart-fill"></i><span>Cash shop</span></button>
+                        <button type="button" class="btn btn-light ml-n4 text-start"><i class="bi bi-arrow-through-heart-fill"></i><span>To do List</span></button>
+                        <button type="button" class="btn btn-light ml-n4 text-start"><i class="bi bi-arrow-through-heart-fill"></i><span>Reminder</span></button>
+                        <button type="button" class="btn btn-light ml-n4 text-start"><i class="bi bi-arrow-through-heart-fill"></i><span>Emergency</span></button>
+                        <button type="button" class="btn btn-light ml-n4 text-start"><i class="bi bi-arrow-through-heart-fill"></i><span>To do List</span></button>
+                    </div>
                 </div>
             </div>
-            <div class="col" style="margin-top: 100px;">
+
+            <div class="col mt-4">
                 <div class="text-center">
-                    <div id="simpleEditor" class="input-group mb-3 w-50 mx-auto" > 
+                    <div id="simpleEditor" class="input-group mb-3 w-25 mx-auto" > 
                         <input type="text" class="form-control shadow-none" placeholder="Take a note.." aria-label="Note" aria-roledescription="basic-addon1" aria-expanded="false">
                         <button class="btn btn-light btn-outline-secondary">List</button>
                         <button class="btn btn-light btn-outline-secondary">Draw</button>
                         <button class="btn btn-light btn-outline-secondary">Img</button>
                     </div>
                     <div class="d-none" id="fullEditor">
-                        <div class="card m-4 mx-auto w-50">
+                        <div class="card m-4 mx-auto w-25">
                             <div id="fullEditorCard" class="card-body" >
                                 <input type="text" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
                                 <textarea class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3" style="resize: none;"></textarea>
@@ -63,7 +67,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <div class="d-flex flex-row flex-wrap justify-content-center gap-2 mt-4">
+                    <div class="d-flex flex-row flex-wrap justify-content-center gap-3 mt-4">
                         
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">

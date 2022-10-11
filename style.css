@@ -3,3 +3,8 @@
 .ml-n3 { margin-left: -1rem !important; }
 .ml-n4 { margin-left: -1.5rem !important; }
 .ml-n5 { margin-left: -3rem !important; }
+
+
+.v-none {
+    visibility: hidden;
+}
