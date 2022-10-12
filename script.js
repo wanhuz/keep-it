@@ -8,14 +8,22 @@ function toggleSidebar() {
             text.classList.remove("d-none");
         })
 
-        sidebarMenu.style.width = "130px";
+        sidebarMenu.style.width = "230px";
+
+        document.querySelectorAll("#sidebar-menu button").forEach(button => {
+            button.style.borderRadius = "70px;";
+            
+        })
     }
     else {
         sidebarText.forEach(text => {
             text.classList.add("d-none");
         })
 
-        sidebarMenu.style.width = "30px";
+        sidebarMenu.style.width = "20px";
+        document.querySelectorAll("#sidebar-menu button").forEach(button => {
+            button.style.borderRadius = "100px";
+        })
     }
 }
 
