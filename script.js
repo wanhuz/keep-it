@@ -1,3 +1,4 @@
+
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
     const sidebarText = document.querySelectorAll("#sidebar span");
@@ -24,7 +25,13 @@ function toggleSidebar() {
         document.querySelectorAll("#sidebar-menu button").forEach(button => {
             button.style.borderRadius = "100px";
         })
+
+
     }
+}
+
+function reloadItems() {
+    var $cards = $('#card-container').masonry({});
 }
 
 document.getElementById("simpleEditor").addEventListener('click', () => {
@@ -32,6 +39,8 @@ document.getElementById("simpleEditor").addEventListener('click', () => {
     document.getElementById("fullEditor").classList.remove("d-none");
 
     document.getElementById("fullEditorTextArea").focus();
+    var $cards = $('#card-container').masonry({});
+
 });
 
 document.getElementById("fullEditor").addEventListener('focusout', (event) => {
@@ -40,7 +49,10 @@ document.getElementById("fullEditor").addEventListener('focusout', (event) => {
     document.getElementById("simpleEditor").classList.remove("d-none");
 })
 
+const sidebarMenu = $("#sidebar-menu");
+
 document.getElementById("sidebar-btn").addEventListener('click', toggleSidebar);
+sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', reloadItems);
 
 
 
