@@ -8,23 +8,33 @@
 #sidebar-menu {
     transition: width 0.09s;
     width: 230px;
+    
 }
 
 #sidebar-menu button {
-    height: 45px;
-
+    height: 50px;
+    padding-right: 110px;
+    border-radius: 70px;
 }
 
 #searchbar {
-    width: 35%;
+    width: 45%;
 }
 
 #fullEditorTextArea {
     resize: none;
 }
 
-#simpleEditor {
-    width: 25%;
+#editor {
+    width: 500px;
+}
+
+#fullEditor {
+    margin: 0px;
+}
+
+#simpleEditor button {
+    border: 1px solid gainsboro;
 }
 
 .card-title {
@@ -41,8 +51,5 @@
     font-size: 15px;
 }
 
-*, ::after, ::before {
-    box-sizing: border-box;
-}
 
 

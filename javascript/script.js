@@ -13,7 +13,7 @@ function toggleSidebar() {
 
         document.querySelectorAll("#sidebar-menu button").forEach(button => {
             button.style.borderRadius = "70px;";
-            
+            button.style.paddingRight = "110px";
         })
     }
     else {
@@ -24,6 +24,7 @@ function toggleSidebar() {
         sidebarMenu.style.width = "20px";
         document.querySelectorAll("#sidebar-menu button").forEach(button => {
             button.style.borderRadius = "100px";
+            button.style.paddingRight = "10px";
         })
 
 
@@ -39,32 +40,18 @@ document.getElementById("simpleEditor").addEventListener('click', () => {
     document.getElementById("fullEditor").classList.remove("d-none");
 
     document.getElementById("fullEditorTextArea").focus();
-    var $cards = $('#card-container').masonry({});
+
 
 });
 
-// document.getElementById("fullEditor").addEventListener('focusout', (event) => {
-
-//     document.getElementById("fullEditor").classList.add("d-none");
-//     document.getElementById("simpleEditor").classList.remove("d-none");
-// })
+document.getElementById("cancelBtn").addEventListener('click', (event) => {
+    console.log("yes");
+    document.getElementById("fullEditor").classList.add("d-none");
+    document.getElementById("simpleEditor").classList.remove("d-none");
+})
 
 const sidebarMenu = $("#sidebar-menu");
 
 document.getElementById("sidebar-btn").addEventListener('click', toggleSidebar);
 sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', reloadItems);
 
-
-
-
-/*
-window.addEventListener("click", (event) => {
-    if (event.target.id !== "titleTextArea" || event.target.id !== "noteTextArea" || event.target.id !== "simpleEditor") {
-        console.log(event.target.id);
-        document.getElementById("simpleEditor").classList.remove("d-none");
-
-        document.getElementById("fullEditor").classList.add("d-none");
-    }
-} )
-
-*/
