@@ -40,10 +40,7 @@
                     <div class="d-flex flex-column position-fixed vh-100 ">
                         <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
                         <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-bell"></i><span class="ps-4">Reminder</span></button>
-                        <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">To do List</span></button>
-                        <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">Things to buy</span></button>
-                        <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">Emergency</span></button>
-                        <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">To do List</span></button>
+                        <x-tagbutton>Test</x-tagbutton>
                     </div>
                 </div>
             </div>
@@ -60,92 +57,34 @@
 
                     <div class="d-none" id="fullEditor" >
                         <div class="card">
-                            <div id="fullEditorCard" class="card-body" >
-                                <input type="text" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
-                                <textarea class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3"></textarea>
-                            </div>
-                            <div class="card-footer d-flex flex-row">
-                                <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-list-task"></i></button>
-                                <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-image"></i></button>
-                                
-                                <button class="btn btn-light border border-0 ms-auto" id="cancelBtn"><i class="bi bi-x"></i></button>
-                                <button class="btn btn-light border border-0"><i class="bi bi-check-lg"></i></button>
-                            </div>
+                            <form method="POST" action="/posts">
+                                @csrf
+                                <div id="fullEditorCard" class="card-body" >
+                                        <input type="text" name="title" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
+                                        <textarea name="body" id="body" class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3"></textarea>
+                                </div>
+                                <div class="card-footer d-flex flex-row">
+                                    <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-list-task"></i></button>
+                                    <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-image"></i></button>
+                                    
+                                    <button class="btn btn-light border border-0 ms-auto" id="cancelBtn"><i class="bi bi-x"></i></button>
+                                    <button type="submit" class="btn btn-light border border-0"><i class="bi bi-check-lg"></i></button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="text-center">
                     <div class="d-flex flex-row flex-wrap" data-masonry='{"percentPosition": true }' id="card-container">
-                        
-                        <div class="card " style="width: 18rem;" >
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla nobis dolorem esse aliquid eaque veniam aliquam ducimus placeat iusto. Magnam similique accusamus accusantium ut voluptatibus doloremque laborum consectetur aliquam ad?</p>
 
-                            </div>
-                        </div>
-
-                        <div class="card " style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-
-                            </div>
-                        </div>
-
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-
-                            </div>
-                        </div>
-
-                        <div class="card " style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-
-                            </div>
-                        </div>
-                        <div class="card " style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis, culpa magni facere est consequatur aliquam. Asperiores dignissimos dolor recusandae beatae debitis perspiciatis atque est harum delectus dicta! Porro nostrum dicta iste quas sequi! Rerum labore, nihil eveniet provident distinctio ab!</p>
-
-                            </div>
-                        </div>
-                        <div class="card " style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis, culpa magni facere est consequatur aliquam. Asperiores dignissimos dolor recusandae beatae debitis perspiciatis atque est harum delectus dicta! Porro nostrum dicta iste quas sequi! Rerum labore, nihil eveniet provident distinctio ab!</p>
-
-                            </div>
-                        </div>
-                        <div class="card " style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis, culpa magni facere est consequatur aliquam. Asperiores dignissimos dolor recusandae beatae debitis perspiciatis atque est harum delectus dicta! Porro nostrum dicta iste quas sequi! Rerum labore, nihil eveniet provident distinctio ab!</p>
-
-                            </div>
-                        </div>
-
-                        <div class="card " style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-
-                            </div>
-                        </div>
-                        <div class="card " style="width: 18rem;">
-                            <div class="card-body text-start">
-                                <h5 class="card-title ">Card title</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
-
-                            </div>
-                        </div>
-                        
+                        @foreach ($notes as $note)
+                            <x-card>
+                                <x-slot:title>{{$note->title}}</x-slot>
+                                <x-slot:body>{{$note->body}}</x-slot>
+                            </x-card>
+                        @endforeach
+                    
                     </div>
                 </div>
             </div>
