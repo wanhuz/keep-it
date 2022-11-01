@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
-
     
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-warning text-light sticky-top w-100">
@@ -24,8 +23,8 @@
             </div>
             <div class="navbar-right">
                 <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-list-nested me-2"></span></button>
-                <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-gear me-2"></span></button>
                 <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-person-circle me-2"></span></button>
+                <button class="btn" type="button"  id="sidebar-btn2"><span class="bi bi-gear me-2"></span></button>
             </div>
         </div>
     </nav>
@@ -55,9 +54,10 @@
                         </div>
                     </div>
 
+                    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
                     <div class="d-none" id="fullEditor" >
                         <div class="card">
-                            <form method="POST" action="/posts">
+                            <form method="POST" action="/posts" target="dummyframe">
                                 @csrf
                                 <div id="fullEditorCard" class="card-body" >
                                         <input type="text" name="title" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
@@ -68,7 +68,7 @@
                                     <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-image"></i></button>
                                     
                                     <button class="btn btn-light border border-0 ms-auto" id="cancelBtn"><i class="bi bi-x"></i></button>
-                                    <button type="submit" class="btn btn-light border border-0"><i class="bi bi-check-lg"></i></button>
+                                    <button type="submit" class="btn btn-light border border-0" id="submitBtn"><i class="bi bi-check-lg"></i></button>
                                 </div>
                             </form>
                         </div>
