@@ -1,3 +1,8 @@
+$('.grid').masonry({
+    columnWidth: 200,
+    itemSelector: '.grid-item'
+  });
+
 
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");

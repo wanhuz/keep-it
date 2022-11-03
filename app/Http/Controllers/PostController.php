@@ -14,7 +14,7 @@ class PostController extends Controller
     }
 
     public function store(Request $request) {
-        
+
         $attributes = request()->validate([
             'title' => 'required',
             'body' => 'required',
@@ -22,6 +22,10 @@ class PostController extends Controller
     
 
         Notes::create($attributes);
+    }
+
+    public function load() {
+        return json_encode(Notes::all()) ;
     }
 }
 

@@ -57,7 +57,7 @@
                     <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
                     <div class="d-none" id="fullEditor" >
                         <div class="card">
-                            <form method="POST" action="/posts" target="dummyframe">
+                            <form target="dummyframe" id="postform">
                                 @csrf
                                 <div id="fullEditorCard" class="card-body" >
                                         <input type="text" name="title" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
@@ -76,10 +76,12 @@
                 </div>
 
                 <div class="text-center">
-                    <div class="d-flex flex-row flex-wrap" data-masonry='{"percentPosition": true }' id="card-container">
+                    <div class="d-flex flex-row flex-wrap" id="card-container">
 
                         @foreach ($notes as $note)
                             <x-card>
+                                <x-slot:id>{{$note->id}}</x-slot>
+                                <x-slot:updated_at>{{$note->updated_at}}</x-slot>
                                 <x-slot:title>{{$note->title}}</x-slot>
                                 <x-slot:body>{{$note->body}}</x-slot>
                             </x-card>
@@ -93,9 +95,9 @@
     </div>
 
     <script src="{{asset('js/jquery-3.6.1.min.js')}}"></script>
-    <script src="{{asset('js/script.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/script.js')}}"></script>
     
 </body>
 </html>
