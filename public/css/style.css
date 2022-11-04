@@ -4,6 +4,28 @@
 .ml-n4 { margin-left: -1.5rem !important; }
 .ml-n5 { margin-left: -3rem !important; }
 
+.zoom {
+    animation: zoomIn 0.2s;
+    -moz-animation: zoomIn 0.2s; /* Firefox */
+    -webkit-animation: zoomIn 0.2s; /* Safari and Chrome */
+    -o-animation: zoomIn 0.2s; /* Opera */
+}
+@keyframes zoomIn {
+    from { scale:0; }
+    to { scale:1; }
+}
+@-moz-keyframes zoomIn { /* Firefox */
+    from { scale:0; }
+    to { scale:1; }
+}
+@-webkit-keyframes zoomIn { /* Safari and Chrome */
+    from { scale:0; }
+    to { scale:1; }
+}
+@-o-keyframes zoomIn { /* Opera */
+    from { scale:0; }
+    to { scale: 1; }
+}
 
 #sidebar-menu {
     transition: width 0.09s;

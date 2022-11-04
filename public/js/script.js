@@ -1,9 +1,5 @@
 var mediaItemContainer = $( '#card-container' );
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
 mediaItemContainer.masonry( {
     columnWidth:  100,
     itemSelector: '.card'
@@ -210,4 +206,10 @@ $(document).on('click', '#submitBtn', function() {
             updateCardContainer();
         }
     })
+})
+
+$(document).on('click', '.note', function(e) {
+    let text = $(this).data('id');
+    $('#fullNoteEditor').modal('show');
+    console.log(text)
 })
