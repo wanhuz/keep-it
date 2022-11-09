@@ -27,6 +27,31 @@ class PostController extends Controller
     public function load() {
         return json_encode(Notes::all()) ;
     }
+
+    public function update(Request $request) {
+
+        $attributes = request()->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        Notes::where('id', $request->id)->increment('revision_count', 1);
+
+        $note = Notes::find($request->id);
+
+        $note->title = $request->title;
+        $note->body = $request->body;
+
+        $note->save();
+
+    }
+
+    public function delete(Request $request) {
+
+        $note = Notes::find($request->id);
+
+        $note->delete();
+    }
 }
 
 

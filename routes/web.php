@@ -17,6 +17,8 @@ Route::get('/', [PostController::class, 'index']);
 Route::post('/post', [PostController::class, 'store']);
 
 Route::get('/load', [PostController::class, 'load']);
+Route::post('/update', [PostController::class, 'update']);
+Route::post('/delete', [PostController::class, 'delete']);
 //Route::get('/', [PostController::class, 'index'])->middleware('auth');
 //Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 

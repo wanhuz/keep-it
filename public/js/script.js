@@ -63,22 +63,46 @@ const sidebarMenu = $("#sidebar-menu");
 document.getElementById("sidebar-btn").addEventListener('click', toggleSidebar);
 sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', refreshCardContainerLayout);
 
-function getUpdatedNoteId(oldNote, newNote) {
+
+function getNewNoteId(currentNoteData, newNoteData) {
+    let tempCurrentNoteId = new Array();
+    let tempNewNoteId = new Array();
+
+    for (let i = 0; i < currentNoteData.length; i++) {
+        tempCurrentNoteId.push(currentNoteData[i].id);
+    }
+
+    for (let i = 0; i < newNoteData.length; i++) {
+        tempNewNoteId.push(newNoteData[i].id);
+    }
+
+    return tempNewNoteId.filter(newId => !tempCurrentNoteId.includes(newId));
+}
+
+function updateNote(updatedNoteId, newNoteData) {
+    let updatedNoteData = Array.from(newNoteData).filter(newNote => updatedNoteId.includes(newNote.id));
+    
+    updatedNoteData.forEach(noteData => {
+        document.querySelector(`[data-id = "${noteData.id}"] .card-title`).textContent = noteData.title;
+        document.querySelector(`[data-id = "${noteData.id}"] .card-text`).textContent = noteData.body;
+        document.querySelector(`[data-id = "${noteData.id}"]`).setAttribute("data-revision-count", noteData.revision_count);
+    })
 
 }
 
-function getNewNoteId(oldNotesDataId,newNotesDataId) {
-    return newNotesDataId.filter(x => !oldNotesDataId.includes(x));
-}
+function getRemovedNoteId(currentNoteData, newNoteData) {
+    let tempCurrentNoteId = new Array();
+    let tempNewNoteId = new Array();
 
-function updateNote(oldNotesDataId,newNotesDataId, newNoteData) {
-    let matchingNote = newNotesDataId.filter(x => oldNotesDataId.includes(x));
+    for (let i = 0; i < currentNoteData.length; i++) {
+        tempCurrentNoteId.push(currentNoteData[i].id);
+    }
 
+    for (let i = 0; i < newNoteData.length; i++) {
+        tempNewNoteId.push(newNoteData[i].id);
+    }
 
-}
-
-function getRemovedNoteId(oldNotesDataId,newNotesDataId) {
-    return oldNotesDataId.filter(x => !newNotesDataId.includes(x));
+    return tempCurrentNoteId.filter(oldId => !tempNewNoteId.includes(oldId));
 }
 
 function createCard(title, text, id, lastupdated) {
@@ -109,7 +133,7 @@ function createCard(title, text, id, lastupdated) {
     return card;
 }
 
-function addNotes(newNoteId, newNotesData) {
+function addNote(newNoteId, newNotesData) {
     let newCardData = newNotesData.filter(note => note.id == newNoteId);
 
     newCardData.forEach(function(card) {
@@ -133,6 +157,25 @@ function removeNote(removedNotesId) {
     refreshCardContainerLayout();
 }
 
+
+function getUpdatedNoteId(currentNoteData, newNoteData) {
+    let updatedNoteId = new Array();
+
+
+    for (let i = 0; i < currentNoteData.length; i++) {
+        for (let j = 0; j < newNoteData.length; j++) {
+            if ((currentNoteData[i].id == newNoteData[j].id) && (newNoteData[j].revision_count > currentNoteData[i].revisionCount)) {
+                updatedNoteId.push(currentNoteData[i].id);
+                break;
+            }
+        }
+    }
+
+    return updatedNoteId;
+}
+
+$("#sidebar-btn2").on('click', updateCardContainer);
+
 function updateCardContainer() {
     //Get current view data
     let currentNotesDataHtml = document.getElementsByClassName("note");
@@ -142,51 +185,33 @@ function updateCardContainer() {
 
         const note = {
             id: parseInt(currentNotesDataHtml[i].getAttribute('data-id')),
-            lastupdated: new Date(currentNotesDataHtml[i].getAttribute('data-last-updated'))
+            revisionCount: currentNotesDataHtml[i].getAttribute('data-revision-count')
         };
 
         currentNoteData.push(note);
     }
+
 
     //Get new data
     $.ajax({
         url: "/load",
         type: 'GET',
         success: function(data) {
-            let newNotesData = JSON.parse(data);
-            let newNotesId, removedNotesId;
-            let newNotesDataId = new Array();
-            let oldNotesDataId = new Array();
+            let newNoteData = JSON.parse(data);
 
-            for (let i = 0; i < newNotesData.length; i++) {
-                newNotesDataId.push(newNotesData[i].id);
-            }
-            for (let i = 0; i < currentNoteData.length; i++) {
-                oldNotesDataId.push(currentNoteData[i].id);
-            }
+            newNotesId = getNewNoteId(currentNoteData ,newNoteData);
+            removedNotesId = getRemovedNoteId(currentNoteData, newNoteData);
+            updatedNotesId = getUpdatedNoteId(currentNoteData, newNoteData);
 
-            newNotesId = getNewNoteId(oldNotesDataId ,newNotesDataId);
-            removedNotesId = getRemovedNoteId(oldNotesDataId ,newNotesDataId);
-           // updatedNotesId = getUpdatedNoteId(oldNotesDataId ,newNotesDataId, )
-            //return;
-            addNotes(newNotesId, newNotesData);
+            addNote(newNotesId, newNoteData);
             removeNote(removedNotesId);
+            updateNote(updatedNotesId, newNoteData);
             refreshCardContainerLayout();
-            return;
-            //updateNotes(updateNoteId, newNotesData);
-            //removeNotes(removedNoteId, newNotesData);
-
-            let updatedNoteId = getUpdatedNoteId(currentNoteData, newNotesDataJson);
-            let newNoteId = getNewNoteId();
-
-            updateNote(newNoteId, updatedNoteId, newNotesData);
         }
     })
 
-    //If last accessed of new card higher than current card, update its body and title
-
-
 }
+
 
 $(document).on('click', '#submitBtn', function() {
     let formData = $("#postform").serializeArray();
@@ -208,8 +233,65 @@ $(document).on('click', '#submitBtn', function() {
     })
 })
 
+$(document).on('click', '#closeEditorBtn', function(e) {
+    e.preventDefault();
+    let formData = $("#editorForm").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+    let newNoteId = document.querySelector("#fullNoteEditor").dataset.id;
+    let newNoteTitle = formData.find(data => data.name == "title").value;
+    let newNoteBody = formData.find(data => data.name == "body").value;
+
+
+    $.ajax({
+        type: "POST",
+        url: "/update",
+        data: {
+            "_token" : formToken,
+            'title' : newNoteTitle,
+            'body' : newNoteBody,
+            'id' : newNoteId
+        },
+        success: function() {
+            updateCardContainer();
+            $('#fullNoteEditor').modal('hide');
+        }
+    })
+})
+
+$(document).on('click', '#removeBtn', function(e) {
+    e.preventDefault();
+
+    let formData = $("#editorForm").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+    let removedNoteId = document.querySelector("#fullNoteEditor").dataset.id;
+
+    $.ajax({
+        type: "POST",
+        url: "/delete",
+        data: {
+            "_token" : formToken,
+            'id' : removedNoteId
+        },
+        success: function() {
+            updateCardContainer();
+            $('#fullNoteEditor').modal('hide');
+        }
+    })
+})
+
 $(document).on('click', '.note', function(e) {
-    let text = $(this).data('id');
+
     $('#fullNoteEditor').modal('show');
-    console.log(text)
+    let clickId = $(this).data('id');
+
+    document.querySelector("#fullNoteEditor").setAttribute('data-id', clickId);
+    let clickedNoteTitle = document.querySelector(`[data-id = "${clickId}"] .card-title`).outerText;
+    let clickedNoteBody = document.querySelector(`[data-id = "${clickId}"] .card-text`).outerText;
+
+    document.getElementById('titleEditor').value = clickedNoteTitle;
+    document.getElementById('bodyEditor').value = clickedNoteBody;
+})
+
+$('#fullNoteEditor').on('hidden.bs.modal', function () {
+    
 })

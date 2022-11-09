@@ -84,7 +84,7 @@
                         @foreach ($notes as $note)
                             <x-card>
                                 <x-slot:id>{{$note->id}}</x-slot>
-                                <x-slot:updated_at>{{$note->updated_at}}</x-slot>
+                                <x-slot:revision_count>{{$note->revision_count}}</x-slot>
                                 <x-slot:title>{{$note->title}}</x-slot>
                                 <x-slot:body>{{$note->body}}</x-slot>
                             </x-card>
@@ -97,6 +97,7 @@
         </div>
     </div>
 
+    <script>let noteData = {!! json_encode($notes) !!} </script>
     <script src="{{asset('js/jquery-3.6.1.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>

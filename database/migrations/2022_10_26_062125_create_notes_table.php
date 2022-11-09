@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
+            $table->integer('revision_count')->default(0);
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
         });
