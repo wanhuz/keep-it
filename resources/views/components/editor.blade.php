@@ -11,7 +11,7 @@
                     <div class="modal-footer bg-light">
                         <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-list-task"></i></button>
                         <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-image"></i></button> 
-                        <button id="removeBtn" class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-trash"></i></button> 
+                        <button id="removeBtn" class="btn btn-light btn-outline-secondary border border-0 ms-auto"><i class="bi bi-trash"></i></button> 
                         <button type="submit" class="btn btn-light border border-0" id="closeEditorBtn"><i class="bi bi-check-lg"></i></button>
                     </div>
                 </form>

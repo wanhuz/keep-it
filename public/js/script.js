@@ -1,4 +1,5 @@
 var mediaItemContainer = $( '#card-container' );
+let intervalRefresh = window.setInterval(updateCardContainer, 5000)
 
 mediaItemContainer.masonry( {
     columnWidth:  100,
@@ -113,7 +114,6 @@ function createCard(title, text, id, lastupdated) {
     let titleNode = document.createTextNode(title);
     let textNode = document.createTextNode(text);
     card.dataset.id = id;
-    card.dataset.lastupdated = lastupdated;
 
     card.classList.add("card");
     card.classList.add("note");
@@ -229,6 +229,7 @@ $(document).on('click', '#submitBtn', function() {
         },
         success: function() {
             updateCardContainer();
+            $("#postform")[0].reset();
         }
     })
 })
@@ -293,5 +294,5 @@ $(document).on('click', '.note', function(e) {
 })
 
 $('#fullNoteEditor').on('hidden.bs.modal', function () {
-    
+    document.querySelector("#fullNoteEditor").setAttribute('data-id', -1);
 })

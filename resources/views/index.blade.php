@@ -57,14 +57,15 @@
                         </div>
                     </div>
 
-                    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+                    <!-- Iframe will prevent page from breaking when closing the editor -->
+                    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe> 
                     <div class="d-none" id="fullEditor" >
                         <div class="card">
                             <form target="dummyframe" id="postform">
                                 @csrf
                                 <div id="fullEditorCard" class="card-body" >
                                         <input type="text" name="title" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
-                                        <textarea name="body" id="body" class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3"></textarea>
+                                        <textarea name="body" id="bodyTextArea" class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3"></textarea>
                                 </div>
                                 <div class="card-footer d-flex flex-row">
                                     <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-list-task"></i></button>
