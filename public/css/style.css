@@ -1,0 +1,78 @@
+.ml-n1 { margin-left: -0.25rem !important; }
+.ml-n2 { margin-left: -0.5rem !important; }
+.ml-n3 { margin-left: -1rem !important; }
+.ml-n4 { margin-left: -1.5rem !important; }
+.ml-n5 { margin-left: -3rem !important; }
+
+.zoom {
+    animation: zoomIn 0.2s;
+    -moz-animation: zoomIn 0.2s; /* Firefox */
+    -webkit-animation: zoomIn 0.2s; /* Safari and Chrome */
+    -o-animation: zoomIn 0.2s; /* Opera */
+}
+@keyframes zoomIn {
+    from { scale:0; }
+    to { scale:1; }
+}
+@-moz-keyframes zoomIn { /* Firefox */
+    from { scale:0; }
+    to { scale:1; }
+}
+@-webkit-keyframes zoomIn { /* Safari and Chrome */
+    from { scale:0; }
+    to { scale:1; }
+}
+@-o-keyframes zoomIn { /* Opera */
+    from { scale:0; }
+    to { scale: 1; }
+}
+
+#sidebar-menu {
+    transition: width 0.09s;
+    width: 230px;
+}
+
+#sidebar-menu button {
+    height: 50px;
+    border-radius: 100px;
+}
+
+#searchbar {
+    width: 45%;
+}
+
+#fullEditorTextArea {
+    resize: none;
+}
+
+#editor {
+    width: 500px;
+}
+
+#fullEditor {
+    margin: 0px;
+}
+
+#simpleEditor button {
+    border: 1px solid gainsboro;
+}
+
+.card-title {
+    font-size: medium;
+}
+
+.card {
+    margin: 5px;
+
+
+}
+
+.card-text {
+    font-size: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+

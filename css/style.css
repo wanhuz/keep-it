@@ -1,0 +1,55 @@
+.ml-n1 { margin-left: -0.25rem !important; }
+.ml-n2 { margin-left: -0.5rem !important; }
+.ml-n3 { margin-left: -1rem !important; }
+.ml-n4 { margin-left: -1.5rem !important; }
+.ml-n5 { margin-left: -3rem !important; }
+
+
+#sidebar-menu {
+    transition: width 0.09s;
+    width: 230px;
+    
+}
+
+#sidebar-menu button {
+    height: 50px;
+    padding-right: 110px;
+    border-radius: 70px;
+}
+
+#searchbar {
+    width: 45%;
+}
+
+#fullEditorTextArea {
+    resize: none;
+}
+
+#editor {
+    width: 500px;
+}
+
+#fullEditor {
+    margin: 0px;
+}
+
+#simpleEditor button {
+    border: 1px solid gainsboro;
+}
+
+.card-title {
+    font-size: medium;
+}
+
+.card {
+    margin: 5px;
+
+
+}
+
+.card-text {
+    font-size: 15px;
+}
+
+
+

@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keep-It!</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Stuffit</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
 
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-warning text-light fixed-top w-100">
+    <nav class="navbar navbar-expand-lg bg-warning text-light sticky-top w-100">
         <div class="container-fluid w-100">
-            <button class="btn" type="button" data-bs-target="#sidebar" data-bs-toggle="collapse"><span class="navbar-toggler-icon"></span></button>
-            <a class="navbar-brand" href="#">Keep-it</a>
+            <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon me-2"></span></button>
+            <a class="navbar-brand me-5" href="#">Stuffit</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <h5>/Anime List</h5>
-
-                <form class="d-flex ms-5 w-25 " role="search">
+                <form class="d-flex ms-5" role="search" id="searchbar">
                     <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
                 </form>
+            </div>
+            <div class="navbar-right">
+                <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-list-nested me-2"></span></button>
+                <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-gear me-2"></span></button>
+                <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-person-circle me-2"></span></button>
             </div>
         </div>
     </nav>
@@ -31,227 +33,104 @@
 
     <!-- Contents -->
 
-  <div class="container-fluid">
-        <div class="row">        
-            <div class="col-2 bg-light vh-100 collapse collapse-horizontal overflow-hidden " id="sidebar">
-                <div class="d-flex flex-column gap-2 text-left mt-4 mx-auto" role="group" aria-label="Vertical button group" id="sidebar-menu">
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Anime List</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Cash shop</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>To do List</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Reminder</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>Emergency</button>
-                    <button type="button" class="btn btn-light ml-n4 ps-5 py-2 text-start"><i class="bi bi-arrow-through-heart-fill pe-2"></i>To do List</button>
+  <div class="container-fluid" >
+        <div class="row">    
+            <div class="col-2 bg-light vh-100 overflow-hidden pe-3 w-auto" id="sidebar" >
+                <div class="d-flex flex-column  gap-2 text-left mt-2 mx-auto" role="group" aria-label="Vertical button group" id="sidebar-menu">
+                    <div class="d-flex flex-column position-fixed vh-100 ms-4">
+                        <button type="button" class="btn btn-light ml-n5 ps-4 text-start"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
+                        <button type="button" class="btn btn-light ml-n5 ps-4 text-start"><i class="bi bi-bell"></i><span class="ps-4">Reminder</span></button>
+                        <button type="button" class="btn btn-light ml-n5 ps-4 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">To do List</span></button>
+                        <button type="button" class="btn btn-light ml-n5 ps-4 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">Things to buy</span></button>
+                        <button type="button" class="btn btn-light ml-n5 ps-4 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">Emergency</span></button>
+                        <button type="button" class="btn btn-light ml-n5 ps-4 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">To do List</span></button>
+                    </div>
                 </div>
             </div>
-            <div class="col" style="margin-top: 100px;">
-                <div class="text-center">
-                    <div id="simpleEditor" class="input-group mb-3 w-50 mx-auto" > 
-                        <input type="text" class="form-control shadow-none" placeholder="Take a note.." aria-label="Note" aria-roledescription="basic-addon1" aria-expanded="false">
-                        <button class="btn btn-light btn-outline-secondary">List</button>
-                        <button class="btn btn-light btn-outline-secondary">Draw</button>
-                        <button class="btn btn-light btn-outline-secondary">Img</button>
+
+            <div class="col mt-4">
+                <div class="container mb-3" id="editor">
+                    <div class="text-center ">
+                        <div id="simpleEditor" class="input-group mb-3 "> 
+                            <input type="text" class="form-control shadow-none" placeholder="Take a note.." aria-label="Note" aria-roledescription="basic-addon1" aria-expanded="false">
+                            <button class="btn btn-light btn-outline-secondary" id="cancel-btn"><i class="bi bi-list-task"></i></button>
+                            <button class="btn btn-light btn-outline-secondary"><i class="bi bi-image"></i></button>
+                        </div>
                     </div>
-                    <div class="d-none" id="fullEditor">
-                        <div class="card m-4 mx-auto w-50">
+
+                    <div class="d-none" id="fullEditor" >
+                        <div class="card">
                             <div id="fullEditorCard" class="card-body" >
                                 <input type="text" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
-                                <textarea class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3" style="resize: none;"></textarea>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                                <textarea class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3"></textarea>
+                            </div>
+                            <div class="card-footer d-flex flex-row">
+                                <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-list-task"></i></button>
+                                <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-image"></i></button>
+                                
+                                <button class="btn btn-light border border-0 ms-auto" id="cancelBtn"><i class="bi bi-x"></i></button>
+                                <button class="btn btn-light border border-0"><i class="bi bi-check-lg"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="text-center">
-                    <div class="d-flex flex-row flex-wrap justify-content-center gap-2 mt-4">
+                    <div class="d-flex flex-row flex-wrap" data-masonry='{"percentPosition": true }' id="card-container">
                         
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                        <div class="card " style="width: 18rem;" >
+                            <div class="card-body text-start">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla nobis dolorem esse aliquid eaque veniam aliquam ducimus placeat iusto. Magnam similique accusamus accusantium ut voluptatibus doloremque laborum consectetur aliquam ad?</p>
+
+                            </div>
+                        </div>
+
+                        <div class="card " style="width: 18rem;">
+                            <div class="card-body text-start">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+
                             </div>
                         </div>
 
                         <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                            <div class="card-body text-start">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
+
                             </div>
                         </div>
 
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
+                        <div class="card " style="width: 18rem;">
+                            <div class="card-body text-start">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
 
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
                             </div>
                         </div>
+                        <div class="card " style="width: 18rem;">
+                            <div class="card-body text-start">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis, culpa magni facere est consequatur aliquam. Asperiores dignissimos dolor recusandae beatae debitis perspiciatis atque est harum delectus dicta! Porro nostrum dicta iste quas sequi! Rerum labore, nihil eveniet provident distinctio ab!</p>
 
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
                             </div>
                         </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
+                        <div class="card " style="width: 18rem;">
+                            <div class="card-body text-start">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
 
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
                             </div>
                         </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
+                        <div class="card " style="width: 18rem;">
+                            <div class="card-body text-start">
+                                <h5 class="card-title ">Card title</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </p>
 
-
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -259,8 +138,10 @@
         </div>
     </div>
 
-
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="/javascript/jquery-3.6.1.min.js"></script>
+    <script src="/javascript/script.js"></script>
+    <script src="/javascript/bootstrap.bundle.min.js"></script>
+    <script src="/javascript/masonry.pkgd.min.js"></script>
+    
 </body>
 </html>

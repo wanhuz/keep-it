@@ -3,3 +3,46 @@
 .ml-n3 { margin-left: -1rem !important; }
 .ml-n4 { margin-left: -1.5rem !important; }
 .ml-n5 { margin-left: -3rem !important; }
+
+
+#sidebar-menu {
+    transition: width 0.09s;
+    width: 230px;
+}
+
+#sidebar-menu button {
+    height: 45px;
+
+}
+
+#searchbar {
+    width: 35%;
+}
+
+#fullEditorTextArea {
+    resize: none;
+}
+
+#simpleEditor {
+    width: 25%;
+}
+
+.card-title {
+    font-size: medium;
+}
+
+.card {
+    margin: 5px;
+
+
+}
+
+.card-text {
+    font-size: 15px;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+
