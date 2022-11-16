@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,9 @@ Route::post('/post', [PostController::class, 'store']);
 Route::get('/load', [PostController::class, 'load']);
 Route::post('/update', [PostController::class, 'update']);
 Route::post('/delete', [PostController::class, 'delete']);
+
+Route::post('/post-tag', [TagController::class, 'add']);
+Route::get('/load-tag', [TagController::class, 'load']);
 //Route::get('/', [PostController::class, 'index'])->middleware('auth');
 //Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 

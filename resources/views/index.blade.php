@@ -11,6 +11,9 @@
 </head>
 <body>
 
+    <!-- Tag editor -->
+    <x-tag-add></x-tag-add>
+
     <!-- Fullscreen text editor -->
     <x-editor></x-editor>
     
@@ -38,15 +41,19 @@
   <div class="container-fluid" >
         <div class="row">    
             <div class="col-2 bg-light vh-100 overflow-hidden w-auto" id="sidebar">
-                <div class="d-flex flex-column gap-2 text-left mt-2" role="group" aria-label="Vertical button group" id="sidebar-menu" >
-                    <div class="d-flex flex-column position-fixed vh-100 ">
+                <div class="d-flex  flex-column gap-2 justify-between-content text-left mt-2" role="group" aria-label="Vertical button group" id="sidebar-menu" >
+                    <div id="sidebarBtn" class="d-flex flex-column position-fixed vh-100 ">
                         <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
-                        <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-bell"></i><span class="ps-4">Reminder</span></button>
-                        <x-tagbutton>Test</x-tagbutton>
+                        <div id="tagList" class="d-flex flex-column">
+                            @foreach ($tags as $tag)
+                                <x-tag-sidebtn>{{$tag->name}}</x-tag-sidebtn>
+                            @endforeach
+                        </div>
+                        <button type="button" id="tagEditorBtn" class="btn btn-light ms-1 text-start"><i class="bi bi-plus-circle"></i><span class="ps-4">Add new tag</span></button>
                     </div>
                 </div>
             </div>
-
+            
             <div class="col mt-4">
                 <div class="container mb-3" id="editor">
                     <div class="text-center ">
@@ -98,8 +105,9 @@
         </div>
     </div>
 
-    <script>let noteData = {!! json_encode($notes) !!} </script>
+    <!-- <script>let allTag = {!! json_encode($tags) !!} </script> -->
     <script src="{{asset('js/jquery-3.6.1.min.js')}}"></script>
+    <script src="{{asset('js/popper.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
     <script src="{{asset('js/script.js')}}"></script>

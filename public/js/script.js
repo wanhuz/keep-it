@@ -1,5 +1,14 @@
 var mediaItemContainer = $( '#card-container' );
-let intervalRefresh = window.setInterval(updateCardContainer, 5000)
+
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+let intervalRefresh = window.setInterval(updatePage, 5000)
+
+function updatePage() {
+    updateCardContainer();
+    //refreshSidebar();
+}
 
 mediaItemContainer.masonry( {
     columnWidth:  100,
@@ -174,7 +183,7 @@ function getUpdatedNoteId(currentNoteData, newNoteData) {
     return updatedNoteId;
 }
 
-$("#sidebar-btn2").on('click', updateCardContainer);
+$("#sidebar-btn2").on('click', refreshSidebar);
 
 function updateCardContainer() {
     //Get current view data
@@ -212,6 +221,48 @@ function updateCardContainer() {
 
 }
 
+function createTagSidebarBtn(tagText) {
+    let sidebarBtn = document.createElement("button");
+    sidebarBtn.classList.add("btn");
+    sidebarBtn.classList.add("btn-light");
+    sidebarBtn.classList.add("ms-1");
+    sidebarBtn.classList.add("text-start");
+
+    let icon = document.createElement("i");
+    icon.classList.add("bi");
+    icon.classList.add("bi-bookmark");
+
+    let text = document.createElement("span");
+    text.classList.add("ps-4");
+    text.textContent = tagText;
+
+    
+    sidebarBtn.append(icon);
+    sidebarBtn.append(text);
+    
+    return sidebarBtn;
+}
+
+function refreshSidebar() {
+
+    $.ajax({
+        url: "/load-tag",
+        type: 'GET',
+        success: function(data) {
+            let allTag = data;
+
+            let sidebarBtnContainer = document.getElementById("tagList");
+            sidebarBtnContainer.innerHTML = "";
+
+            allTag.forEach(tag => {
+                sidebarBtnContainer.append(createTagSidebarBtn(tag.name));
+            });
+
+            
+        }
+    })
+}
+
 
 $(document).on('click', '#submitBtn', function() {
     let formData = $("#postform").serializeArray();
@@ -241,7 +292,6 @@ $(document).on('click', '#closeEditorBtn', function(e) {
     let newNoteId = document.querySelector("#fullNoteEditor").dataset.id;
     let newNoteTitle = formData.find(data => data.name == "title").value;
     let newNoteBody = formData.find(data => data.name == "body").value;
-
 
     $.ajax({
         type: "POST",
@@ -295,4 +345,82 @@ $(document).on('click', '.note', function(e) {
 
 $('#fullNoteEditor').on('hidden.bs.modal', function () {
     document.querySelector("#fullNoteEditor").setAttribute('data-id', -1);
+})
+
+$("#tagEditorBtn").on('click', function(e) {
+    e.preventDefault();
+
+    $('#tagEditorModal').modal('show');
+})
+
+$(document).on('click', '#addTagBtn', function(e) {
+    e.preventDefault();
+
+    let formData = $("#tagAddForm").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+    let newTagName = formData.find(data => data.name == "tagName").value;
+
+    $.ajax({
+        type: "POST",
+        url: "/post-tag",
+        data: {
+            "_token" : formToken,
+            'name' : newTagName
+        },
+        success: function() {
+            $("#tagAddForm")[0].reset();
+            refreshSidebar();
+        }
+    })
+})
+
+$("#tagNoteBtn").on('click', function(e) {
+    e.preventDefault();
+
+})
+
+
+
+$("#editorTagList").on('click', function (e) {
+
+    function createEditorTagCheckBox(name) {
+        let tag = `
+        <label class="dropdown-item"> <input type="checkbox" name="${name}" value="${name}">
+            <span class="ps-2">${name}</span>
+        </label>
+        `;
+
+        let labelTag = document.createElement("label");
+        labelTag.classList.add("dropdown-item");
+        let inputTag = document.createElement("input");
+        inputTag.type = "checkbox";
+        inputTag.name = name;
+        inputTag.value = name;
+        let textTag = document.createElement("span");
+        textTag.classList.add("ps-2");
+        textTag.textContent = name;
+
+        labelTag.append(inputTag);
+        labelTag.append(textTag);
+
+        return labelTag;
+    }
+
+    $.ajax({
+        url: "/load-tag",
+        type: 'GET',
+        success: function(data) {
+            let allTag = data;
+            let tagEditorContainer = document.getElementById("tagEditorCheckbox");
+            tagEditorContainer.innerHTML = "";
+
+            allTag.forEach(tag => {
+                tagEditorContainer.append(createEditorTagCheckBox(tag.name));
+            });
+        }
+    })
+});
+
+$(".dropdown-menu").on('click', function (e) {
+    e.stopPropagation();
 })

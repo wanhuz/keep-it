@@ -4,4 +4,9 @@
         <h5 class="card-title">{{ $title }}</h5>
         <p class="card-text">{{ $body }}</p>
     </div>
+    <div class="card-tag d-flex flex-row flex-wrap">
+ 
+    </div>
+
+
 </div>

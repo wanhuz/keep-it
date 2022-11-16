@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notes;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index() {
         $notes = Notes::all();
+        $tags = Tag::all();
 
-        return view('index', compact('notes'));
+        return view('index', ['notes' => $notes], ['tags' => $tags]);
     }
 
     public function store(Request $request) {
