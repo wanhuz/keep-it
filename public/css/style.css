@@ -77,3 +77,13 @@ textarea {
 }
 
 
+.card-tag {
+    width: fit-content; 
+    height: 24px; 
+    font-size: 12px;
+    background: #e9ecef;
+}
+
+.bg-light-dark {
+    background: #e9ecef;
+}

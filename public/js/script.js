@@ -5,6 +5,7 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 
 let intervalRefresh = window.setInterval(updatePage, 5000)
 
+updateNoteTag();
 function updatePage() {
     updateCardContainer();
     //refreshSidebar();
@@ -183,7 +184,7 @@ function getUpdatedNoteId(currentNoteData, newNoteData) {
     return updatedNoteId;
 }
 
-$("#sidebar-btn2").on('click', refreshSidebar);
+$("#sidebar-btn2").on('click', updateNoteTag);
 
 function updateCardContainer() {
     //Get current view data
@@ -336,11 +337,20 @@ $(document).on('click', '.note', function(e) {
     let clickId = $(this).data('id');
 
     document.querySelector("#fullNoteEditor").setAttribute('data-id', clickId);
-    let clickedNoteTitle = document.querySelector(`[data-id = "${clickId}"] .card-title`).outerText;
-    let clickedNoteBody = document.querySelector(`[data-id = "${clickId}"] .card-text`).outerText;
+    let clickedNoteTitle = document.querySelector(`.card.note[data-id="${clickId}"] .card-title`).outerText;
+    let clickedNoteBody = document.querySelector(`.card.note[data-id="${clickId}"] .card-text`).outerText;
+    let clickedNoteTags = document.querySelector(`.card.note[data-id="${clickId}"]`).dataset.tags;
+    clickedNoteTags = String(clickedNoteTags).split(",");
 
     document.getElementById('titleEditor').value = clickedNoteTitle;
     document.getElementById('bodyEditor').value = clickedNoteBody;
+    let tagEditor = document.getElementById("editorTags");
+
+    tagEditor.innerHTML = "";
+    clickedNoteTags.forEach(tag => {
+        tagEditor.append(createNoteTag(tag));
+    });
+
 })
 
 $('#fullNoteEditor').on('hidden.bs.modal', function () {
@@ -424,3 +434,53 @@ $("#editorTagList").on('click', function (e) {
 $(".dropdown-menu").on('click', function (e) {
     e.stopPropagation();
 })
+
+function createNoteTag(tagName) {
+    `<button class="card-tag btn  bg-light rounded-pill text-center pt-0 ms-2 my-2 "><p class="mb-5">text</p></button>`
+
+    let btn = document.createElement("button");
+    btn.classList.add("card-tag", "btn", "btn-light", "rounded-pill", "text-center", "pt-0", "ms-2", "my-2");
+    let text = document.createElement("p");
+    text.classList.add("mb-5");
+    text.textContent = tagName;
+    btn.append(text);
+
+    return btn;
+}
+
+function updateNoteTag() {
+
+    function getUpdatedTag(newTag) {
+        let oldTag = document.query
+    }
+
+    $.ajax({
+        url: "/load-note-tag",
+        type: 'GET',
+        success: function(noteTags) {
+            let noteId = Array();
+
+
+            
+            noteTags.forEach(noteTag => { (!(noteId.includes(noteTag.notes_id))) ? noteId.push(noteTag.notes_id) : 0}); // Get unique id
+            
+            noteId.forEach(id => {
+                let cardById = document.querySelector(`[data-id = "${id}"]`);
+                let cardTags = Array();
+                let noteTagContainer = document.querySelector(`[data-id = "${id}"] .card-tags`);
+                let noteTagById = noteTags.filter(note => note.notes_id == id);
+                
+
+
+                noteTagContainer.innerHTML = ""
+                noteTagById.forEach(tag => {
+                    noteTagContainer.append(createNoteTag(tag.name));
+                    cardTags.push(tag.name);
+                })
+
+                cardById.setAttribute("data-tags", cardTags);
+            })
+
+        }
+    })
+}

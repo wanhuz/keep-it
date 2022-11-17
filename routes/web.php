@@ -23,6 +23,7 @@ Route::post('/delete', [PostController::class, 'delete']);
 
 Route::post('/post-tag', [TagController::class, 'add']);
 Route::get('/load-tag', [TagController::class, 'load']);
+Route::get('/load-note-tag', [TagController::class, 'load_notes_tag']);
 //Route::get('/', [PostController::class, 'index'])->middleware('auth');
 //Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 

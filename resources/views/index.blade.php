@@ -88,7 +88,6 @@
 
                 <div class="text-center">
                     <div class="d-flex flex-row flex-wrap" id="card-container">
-
                         @foreach ($notes as $note)
                             <x-card>
                                 <x-slot:id>{{$note->id}}</x-slot>
@@ -105,7 +104,8 @@
         </div>
     </div>
 
-    <!-- <script>let allTag = {!! json_encode($tags) !!} </script> -->
+    
+
     <script src="{{asset('js/jquery-3.6.1.min.js')}}"></script>
     <script src="{{asset('js/popper.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>

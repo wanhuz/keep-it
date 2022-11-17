@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index() {
         $notes = Notes::all();
         $tags = Tag::all();
-
+        
         return view('index', ['notes' => $notes], ['tags' => $tags]);
     }
 
