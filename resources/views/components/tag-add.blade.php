@@ -1,4 +1,4 @@
-<div class="modal zoom" id="tagEditorModal" tabindex="-1" aria-labelledby="tagEditorModalLabel" aria-hidden="true">
+<div class="modal zoom" id="tagAddModal" tabindex="-1" aria-labelledby="tagAddModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header border-bottom-0 pb-0 mb-0 ">

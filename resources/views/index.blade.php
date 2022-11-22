@@ -49,7 +49,7 @@
                                 <x-tag-sidebtn>{{$tag->name}}</x-tag-sidebtn>
                             @endforeach
                         </div>
-                        <button type="button" id="tagEditorBtn" class="btn btn-light ms-1 text-start"><i class="bi bi-plus-circle"></i><span class="ps-4">Add new tag</span></button>
+                        <button type="button" id="tagAddBtn" class="btn btn-light ms-1 text-start"><i class="bi bi-plus-circle"></i><span class="ps-4">Add new tag</span></button>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,13 @@
     <script src="{{asset('js/popper.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
-    <script src="{{asset('js/script.js')}}"></script>
+    <script src="{{asset('js/index/tag.js')}}"></script>
+    <script src="{{asset('js/index/card.js')}}"></script>
+    <script src="{{asset('js/index/sidebar.js')}}"></script>
+    <script src="{{asset('js/index/editor.js')}}"></script>
+    <script src="{{asset('js/index/misc.js')}}"></script>
+    <script src="{{asset('js/index/init.js')}}"></script>
+    <!-- <script src="{{asset('js/script.js')}}"></script> -->
     
 </body>
 </html>
