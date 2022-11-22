@@ -337,15 +337,21 @@ $(document).on('click', '.note', function(e) {
     let clickId = $(this).data('id');
 
     document.querySelector("#fullNoteEditor").setAttribute('data-id', clickId);
+    let tagEditor = document.getElementById("editorTags");
     let clickedNoteTitle = document.querySelector(`.card.note[data-id="${clickId}"] .card-title`).outerText;
     let clickedNoteBody = document.querySelector(`.card.note[data-id="${clickId}"] .card-text`).outerText;
     let clickedNoteTags = document.querySelector(`.card.note[data-id="${clickId}"]`).dataset.tags;
-    clickedNoteTags = String(clickedNoteTags).split(",");
 
     document.getElementById('titleEditor').value = clickedNoteTitle;
     document.getElementById('bodyEditor').value = clickedNoteBody;
-    let tagEditor = document.getElementById("editorTags");
 
+    if (clickedNoteTags === undefined)  {
+        tagEditor.innerHTML = "";
+        return;
+    }
+
+    clickedNoteTags = String(clickedNoteTags).split(",");
+    
     tagEditor.innerHTML = "";
     clickedNoteTags.forEach(tag => {
         tagEditor.append(createNoteTag(tag));
@@ -393,7 +399,7 @@ $("#tagNoteBtn").on('click', function(e) {
 
 $("#editorTagList").on('click', function (e) {
 
-    function createEditorTagCheckBox(name) {
+    function createEditorTagCheckBox(name, id) {
         let tag = `
         <label class="dropdown-item"> <input type="checkbox" name="${name}" value="${name}">
             <span class="ps-2">${name}</span>
@@ -401,11 +407,11 @@ $("#editorTagList").on('click', function (e) {
         `;
 
         let labelTag = document.createElement("label");
-        labelTag.classList.add("dropdown-item");
+        labelTag.classList.add("dropdown-item", "tag-checkbox");
         let inputTag = document.createElement("input");
         inputTag.type = "checkbox";
         inputTag.name = name;
-        inputTag.value = name;
+        inputTag.value = id;
         let textTag = document.createElement("span");
         textTag.classList.add("ps-2");
         textTag.textContent = name;
@@ -425,7 +431,7 @@ $("#editorTagList").on('click', function (e) {
             tagEditorContainer.innerHTML = "";
 
             allTag.forEach(tag => {
-                tagEditorContainer.append(createEditorTagCheckBox(tag.name));
+                tagEditorContainer.append(createEditorTagCheckBox(tag.name, tag.id));
             });
         }
     })
@@ -450,19 +456,14 @@ function createNoteTag(tagName) {
 
 function updateNoteTag() {
 
-    function getUpdatedTag(newTag) {
-        let oldTag = document.query
-    }
-
     $.ajax({
         url: "/load-note-tag",
         type: 'GET',
         success: function(noteTags) {
-            let noteId = Array();
+            let noteId = [];
 
-
+            noteTags.forEach(noteTag => { (!(noteId.includes(noteTag.notes_id))) ? noteId.push(noteTag.notes_id) : false}); // Get unique id
             
-            noteTags.forEach(noteTag => { (!(noteId.includes(noteTag.notes_id))) ? noteId.push(noteTag.notes_id) : 0}); // Get unique id
             
             noteId.forEach(id => {
                 let cardById = document.querySelector(`[data-id = "${id}"]`);
@@ -470,8 +471,6 @@ function updateNoteTag() {
                 let noteTagContainer = document.querySelector(`[data-id = "${id}"] .card-tags`);
                 let noteTagById = noteTags.filter(note => note.notes_id == id);
                 
-
-
                 noteTagContainer.innerHTML = ""
                 noteTagById.forEach(tag => {
                     noteTagContainer.append(createNoteTag(tag.name));
@@ -484,3 +483,31 @@ function updateNoteTag() {
         }
     })
 }
+
+$("#submitTag").on('click', function(e) {
+    e.stopPropagation();
+
+    let formData = $("#editorForm").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+    let noteId = document.querySelector("#fullNoteEditor").dataset.id;
+    let updateTag = Array();
+    
+    document.querySelectorAll(".tag-checkbox input:checked").forEach((tagChecked) => {
+        updateTag.push(tagChecked.value);
+    });
+
+    if (updateTag < 1) updateTag.push(0);
+
+    $.ajax({
+        url: "/add-tag",
+        type: 'POST',
+        data: {
+            "_token" : formToken,
+            "notes_id" : noteId,
+            "tag_id" : updateTag
+        },
+        success: function() {
+            updateNoteTag();
+        }
+    })
+});

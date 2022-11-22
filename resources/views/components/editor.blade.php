@@ -13,7 +13,7 @@
                         <button class="btn bg-light-dark rounded-pill text-center pt-0 mx-1 my-1 " id="tagNoteBtn" style="width: fit-content; height: 23px; font-size: 14px;" role="button" data-bs-toggle="dropdown" aria-expanded="false"><p class="mb-5">+</p></button>
                         <div class="dropdown-menu">
                             <div id="tagEditorCheckbox"></div>
-                            <button type="submit" class="mt-3 btn btn-primary border border-0 py-1 px-3 ms-auto d-block me-2" >Save</button>
+                            <button id="submitTag" type="button" class="mt-3 btn btn-primary border border-0 py-1 px-3 ms-auto d-block me-2" >Save</button>
                         </div>
 
                     </div>
