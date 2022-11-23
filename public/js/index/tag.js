@@ -11,23 +11,33 @@ function createTag(tagName) {
     return btn;
 }
 
-function updateTag() {
+function updateTag(callback) {
     $.ajax({
         url: "/load-note-tag",
         type: 'GET',
         success: function(noteTags) {
             let noteId = [];
+            let allNoteId = Array();
+
+            document.querySelectorAll(".note").forEach(note => {
+                allNoteId.push(note.dataset.id);
+            });
 
             noteTags.forEach(noteTag => { (!(noteId.includes(noteTag.notes_id))) ? noteId.push(noteTag.notes_id) : false}); // Get unique id
             
-            
-            noteId.forEach(id => {
-                let cardById = document.querySelector(`[data-id = "${id}"]`);
+            allNoteId.forEach(id => {
+                let cardById = document.querySelector(`.card.note[data-id="${id}"]`);
                 let cardTags = Array();
                 let noteTagContainer = document.querySelector(`[data-id = "${id}"] .card-tags`);
                 let noteTagById = noteTags.filter(note => note.notes_id == id);
                 
                 noteTagContainer.innerHTML = ""
+
+                if (noteTagById.length < 1) {
+                    cardById.removeAttribute("data-tags");
+                    return;
+                }
+
                 noteTagById.forEach(tag => {
                     noteTagContainer.append(createTag(tag.name));
                     cardTags.push(tag.name);
@@ -36,8 +46,33 @@ function updateTag() {
                 cardById.setAttribute("data-tags", cardTags);
             })
 
+            if (typeof(callback) === 'function') callback(noteTags);
+
         }
     })
+}
+
+function updateModalTag(noteTag) {
+    
+    let id = document.querySelector("#fullNoteEditor").dataset.id;
+    let newTag = Array();
+
+    noteTag.forEach(note => {
+        if (note.notes_id == id) 
+            newTag.push(note.name);
+    })
+
+    let tagEditor = document.getElementById("editorTags");
+
+    if (newTag === undefined)  {
+        tagEditor.innerHTML = "";
+        return;
+    }
+    
+    tagEditor.innerHTML = "";
+    newTag.forEach(tag => {
+        tagEditor.append(createTag(tag));
+    });
 }
 
 $("#submitTag").on('click', function(e) {
@@ -52,7 +87,7 @@ $("#submitTag").on('click', function(e) {
         formUpdateTag.push(tagChecked.value);
     });
 
-    if (formUpdateTag < 1) formUpdateTag.push(0);
+    if (formUpdateTag < 1) formUpdateTag.push(0); //Laravel breaks if empty array is posted, 0 is placeholder for if no checkbox is checked
 
     $.ajax({
         url: "/add-tag",
@@ -63,7 +98,7 @@ $("#submitTag").on('click', function(e) {
             "tag_id" : formUpdateTag
         },
         success: function() {
-            updateTag();
+            updateTag(updateModalTag);
         }
     })
 });

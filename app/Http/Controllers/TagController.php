@@ -34,15 +34,15 @@ class TagController extends Controller
         
         $attributes = request()->validate([
             'notes_id' => 'required',
-            'tag_id' => 'required',
+            'tag_id' => 'required' 
         ]);
 
         $note = Notes::find($request->notes_id);
 
-        if (empty($request->tag_id)) {
+        if ($request->tag_id[0] == 0) {
             $note->tags()->detach();
         }
-        else {
+        else { 
             $note->tags()->sync($request->tag_id);
         }
         
