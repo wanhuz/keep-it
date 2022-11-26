@@ -54,6 +54,15 @@ class PostController extends Controller
 
         $note->delete();
     }
+
+    public function load_note_by_tag(Request $request) {
+        $tag = $request->tag;
+
+        return Notes::whereHas('tags', function ($query) use($tag) {
+            return $query->where('tags.name', '=', $tag);
+        })->get();
+        
+    }
 }
 
 

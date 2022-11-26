@@ -6,11 +6,10 @@ const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstra
 
 let contentRefresh = window.setInterval(updatePage, 5000)
 
-updateTag();
+updateCardContainer();
 
 function updatePage() {
     updateCardContainer();
-    //updateNoteTag();
 }
 
 mediaItemContainer.masonry( {

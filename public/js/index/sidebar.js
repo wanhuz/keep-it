@@ -96,6 +96,26 @@ $(document).on('click', '#addTagBtn', function(e) {
     })
 })
 
+$(document).on('click', '.sidebar-btn', function(e) {
+    e.preventDefault();
+
+    let formData = $("#sidebar-btn-form").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+    let clickedTag = e.target.value;
+
+    $.ajax({
+        type: "POST",
+        url: "/load-note-by-tag",
+        data: {
+            "_token" : formToken,
+            'tag' : clickedTag
+        },
+        success: function(taggedNote) {
+            updateCardContainerBasedOnTag(taggedNote);
+        }
+    })
+})
+
 const sidebarMenu = $("#sidebar-menu");
 
 document.getElementById("sidebar-btn").addEventListener('click', toggleSidebar);

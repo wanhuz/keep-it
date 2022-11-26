@@ -46,8 +46,8 @@ function updateTag(callback) {
                 cardById.setAttribute("data-tags", cardTags);
             })
 
+            refreshCardContainerLayout();
             if (typeof(callback) === 'function') callback(noteTags);
-
         }
     })
 }

@@ -138,9 +138,33 @@ function updateCardContainer() {
             addNote(newNotesId, newNoteData);
             removeNote(removedNotesId);
             updateNote(updatedNotesId, newNoteData);
+            updateTag();
             refreshCardContainerLayout();
         }
     })
+}
+
+function clearCardContainer() {
+    document.querySelector("#card-container").innerHTML = "";
+}
+
+function updateCardContainerBasedOnTag(noteData) {
+
+    function addNote(noteData) {
+        noteData.forEach(function(note) {
+            $(mediaItemContainer).prepend(createCard(note.title, note.body, note.id, note.lastupdated));
+        })
+    }
+
+    let noteIdByTag = Array();
+    
+    noteData.forEach(note => {
+        noteIdByTag.push(note.id);
+    })
+
+    clearCardContainer();
+    addNote(noteData);
+    refreshCardContainerLayout();
 }
 
 function refreshCardContainerLayout() {

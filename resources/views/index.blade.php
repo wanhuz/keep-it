@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stuffit</title>
+    <title>Keep-it</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -21,16 +21,16 @@
     <nav class="navbar navbar-expand-lg bg-warning text-light sticky-top w-100">
         <div class="container-fluid w-100">
             <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon me-2"></span></button>
-            <a class="navbar-brand me-5" href="#">Stuffit</a>
+            <a class="navbar-brand me-5" href="#">Keep-it</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="d-flex ms-5" role="search" id="searchbar">
                     <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
             <div class="navbar-right">
-                <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-list-nested me-2"></span></button>
-                <button class="btn" type="button"  id="sidebar-btn"><span class="bi bi-person-circle me-2"></span></button>
-                <button class="btn" type="button"  id="sidebar-btn2"><span class="bi bi-gear me-2"></span></button>
+                <button class="btn" type="button" id="sidebar-btn"><span class="bi bi-list-nested me-2"></span></button>
+                <button class="btn" type="button" id="sidebar-btn"><span class="bi bi-person-circle me-2"></span></button>
+                <button class="btn" type="button" id="sidebar-btn2"><span class="bi bi-gear me-2"></span></button>
             </div>
         </div>
     </nav>
@@ -43,13 +43,19 @@
             <div class="col-2 bg-light vh-100 overflow-hidden w-auto" id="sidebar">
                 <div class="d-flex  flex-column gap-2 justify-between-content text-left mt-2" role="group" aria-label="Vertical button group" id="sidebar-menu" >
                     <div id="sidebarBtn" class="d-flex flex-column position-fixed vh-100 ">
-                        <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
-                        <div id="tagList" class="d-flex flex-column">
-                            @foreach ($tags as $tag)
-                                <x-tag-sidebtn>{{$tag->name}}</x-tag-sidebtn>
-                            @endforeach
-                        </div>
-                        <button type="button" id="tagAddBtn" class="btn btn-light ms-1 text-start"><i class="bi bi-plus-circle"></i><span class="ps-4">Add new tag</span></button>
+                        <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
+                            @csrf
+                            <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
+                            <div id="tagList" class="d-flex flex-column">
+                                @foreach ($tags as $tag)
+                                    <x-tag-sidebtn>
+                                        <x-slot:value>{{$tag->name}}</x-slot>
+                                        {{$tag->name}}
+                                    </x-tag-sidebtn>
+                                @endforeach
+                            </div>
+                            <button type="button" id="tagAddBtn" class="btn btn-light ms-1 text-start"><i class="bi bi-plus-circle"></i><span class="ps-4">Add new tag</span></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -116,7 +122,5 @@
     <script src="{{asset('js/index/editor.js')}}"></script>
     <script src="{{asset('js/index/misc.js')}}"></script>
     <script src="{{asset('js/index/init.js')}}"></script>
-    <!-- <script src="{{asset('js/script.js')}}"></script> -->
-    
 </body>
 </html>
