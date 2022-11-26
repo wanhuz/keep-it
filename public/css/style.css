@@ -3,6 +3,7 @@
 .ml-n3 { margin-left: -1rem !important; }
 .ml-n4 { margin-left: -1.5rem !important; }
 .ml-n5 { margin-left: -3rem !important; }
+.mb-6 { margin-bottom: 5rem !important;}
 
 .zoom {
     animation: zoomIn 0.2s;
@@ -76,3 +77,13 @@ textarea {
 }
 
 
+.card-tag {
+    width: fit-content; 
+    height: 24px; 
+    font-size: 12px;
+    background: #e9ecef;
+}
+
+.bg-light-dark {
+    background: #e9ecef;
+}

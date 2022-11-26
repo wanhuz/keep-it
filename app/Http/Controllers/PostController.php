@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notes;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index() {
         $notes = Notes::all();
-
-        return view('index', compact('notes'));
+        $tags = Tag::all();
+        
+        return view('index', ['notes' => $notes], ['tags' => $tags]);
     }
 
     public function store(Request $request) {
@@ -51,6 +53,15 @@ class PostController extends Controller
         $note = Notes::find($request->id);
 
         $note->delete();
+    }
+
+    public function load_note_by_tag(Request $request) {
+        $tag = $request->tag;
+
+        return Notes::whereHas('tags', function ($query) use($tag) {
+            return $query->where('tags.name', '=', $tag);
+        })->get();
+        
     }
 }
 

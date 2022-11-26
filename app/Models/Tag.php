@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notes extends Model
+class Tag extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'body',
+        'name',
     ];
 
-    public function tags() {
-        return $this->belongsToMany(Tag::class);
+    public function notes() {
+        return $this->belongsToMany(Notes::class);
     }
 }

@@ -1,1 +1,0 @@
-<button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-bookmark"></i><span class="ps-4">{{ $slot }}</span></button>
