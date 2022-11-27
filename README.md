@@ -19,10 +19,6 @@ Keep-it is current a work in progress project. It starts as a hobby project to l
 - Embed image and video in note
 - Ability to customize to user preference such as background image or interface color
 
-## Demo
-
-Demo is available at [Heroku](https://keep-its.herokuapp.com)
-
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
