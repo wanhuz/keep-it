@@ -116,11 +116,27 @@ $(document).on('click', '.sidebar-btn', function(e) {
         },
         success: function(taggedNote) {
             currentPageTag = clickedTag;
-            populateCardContainerBasedOnTag(JSON.parse(taggedNote));
+            populateCardContainer(JSON.parse(taggedNote));
         },
         error: function() {
             currentPageTag = null;
             console.log(`Failed to load note tagged ${clickedTag}`);
+        }
+    })
+})
+
+$("#all-note-sidebar-btn").on('click', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: "/load",
+        type: 'GET',
+        success: function(taggedNote) {
+            currentPageTag = null;
+            populateCardContainer(JSON.parse(taggedNote));
+        },
+        error: function() {
+            console.log(`Failed to load all note`);
         }
     })
 })

@@ -10,15 +10,13 @@ let contentRefresh = window.setInterval(updatePage, 5000)
 updateCardContainer();
 
 function updatePage() {
-    if (currentPageTag) {
+    if (currentPageTag)
         updateCardContainerByTag(currentPageTag);
-    }
-    else {
+    else 
         updateCardContainer();
-    }
 }
 
 mediaItemContainer.masonry( {
     columnWidth:  100,
     itemSelector: '.card'
-} );
+});

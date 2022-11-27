@@ -49,7 +49,7 @@
                     <div id="sidebarBtn" class="d-flex flex-column position-fixed vh-100 ">
                         <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
                             @csrf
-                            <button type="button" class="btn btn-light ms-1 text-start"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
+                            <button type="button" class="btn btn-light ms-1 text-start" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
                             <div id="tagList" class="d-flex flex-column">
                                 @foreach ($tags as $tag)
                                     <x-tag-sidebtn>

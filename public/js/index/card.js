@@ -195,11 +195,11 @@ function clearCardContainer() {
     document.querySelector("#card-container").innerHTML = "";
 }
 
-function populateCardContainerBasedOnTag(noteData) {
+function populateCardContainer(noteData) {
 
     function addNote(noteData) {
         noteData.forEach(function(note) {
-            $(mediaItemContainer).prepend(createCard(note.title, note.body, note.id, note.lastupdated));
+            $(mediaItemContainer).append(createCard(note.title, note.body, note.id, note.lastupdated));
         })
     }
 
@@ -220,6 +220,8 @@ function refreshCardContainerLayout() {
     $(mediaItemContainer).masonry('layout');
 }
 
+
+//Event on click note
 $(document).on('click', '.note', function(e) {
 
     $('#fullNoteEditor').modal('show');
