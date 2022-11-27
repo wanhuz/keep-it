@@ -1,10 +1,10 @@
-<p align="center">
+<p align="left">
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
 ## Keep-It
 
-Keep-it is a sticky note taking web application inspired by services such as Google Keep. It allows user to post sticky note as and organize note using tags. Keep-it is current a work in progress project. 
+Keep-it is a sticky note taking web application inspired by services such as Google Keep. It allows user to post sticky note and organize the note using tags. Keep-it is current a work in progress, and as such is not recommended to be use in daily life. 
 
 ## Current features
 
@@ -13,11 +13,11 @@ Keep-it is current a work in progress project. It starts as a hobby project to l
 - Post note
 - Tag and filter note
 
-## Planned feature
+## Upcoming feature
 
-- Post image and video
 - Search through note
-- Customize to user preference such as background image or sidebar color
+- Embed image and video in note
+- Ability to customize to user preference such as background image or interface color
 
 ## Demo
 
