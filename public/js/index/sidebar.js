@@ -103,6 +103,7 @@ $(document).on('click', '.sidebar-btn', function(e) {
     let formToken = formData.find(data => data.name == "_token").value;
     let clickedTag = e.target.value;
 
+
     $.ajax({
         type: "POST",
         url: "/load-note-by-tag",
@@ -111,7 +112,12 @@ $(document).on('click', '.sidebar-btn', function(e) {
             'tag' : clickedTag
         },
         success: function(taggedNote) {
-            updateCardContainerBasedOnTag(taggedNote);
+            currentPageTag = clickedTag;
+            populateCardContainerBasedOnTag(JSON.parse(taggedNote));
+        },
+        error: function() {
+            currentPageTag = null;
+            console.log(`Failed to load note tagged ${clickedTag}`);
         }
     })
 })

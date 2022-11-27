@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notes;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class PostController extends Controller
 {
@@ -58,9 +59,11 @@ class PostController extends Controller
     public function load_note_by_tag(Request $request) {
         $tag = $request->tag;
 
-        return Notes::whereHas('tags', function ($query) use($tag) {
-            return $query->where('tags.name', '=', $tag);
-        })->get();
+        $note_with_tag = Notes::whereHas('tags', function ($query) use($tag) {
+                                return $query->where('tags.name', '=', $tag);
+                                })->get();
+        
+        return json_encode($note_with_tag);
         
     }
 }

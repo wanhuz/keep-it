@@ -83,12 +83,14 @@ function updateNote(updatedNoteId, newNoteData) {
 }
 
 function createCard(title, text, id, lastupdated) {
+
     let card = document.createElement("div");
     let innerdiv = document.createElement("div");;
     let cardtitle = document.createElement("h5");
     let cardtext = document.createElement("p");
     let titleNode = document.createTextNode(title);
     let textNode = document.createTextNode(text);
+    let cardTagContainer = document.createElement("div");
     card.dataset.id = id;
 
     card.classList.add("card");
@@ -105,6 +107,9 @@ function createCard(title, text, id, lastupdated) {
     cardtext.classList.add("card-text");
     cardtext.append(textNode);
     innerdiv.append(cardtext);
+
+    cardTagContainer.classList.add("card-tags", "d-flex", "flex-row", "flex-wrap", "ms-2");
+    card.append(cardTagContainer);
 
     return card;
 }
@@ -144,11 +149,53 @@ function updateCardContainer() {
     })
 }
 
+function updateCardContainerByTag(tag) {
+    //Get current view data
+    let currentNotesDataHtml = document.getElementsByClassName("note");
+    let currentNoteData = new Array();
+
+    for (let i = 0; i < currentNotesDataHtml.length; i++) {
+
+        const note = {
+            id: parseInt(currentNotesDataHtml[i].getAttribute('data-id')),
+            revisionCount: currentNotesDataHtml[i].getAttribute('data-revision-count')
+        };
+
+        currentNoteData.push(note);
+    }
+
+    let formData = $("#formGetNoteByTag").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+
+    //Get new data
+    $.ajax({
+        type: "POST",
+        url: "/load-note-by-tag",
+        data: {
+            "_token" : formToken,
+            'tag' : tag
+        },
+        success: function(data) {
+            let newNoteData = JSON.parse(data);
+
+            newNotesId = getNewNoteId(currentNoteData ,newNoteData);
+            removedNotesId = getRemovedNoteId(currentNoteData, newNoteData);
+            updatedNotesId = getUpdatedNoteId(currentNoteData, newNoteData);
+
+            addNote(newNotesId, newNoteData);
+            removeNote(removedNotesId);
+            updateNote(updatedNotesId, newNoteData);
+            updateTag();
+            refreshCardContainerLayout();
+        }
+    })
+}
+
 function clearCardContainer() {
     document.querySelector("#card-container").innerHTML = "";
 }
 
-function updateCardContainerBasedOnTag(noteData) {
+function populateCardContainerBasedOnTag(noteData) {
 
     function addNote(noteData) {
         noteData.forEach(function(note) {
@@ -165,6 +212,7 @@ function updateCardContainerBasedOnTag(noteData) {
     clearCardContainer();
     addNote(noteData);
     refreshCardContainerLayout();
+    updateTag();
 }
 
 function refreshCardContainerLayout() {

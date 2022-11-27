@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
+    <!-- Hidden form to get note by tag -->
+    <form id="formGetNoteByTag">
+        @csrf
+    </form>
 
     <!-- Tag editor -->
     <x-tag-add></x-tag-add>

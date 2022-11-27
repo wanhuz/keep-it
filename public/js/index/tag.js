@@ -11,7 +11,7 @@ function createTag(tagName) {
     return btn;
 }
 
-function updateTag(callback) {
+function updateTag(updateModalTag) {
     $.ajax({
         url: "/load-note-tag",
         type: 'GET',
@@ -31,6 +31,9 @@ function updateTag(callback) {
                 let noteTagContainer = document.querySelector(`[data-id = "${id}"] .card-tags`);
                 let noteTagById = noteTags.filter(note => note.notes_id == id);
                 
+                if (noteTagContainer === null)
+                    return;
+
                 noteTagContainer.innerHTML = ""
 
                 if (noteTagById.length < 1) {
@@ -47,7 +50,7 @@ function updateTag(callback) {
             })
 
             refreshCardContainerLayout();
-            if (typeof(callback) === 'function') callback(noteTags);
+            if (typeof(updateModalTag) === 'function') updateModalTag(noteTags);
         }
     })
 }
