@@ -16,6 +16,7 @@ Keep-it is current a work in progress project. It starts as a hobby project to l
 ## Upcoming feature
 
 - Search through note
+- Edit and remove tag
 - Embed image and video in note
 - Ability to customize to user preference such as background image or interface color
 
