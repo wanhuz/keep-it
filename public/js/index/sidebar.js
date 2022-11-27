@@ -103,6 +103,9 @@ $(document).on('click', '.sidebar-btn', function(e) {
     let formToken = formData.find(data => data.name == "_token").value;
     let clickedTag = e.target.value;
 
+    if (clickedTag === undefined) { //If user clicked the icon, return the parent button's value
+        clickedTag = e.target.parentElement.value;
+    }
 
     $.ajax({
         type: "POST",
