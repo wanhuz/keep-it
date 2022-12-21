@@ -87,3 +87,27 @@ textarea {
 .bg-light-dark {
     background: #e9ecef;
 }
+
+.color-picker {
+    background-color: grey;
+}
+
+.squaregrid {
+    width: 250px;
+    height: 250px;
+    margin: 20px;
+    display: grid;
+    grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+    grid-gap: 10px;
+}
+
+.cell {
+    font-size: 1em;
+}
+
+
+.modal-body .tab-content{
+    height: 50vh;
+    width: 50vh;
+}
+

@@ -99,46 +99,22 @@ $(document).on('click', '#addTagBtn', function(e) {
 $(document).on('click', '.sidebar-btn', function(e) {
     e.preventDefault();
 
-    let formData = $("#sidebar-btn-form").serializeArray();
-    let formToken = formData.find(data => data.name == "_token").value;
     let clickedTag = e.target.value;
 
     if (clickedTag === undefined) { //If user clicked the icon, return the parent button's value
         clickedTag = e.target.parentElement.value;
     }
-
-    $.ajax({
-        type: "POST",
-        url: "/load-note-by-tag",
-        data: {
-            "_token" : formToken,
-            'tag' : clickedTag
-        },
-        success: function(taggedNote) {
-            currentPageTag = clickedTag;
-            populateCardContainer(JSON.parse(taggedNote));
-        },
-        error: function() {
-            currentPageTag = null;
-            console.log(`Failed to load note tagged ${clickedTag}`);
-        }
-    })
+    currentSearchTerm = null;
+    currentPageTag = clickedTag;
+    updateCardContainerByTag(clickedTag, true);
 })
 
 $("#all-note-sidebar-btn").on('click', function(e) {
     e.preventDefault();
 
-    $.ajax({
-        url: "/load",
-        type: 'GET',
-        success: function(taggedNote) {
-            currentPageTag = null;
-            populateCardContainer(JSON.parse(taggedNote));
-        },
-        error: function() {
-            console.log(`Failed to load all note`);
-        }
-    })
+    currentSearchTerm = null;
+    currentPageTag = null;
+    updateCardContainer();
 })
 
 const sidebarMenu = $("#sidebar-menu");

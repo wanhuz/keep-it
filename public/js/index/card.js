@@ -47,6 +47,8 @@ function getUpdatedNoteId(currentNoteData, newNoteData) {
 }
 
 //Note UI manipulation
+
+//newNoteId take one note id
 function addNote(newNoteId, newNotesData) {
     let newCardData = newNotesData.filter(note => note.id == newNoteId);
 
@@ -57,6 +59,7 @@ function addNote(newNoteId, newNotesData) {
     return;
 }
 
+//Removednotesid take array of note id
 function removeNote(removedNotesId) {
     let currentNoteNode = document.querySelectorAll(".note");
 
@@ -68,9 +71,10 @@ function removeNote(removedNotesId) {
         }
     })
 
-    refreshCardContainerLayout();
+    return;
 }
 
+//updatedNoteId take array of update id
 function updateNote(updatedNoteId, newNoteData) {
     let updatedNoteData = Array.from(newNoteData).filter(newNote => updatedNoteId.includes(newNote.id));
     
@@ -80,6 +84,16 @@ function updateNote(updatedNoteId, newNoteData) {
         document.querySelector(`[data-id = "${noteData.id}"]`).setAttribute("data-revision-count", noteData.revision_count);
     })
 
+    return;
+}
+
+function clearCardContainer() {
+    document.querySelector("#card-container").innerHTML = "";
+}
+
+function refreshCardContainerLayout() {
+    $(mediaItemContainer).masonry('reloadItems');
+    $(mediaItemContainer).masonry('layout');
 }
 
 function createCard(title, text, id, lastupdated) {
@@ -114,8 +128,22 @@ function createCard(title, text, id, lastupdated) {
     return card;
 }
 
-function updateCardContainer() {
-    //Get current view data
+//Update card logic
+function updateCardContainerByTag(tagName, clearContainer = false) {
+    if (clearContainer)
+        updateCardContainer(tagName, "tag", true);
+    else
+        updateCardContainer(tagName, "tag", false);
+}
+
+function updateCardContainerBySearch(searchQuery, clearContainer = false) {
+    if (clearContainer)
+        updateCardContainer(searchQuery, "search", true);
+    else 
+        updateCardContainer(searchQuery, "search", false);
+}
+
+function getCurrentCardContainer() {
     let currentNotesDataHtml = document.getElementsByClassName("note");
     let currentNoteData = new Array();
 
@@ -129,95 +157,41 @@ function updateCardContainer() {
         currentNoteData.push(note);
     }
 
-    //Get new data
+    return currentNoteData;
+}
+
+function updateCardContainer(searchQuery = null, filterType = null, clearContainer = false) {
+    let currentCard = getCurrentCardContainer();
+
     $.ajax({
-        url: "/load",
+        url: "/search",
         type: 'GET',
-        success: function(data) {
-            let newNoteData = JSON.parse(data);
-
-            newNotesId = getNewNoteId(currentNoteData ,newNoteData);
-            removedNotesId = getRemovedNoteId(currentNoteData, newNoteData);
-            updatedNotesId = getUpdatedNoteId(currentNoteData, newNoteData);
-
-            addNote(newNotesId, newNoteData);
-            removeNote(removedNotesId);
-            updateNote(updatedNotesId, newNoteData);
-            updateTag();
-            refreshCardContainerLayout();
-        }
-    })
-}
-
-function updateCardContainerByTag(tag) {
-    //Get current view data
-    let currentNotesDataHtml = document.getElementsByClassName("note");
-    let currentNoteData = new Array();
-
-    for (let i = 0; i < currentNotesDataHtml.length; i++) {
-
-        const note = {
-            id: parseInt(currentNotesDataHtml[i].getAttribute('data-id')),
-            revisionCount: currentNotesDataHtml[i].getAttribute('data-revision-count')
-        };
-
-        currentNoteData.push(note);
-    }
-
-    let formData = $("#formGetNoteByTag").serializeArray();
-    let formToken = formData.find(data => data.name == "_token").value;
-
-    //Get new data
-    $.ajax({
-        type: "POST",
-        url: "/load-note-by-tag",
         data: {
-            "_token" : formToken,
-            'tag' : tag
+            filterBy: filterType,
+            searchQuery: searchQuery
         },
-        success: function(data) {
-            let newNoteData = JSON.parse(data);
+        success: function(newCard) {
 
-            newNotesId = getNewNoteId(currentNoteData ,newNoteData);
-            removedNotesId = getRemovedNoteId(currentNoteData, newNoteData);
-            updatedNotesId = getUpdatedNoteId(currentNoteData, newNoteData);
-
-            addNote(newNotesId, newNoteData);
-            removeNote(removedNotesId);
-            updateNote(updatedNotesId, newNoteData);
+            if (clearContainer) {
+                clearCardContainer();
+                currentCard = getCurrentCardContainer();
+            }
+                
+            updateCard(currentCard, newCard);
             updateTag();
             refreshCardContainerLayout();
-        }
-    })
+        }})
 }
 
-function clearCardContainer() {
-    document.querySelector("#card-container").innerHTML = "";
-}
+function updateCard(currentNoteData, newNoteData) {
 
-function populateCardContainer(noteData) {
+    newNotesIds = getNewNoteId(currentNoteData, newNoteData);
+    removedNotesId = getRemovedNoteId(currentNoteData, newNoteData);
+    updatedNotesId = getUpdatedNoteId(currentNoteData, newNoteData);
 
-    function addNote(noteData) {
-        noteData.forEach(function(note) {
-            $(mediaItemContainer).append(createCard(note.title, note.body, note.id, note.lastupdated));
-        })
-    }
-
-    let noteIdByTag = Array();
-    
-    noteData.forEach(note => {
-        noteIdByTag.push(note.id);
-    })
-
-    clearCardContainer();
-    addNote(noteData);
-    refreshCardContainerLayout();
-    updateTag();
-}
-
-function refreshCardContainerLayout() {
-    $(mediaItemContainer).masonry('reloadItems');
-    $(mediaItemContainer).masonry('layout');
+    newNotesIds.forEach(newNoteId => addNote(newNoteId, newNoteData));
+    removeNote(removedNotesId);
+    updateNote(updatedNotesId, newNoteData);
 }
 
 

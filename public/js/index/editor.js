@@ -26,7 +26,7 @@ $(document).on('click', '#submitBtn', function() {
             'body' : noteBody
         },
         success: function() {
-            updateCardContainer();
+            updatePage();
             $("#postform")[0].reset();
         }
     })
@@ -52,7 +52,7 @@ $(document).on('click', '#saveBtn', function(e) {
             'id' : newNoteId
         },
         success: function() {
-            updateCardContainer();
+            updatePage();
             $('#fullNoteEditor').modal('hide');
         }
     })
@@ -73,7 +73,7 @@ $(document).on('click', '#removeBtn', function(e) {
             'id' : removedNoteId
         },
         success: function() {
-            updateCardContainer();
+            updatePage();
             $('#fullNoteEditor').modal('hide');
         }
     })

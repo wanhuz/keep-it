@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keep-it</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/color.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
@@ -14,6 +15,9 @@
     <form id="formGetNoteByTag">
         @csrf
     </form>
+
+    <!-- User preference editor -->
+    <x-preference></x-preference>
 
     <!-- Tag editor -->
     <x-tag-add></x-tag-add>
@@ -27,14 +31,14 @@
             <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon me-2"></span></button>
             <a class="navbar-brand me-5" href="#">Keep-it</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-5" role="search" id="searchbar">
-                    <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex ms-5" role="search" id="searchbar" action="/search">
+                    @csrf
+                    <input id="search-input" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
             <div class="navbar-right">
-                <button class="btn" type="button" id="sidebar-btn"><span class="bi bi-list-nested me-2"></span></button>
                 <button class="btn" type="button" id="sidebar-btn"><span class="bi bi-person-circle me-2"></span></button>
-                <button class="btn" type="button" id="sidebar-btn2"><span class="bi bi-gear me-2"></span></button>
+                <button class="btn" type="button" id="userprefBtn"><span class="bi bi-gear me-2"></span></button>
             </div>
         </div>
     </nav>
@@ -125,6 +129,8 @@
     <script src="{{asset('js/index/sidebar.js')}}"></script>
     <script src="{{asset('js/index/editor.js')}}"></script>
     <script src="{{asset('js/index/misc.js')}}"></script>
+    <script src="{{asset('js/index/search.js')}}"></script>
+    <script src="{{asset('js/index/userpref.js')}}"></script>
     <script src="{{asset('js/index/init.js')}}"></script>
 </body>
 </html>
