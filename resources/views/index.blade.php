@@ -54,6 +54,7 @@
                         <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
                             @csrf
                             <button type="button" class="btn btn-light ms-1 text-start" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
+                            <hr class="ms-1 my-1">
                             <div id="tagList" class="d-flex flex-column">
                                 @foreach ($tags as $tag)
                                     <x-tag-sidebtn>
