@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keep-it</title>
+    <title>{{$settings->firstWhere('key', '=', 'app-name')->value}}</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/color.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="icon" type="image/x-icon" href="{{asset('storage/' . $settings->firstWhere('key', '=', 'favicon-img')->value)}}">
 </head>
 <body>
-    <!-- Hidden form to get note by tag -->
-    <form id="formGetNoteByTag">
-        @csrf
-    </form>
 
     <!-- User preference editor -->
     <x-preference></x-preference>
@@ -29,7 +26,7 @@
     <nav class="navbar navbar-expand-lg bg-warning text-light sticky-top w-100">
         <div class="container-fluid w-100">
             <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon me-2"></span></button>
-            <a class="navbar-brand me-5" href="#">Keep-it</a>
+            <a class="navbar-brand me-5" href="#">{{$settings->firstWhere('key', '=', 'app-name')->value}}</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="d-flex ms-5" role="search" id="searchbar" action="/search">
                     @csrf

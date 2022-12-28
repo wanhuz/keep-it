@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,8 @@ Route::get('/load-note-tag', [TagController::class, 'load_notes_tag']);
 Route::post('/add-tag', [TagController::class, 'tag_note']);
 Route::post('/load-note-by-tag', [PostController::class, 'load_note_by_tag']);
 Route::get('/search', [PostController::class, 'search']);
+
+Route::post('/post-setting', [SettingController::class, 'store']);
 //Route::get('/', [PostController::class, 'index'])->middleware('auth');
 //Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 

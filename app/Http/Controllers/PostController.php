@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notes;
 use App\Models\Tag;
+use App\Models\Setting;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -13,8 +14,11 @@ class PostController extends Controller
     public function index() {
         $notes = Notes::all();
         $tags = Tag::all();
+        $settings = Setting::all();
+
+        // return $settings->firstWhere('key', '=', 'app-name');
         
-        return view('index', ['notes' => $notes], ['tags' => $tags]);
+        return view('index', compact('notes', 'tags', 'settings'));
     }
 
     public function store(Request $request) {
