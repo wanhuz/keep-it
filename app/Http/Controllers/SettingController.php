@@ -10,8 +10,7 @@ use Illuminate\Validation\Rules\File;
 class SettingController extends Controller
 {
     public function store(Request $request) {
-        $isFile = false;
-        $fileInput;
+        $inputIsFile = false;
         $userSetting = $request->all();
 
         foreach ($userSetting as $key => $value) {
@@ -19,18 +18,18 @@ class SettingController extends Controller
 
             switch($key) {
                 case "favicon-img":
-                    $fileInput = request()->file('favicon-img');
-                    $value = $fileInput->store('favicon');
-                    $isFile = true;
+                    $fileName = 'favicon-img';
+                    $fileInput = request()->file($fileName);
+                    $inputIsFile = true;
                     break;
                 case "bg-img":
-                    $fileInput = request()->file('bg-img');
-                    $value = $fileInput->store('bg-img');
-                    $isFile = true;
+                    $fileName = 'bg-img';
+                    $fileInput = request()->file($fileName);
+                    $inputIsFile = true;
                     break;
             }
 
-            if ($isFile) {
+            if ($inputIsFile) {
                 Validator::validate($userSetting, [
                     'bg-img' => [
                         'required',
@@ -40,6 +39,8 @@ class SettingController extends Controller
                     ],
                 ]);
             }
+
+            $value = $fileInput->store($fileName);
 
             Setting::updateOrCreate(
                 ['key' => $key],
