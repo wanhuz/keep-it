@@ -32,9 +32,9 @@
 
                                     <div class="mb-3 gap-2 align-items-center">
                                         <label for="faviconInput" class="form-label">Website icon</label>
-                                        <input class="ms-auto form-control mb-2" type="file" id="faviconInput" name="favicon-img">
-                                        <small>*Accepted file format: ico/png/gif/jpeg/svg</small>
-                                        <small>*Recommended icon size: 16px x 16px</small>
+                                        <input class="ms-auto form-control mb-2" type="file" id="faviconInput" name="favicon-img" accept=".gif,.jpg,.png,.ico,.svg">
+                                        <sup>*Accepted file format: ico/png/gif/jpeg/svg</sup>
+                                        <sup>*Recommended icon size: 16px x 16px</sup>
                                     </div>
                                 </form>
                             </div>
@@ -105,13 +105,9 @@
                                 <div class="container">
                                     <div class="mb-3 gap-2 align-items-center">
                                         <label for="backgroundImgInput" class="form-label">Background image</label>
-                                        <input class="ms-auto form-control" type="file" id="backgroundImgInput" name="bg-image">
+                                        <input class="ms-auto form-control" type="file" id="backgroundImgInput" name="bg-img" accept="image/*">
                                     </div>
 
-                                    <div class="mb-3 d-flex flex-row gap-2 align-items-center justify-content-center">
-                                        <label for="repeatBackgroundImageInput" class="form-label">Repeat background image</label>
-                                        <input class="ms-auto d-inline" type="checkbox" id="repeatBackgroundImageInput" name="repeat-bg-image">
-                                    </div>
                                 </div>
                             </form>
                         </div>

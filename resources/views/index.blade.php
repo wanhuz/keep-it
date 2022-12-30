@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="icon" type="image/x-icon" href="{{asset('storage/' . $settings->firstWhere('key', '=', 'favicon-img')->value)}}">
+
+    <style>
+        body {  background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
+                background-size: cover; }
+
+    </style>
 </head>
 <body>
 

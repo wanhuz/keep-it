@@ -26,8 +26,22 @@ $("#saveUserConfBtn").on('click', function(e) {
     let formActiveTabId = $(`${activeTabId} form`).attr('id');
 
     let formData = new FormData(document.getElementById(formActiveTabId));
-    formData.delete('favicon-img');
-    formData.append("favicon-img", $("input[name='favicon-img']")[0].files[0]);
+
+    let formInputName = [];
+    document.querySelectorAll(`${activeTabId} form input`).forEach(input => formInputName.push(input.getAttribute('name')));
+
+    formInputName.forEach(inputName => {
+        switch(inputName) {
+            case "favicon-img":
+                formData.delete('favicon-img');
+                formData.append("favicon-img", $("input[name='favicon-img']")[0].files[0]);
+                break;
+            case "bg-img":
+                formData.delete('bg-img');
+                formData.append("bg-img", $("input[name='bg-img']")[0].files[0]);
+                break;
+        }
+    })
     
     $.ajax({
         type: "POST",
@@ -42,8 +56,15 @@ $("#saveUserConfBtn").on('click', function(e) {
             // $('#fullNoteEditor').modal('hide');
         },
         error: function(something){
-            console.log("fail with");
-            console.log(something);
+            // switch(inputName) {
+            //     case "favicon-img":
+            //         formData.delete('favicon-img');
+            //         formData.append("favicon-img", $("input[name='favicon-img']")[0].files[0]);
+            //         break;
+                // case "bg-img":
+                    // document.getElementById("error-bg-img").classList.remove("d-none");
+                    // break;
+            // }
         }
     })
 
