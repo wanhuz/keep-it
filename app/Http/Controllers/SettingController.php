@@ -10,40 +10,44 @@ use Illuminate\Validation\Rules\File;
 class SettingController extends Controller
 {
     public function store(Request $request) {
-        $inputIsFile = false;
         $userSetting = $request->all();
+        $maxFileSize = str_replace("M", "", ini_get('upload_max_filesize'));
 
-        foreach ($userSetting as $key => $value) {
-            if ($key == "_token") continue;
+        foreach ($userSetting as $setting => $value) {
+            if ($setting == "_token") continue;
+            if (empty($value)) continue;
 
-            switch($key) {
-                case "favicon-img":
-                    $fileName = 'favicon-img';
-                    $fileInput = request()->file($fileName);
-                    $inputIsFile = true;
-                    break;
-                case "bg-img":
-                    $fileName = 'bg-img';
-                    $fileInput = request()->file($fileName);
-                    $inputIsFile = true;
-                    break;
-            }
+            if ($setting == "favicon-img") {
+                $fileName = "favicon-img";
+                
+                $fileInput = request()->file($fileName);
 
-            if ($inputIsFile) {
                 Validator::validate($userSetting, [
-                    'bg-img' => [
+                    $fileName => [
                         'required',
-                        File::image()
-                            ->min(5)
-                            ->max(7 * 1024),
-                    ],
+                        'file' => 'max: ' . $maxFileSize * 1024,
+                        'x-icon' => 'mimes:ico',
+                    ]
                 ]);
-            }
 
-            $value = $fileInput->store($fileName);
+                $value = $fileInput->store($fileName); 
+            }
+            else if ($setting == "bg-img") {
+                $fileName = "bg-img";
+                $fileInput = request()->file($fileName);
+                
+                Validator::validate($userSetting, [
+                    $fileName => [
+                        'required',
+                        File::image()->max($maxFileSize * 1024)
+                    ]
+                ]);
+
+                $value = $fileInput->store($fileName);
+            }
 
             Setting::updateOrCreate(
-                ['key' => $key],
+                ['key' => $setting],
                 ['value' => $value]
             );
         }

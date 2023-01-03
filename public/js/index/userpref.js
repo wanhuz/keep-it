@@ -26,22 +26,32 @@ $("#saveUserConfBtn").on('click', function(e) {
     let formActiveTabId = $(`${activeTabId} form`).attr('id');
 
     let formData = new FormData(document.getElementById(formActiveTabId));
-
     let formInputName = [];
-    document.querySelectorAll(`${activeTabId} form input`).forEach(input => formInputName.push(input.getAttribute('name')));
+    let file;
+
+    document.querySelectorAll(`${activeTabId} form input`).forEach(input => 
+        formInputName.push(input.getAttribute('name'))
+    );
 
     formInputName.forEach(inputName => {
         switch(inputName) {
             case "favicon-img":
                 formData.delete('favicon-img');
-                formData.append("favicon-img", $("input[name='favicon-img']")[0].files[0]);
+                file =  $("input[name='favicon-img']")[0].files[0];
+                if (file !== undefined)
+                    formData.append("favicon-img", file);
                 break;
             case "bg-img":
                 formData.delete('bg-img');
-                formData.append("bg-img", $("input[name='bg-img']")[0].files[0]);
+                file =  $("input[name='bg-img']")[0].files[0];
+                if (file !== undefined)
+                    formData.append("bg-img", file);
                 break;
         }
     })
+
+    console.log(...formData);
+    return;
     
     $.ajax({
         type: "POST",
@@ -55,17 +65,52 @@ $("#saveUserConfBtn").on('click', function(e) {
             // updatePage();
             // $('#fullNoteEditor').modal('hide');
         },
-        error: function(something){
-            // switch(inputName) {
-            //     case "favicon-img":
-            //         formData.delete('favicon-img');
-            //         formData.append("favicon-img", $("input[name='favicon-img']")[0].files[0]);
-            //         break;
-                // case "bg-img":
-                    // document.getElementById("error-bg-img").classList.remove("d-none");
-                    // break;
-            // }
+        error: function(errorMsg){
+            let errorMsgs = errorMsg['responseJSON']['errors'];
+
+            for (let errorMsg in errorMsgs) {
+                let errorMsgString;
+                let maxFileSize;
+                
+
+                switch(errorMsg) {
+                    case "bg-img":
+                        
+                        errorMsgString = JSON.stringify(errorMsgs[errorMsg])
+                        maxFileSize = errorMsgString.match(/(\d+)/);
+                        if (maxFileSize) maxFileSize = maxFileSize[1]/1024;
+
+                        errorMsgString = errorMsgString.replace(/(\d+)/, maxFileSize);
+                        errorMsgString = errorMsgString.replace("kilobytes", "MB");
+                        errorMsgString = errorMsgString.replace("bg-img", "background image");
+                        errorMsgString = errorMsgString.replaceAll('\"', "");
+                        errorMsgString = errorMsgString.replaceAll('[', '');
+                        errorMsgString = errorMsgString.replaceAll(']', '');
+
+                        document.getElementById("bg-img-error-msg").innerHTML = createErrorMessageElement(errorMsgString);
+                        break;
+                    case "favicon-img":
+                        errorMsgString = JSON.stringify(errorMsgs[errorMsg])
+
+                        maxFileSize = errorMsgString.match(/(\d+)/);
+                        if (maxFileSize) maxFileSize = maxFileSize[1]/1024;
+
+                        errorMsgString = errorMsgString.replace(/(\d+)/, maxFileSize);
+                        errorMsgString = errorMsgString.replace("kilobytes", "MB");
+                        errorMsgString = errorMsgString.replace("favicon-img", "icon");
+                        errorMsgString = errorMsgString.replaceAll('\"', "");
+                        errorMsgString = errorMsgString.replaceAll('[', '');
+                        errorMsgString = errorMsgString.replaceAll(']', '');
+
+                        document.getElementById("favicon-error-msg").innerHTML = createErrorMessageElement(errorMsgString);
+                        break;
+                }
+            }
         }
     })
 
 })
+
+function createErrorMessageElement(message) {
+    return `<small class="text-danger">${message}</small>`
+}

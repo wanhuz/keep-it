@@ -32,9 +32,8 @@
 
                                     <div class="mb-3 gap-2 align-items-center">
                                         <label for="faviconInput" class="form-label">Website icon</label>
-                                        <input class="ms-auto form-control mb-2" type="file" id="faviconInput" name="favicon-img" accept=".gif,.jpg,.png,.ico,.svg">
-                                        <sup>*Accepted file format: ico/png/gif/jpeg/svg</sup>
-                                        <sup>*Recommended icon size: 16px x 16px</sup>
+                                        <input class="ms-auto form-control mb-2" type="file" id="faviconInput" name="favicon-img" accept=".ico">
+                                        <div id="favicon-error-msg"></div>
                                     </div>
                                 </form>
                             </div>
@@ -108,6 +107,8 @@
                                         <input class="ms-auto form-control" type="file" id="backgroundImgInput" name="bg-img" accept="image/*">
                                     </div>
 
+                                    <div id="bg-img-error-msg"></div>
+
                                 </div>
                             </form>
                         </div>
@@ -118,22 +119,22 @@
                                 <div class="container">
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="headerTransparentInput" class="form-label">Header transparency</label>
-                                            <input class="d-block w-100" type="range" name="headerTransparentInput" id="headerTransparentInput">
+                                            <input class="d-block w-100" type="range" name="headerTransparency" id="headerTransparentInput">
                                     </div>
 
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="cardTransparentInput" class="form-label">Card transparency</label>
-                                            <input class="d-block w-100" type="range" name="cardTransparentInput" id="cardTransparentInput">
+                                            <input class="d-block w-100" type="range" name="cardTransparency" id="cardTransparentInput">
                                     </div>
 
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="sidebarTransparentInput" class="form-label">Sidebar transparency</label>
-                                            <input class="d-block w-100" type="range" name="sidebarTransparentInput" id="sidebarTransparentInput">
+                                            <input class="d-block w-100" type="range" name="sidebarTransparency" id="sidebarTransparentInput">
                                     </div>
 
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="cardEditorTransparentInput" class="form-label">Card editor background transparency</label>
-                                            <input class="d-block w-100" type="range" name="cardEditorTransparentInput" id="cardEditorTransparentInput">
+                                            <input class="d-block w-100" type="range" name="cardEditorTransparency" id="cardEditorTransparentInput">
                                     </div>
                                 </div>
                             </form> 
