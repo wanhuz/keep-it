@@ -1,24 +1,22 @@
-<div class="color-picker-container dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-    <div class="dropdown-menu" style=" height: 200px; width: 300px; z-index: 999;">
-        <div class="d-flex flex-column">
-            <div class="squaregrid">
-                <div class="md-red cell"></div>
-                <div class="md-pink cell"></div>
-                <div class="md-purple cell"></div>
-                <div class="md-deep-purple cell"></div>
-                <div class="md-indigo cell"></div>
-                <div class="md-blue cell"></div>
-                <div class="md-light-blue cell"></div>
-                <div class="md-cyan cell"></div>
-                <div class="md-teal cell"></div>
-                <div class="md-green cell"></div>
-                <div class="md-light-green cell"></div>
-                <div class="md-yellow cell"></div>
-                <div class="md-orange cell"></div>
-                <div class="md-brown cell"></div>
-                <div class="cell"><input type="color"></div>
-            </div>
-        </div>
-    </div>
-</div>
+<input type="color" list="presetColors">
+<datalist id="presetColors">
+    <option>#D32F2F</option>
+    <option>#C2185B</option>
+    <option>#7B1FA2</option>
+    <option>#512DA8</option>
+    <option>#303F9F</option>
+    <option>#1976D2</option>
+    <option>#0288D1</option>
+    <option>#0097A7</option>
+    <option>#00796B</option>
+    <option>#388E3C</option>
+    <option>#689F38</option>
+    <option>#AFB42B</option>
+    <option>#FBC02D</option>
+    <option>#FFA000</option>
+    <option>#F57C00</option>
+    <option>#E64A19</option>
+    <option>#5D4037</option>
+    <option>#616161</option>
+    <option>#455A64</option>
+</datalist>

@@ -119,22 +119,22 @@
                                 <div class="container">
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="headerTransparentInput" class="form-label">Header transparency</label>
-                                            <input class="d-block w-100" type="range" name="headerTransparency" id="headerTransparentInput">
+                                            <input class="d-block w-100" type="range" name="header-tpc" id="headerTransparentInput">
                                     </div>
 
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="cardTransparentInput" class="form-label">Card transparency</label>
-                                            <input class="d-block w-100" type="range" name="cardTransparency" id="cardTransparentInput">
+                                            <input class="d-block w-100" type="range" name="card-tpc" id="cardTransparentInput">
                                     </div>
 
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="sidebarTransparentInput" class="form-label">Sidebar transparency</label>
-                                            <input class="d-block w-100" type="range" name="sidebarTransparency" id="sidebarTransparentInput">
+                                            <input class="d-block w-100" type="range" name="sidebar-tpc" id="sidebarTransparentInput">
                                     </div>
 
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="cardEditorTransparentInput" class="form-label">Card editor background transparency</label>
-                                            <input class="d-block w-100" type="range" name="cardEditorTransparency" id="cardEditorTransparentInput">
+                                            <input class="d-block w-100" type="range" name="cardEditor-tpc" id="cardEditorTransparentInput">
                                     </div>
                                 </div>
                             </form> 

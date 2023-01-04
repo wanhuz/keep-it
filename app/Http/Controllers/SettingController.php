@@ -9,6 +9,7 @@ use Illuminate\Validation\Rules\File;
 
 class SettingController extends Controller
 {
+
     public function store(Request $request) {
         $userSetting = $request->all();
         $maxFileSize = str_replace("M", "", ini_get('upload_max_filesize'));
@@ -44,6 +45,9 @@ class SettingController extends Controller
                 ]);
 
                 $value = $fileInput->store($fileName);
+            }
+            else if (str_contains($setting, "-tpc")) {
+                $value = $value / 100;
             }
 
             Setting::updateOrCreate(

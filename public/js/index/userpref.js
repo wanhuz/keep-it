@@ -50,8 +50,6 @@ $("#saveUserConfBtn").on('click', function(e) {
         }
     })
 
-    console.log(...formData);
-    return;
     
     $.ajax({
         type: "POST",
@@ -69,47 +67,56 @@ $("#saveUserConfBtn").on('click', function(e) {
             let errorMsgs = errorMsg['responseJSON']['errors'];
 
             for (let errorMsg in errorMsgs) {
-                let errorMsgString;
-                let maxFileSize;
+                let errorMsgString = JSON.stringify(errorMsgs[errorMsg]);
                 
-
                 switch(errorMsg) {
                     case "bg-img":
-                        
-                        errorMsgString = JSON.stringify(errorMsgs[errorMsg])
-                        maxFileSize = errorMsgString.match(/(\d+)/);
-                        if (maxFileSize) maxFileSize = maxFileSize[1]/1024;
-
-                        errorMsgString = errorMsgString.replace(/(\d+)/, maxFileSize);
-                        errorMsgString = errorMsgString.replace("kilobytes", "MB");
-                        errorMsgString = errorMsgString.replace("bg-img", "background image");
-                        errorMsgString = errorMsgString.replaceAll('\"', "");
-                        errorMsgString = errorMsgString.replaceAll('[', '');
-                        errorMsgString = errorMsgString.replaceAll(']', '');
-
-                        document.getElementById("bg-img-error-msg").innerHTML = createErrorMessageElement(errorMsgString);
+                        document.getElementById("bg-img-error-msg").innerHTML = createErrorMessageElement(formatErrorMsg(errorMsg, errorMsgString));
                         break;
                     case "favicon-img":
-                        errorMsgString = JSON.stringify(errorMsgs[errorMsg])
-
-                        maxFileSize = errorMsgString.match(/(\d+)/);
-                        if (maxFileSize) maxFileSize = maxFileSize[1]/1024;
-
-                        errorMsgString = errorMsgString.replace(/(\d+)/, maxFileSize);
-                        errorMsgString = errorMsgString.replace("kilobytes", "MB");
-                        errorMsgString = errorMsgString.replace("favicon-img", "icon");
-                        errorMsgString = errorMsgString.replaceAll('\"', "");
-                        errorMsgString = errorMsgString.replaceAll('[', '');
-                        errorMsgString = errorMsgString.replaceAll(']', '');
-
-                        document.getElementById("favicon-error-msg").innerHTML = createErrorMessageElement(errorMsgString);
+                        document.getElementById("favicon-error-msg").innerHTML = createErrorMessageElement(formatErrorMsg(errorMsg, errorMsgString));
                         break;
                 }
             }
         }
+        
     })
 
 })
+
+function formatErrorMsg(errorMsgType, errorMsgString) {
+    let maxFileSize;
+
+    switch(errorMsgType) {
+        case "bg-img":
+            
+            maxFileSize = errorMsgString.match(/(\d+)/);
+            if (maxFileSize) maxFileSize = maxFileSize[1]/1024;
+
+            errorMsgString = errorMsgString.replace(/(\d+)/, maxFileSize);
+            errorMsgString = errorMsgString.replace("kilobytes", "MB");
+            errorMsgString = errorMsgString.replace("bg-img", "background image");
+            errorMsgString = errorMsgString.replaceAll('\"', "");
+            errorMsgString = errorMsgString.replaceAll('[', '');
+            errorMsgString = errorMsgString.replaceAll(']', '');
+            break;
+
+        case "favicon-img":
+
+            maxFileSize = errorMsgString.match(/(\d+)/);
+            if (maxFileSize) maxFileSize = maxFileSize[1]/1024;
+
+            errorMsgString = errorMsgString.replace(/(\d+)/, maxFileSize);
+            errorMsgString = errorMsgString.replace("kilobytes", "MB");
+            errorMsgString = errorMsgString.replace("favicon-img", "icon");
+            errorMsgString = errorMsgString.replaceAll('\"', "");
+            errorMsgString = errorMsgString.replaceAll('[', '');
+            errorMsgString = errorMsgString.replaceAll(']', '');
+            break;
+    }
+
+    return errorMsgString;
+}
 
 function createErrorMessageElement(message) {
     return `<small class="text-danger">${message}</small>`

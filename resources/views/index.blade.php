@@ -12,8 +12,13 @@
     <link rel="icon" type="image/x-icon" href="{{asset('storage/' . $settings->firstWhere('key', '=', 'favicon-img')->value)}}">
 
     <style>
-        body {  background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
-                background-size: cover; }
+        body {  
+            background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
+            background-size: cover; 
+        }
+        .card {
+            background: rgba(255,255,255, {{$settings->firstWhere('key', '=', 'card-tpc')->value}});
+        }
 
     </style>
 </head>
