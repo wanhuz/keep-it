@@ -15,9 +15,13 @@
         body {  
             background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
             background-size: cover; 
+            background-attachment: fixed;
         }
         .card {
             background: rgba(255,255,255, {{$settings->firstWhere('key', '=', 'card-tpc')->value}});
+        }
+        .navbar {
+            background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, {{$settings->firstWhere('key', '=', 'header-tpc')->value}});
         }
 
     </style>
@@ -34,7 +38,7 @@
     <x-editor></x-editor>
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-warning text-light sticky-top w-100">
+    <nav class="navbar navbar-expand-lg text-light sticky-top w-100">
         <div class="container-fluid w-100">
             <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon me-2"></span></button>
             <a class="navbar-brand me-5" href="#">{{$settings->firstWhere('key', '=', 'app-name')->value}}</a>

@@ -81,18 +81,18 @@
                                     @csrf
                                     <div class="mb-3 d-flex gap-2 align-items-center">
                                             <label for="exampleFormControlInput1" class="form-label">Header color</label>
-                                            <div class="ms-auto"><x-form.color-picker></x-form.color-picker></div>
+                                            <div class="ms-auto"><x-form.color-picker>head-color</x-form.color-picker></div>
                                     </div>
 
                                     <div class="mb-3 d-flex gap-2 align-items-center">
                                             <label for="exampleFormControlInput1" class="form-label">Sidebar color</label>
-                                            <div class="ms-auto"><x-form.color-picker></x-form.color-picker></div>
+                                            <div class="ms-auto"><x-form.color-picker>side-color</x-form.color-picker></div>
                                             
                                     </div>
 
                                     <div class="mb-3 d-flex gap-2 align-items-center">
                                             <label for="exampleFormControlInput1" class="form-label">Background color</label>
-                                            <div class="ms-auto"><x-form.color-picker></x-form.color-picker></div>
+                                            <div class="ms-auto"><x-form.color-picker>bg-color</x-form.color-picker></div>
                                     </div>
                                 </form>
                             </div>

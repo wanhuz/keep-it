@@ -1,4 +1,4 @@
-<input type="color" list="presetColors">
+<input type="color" list="presetColors" name="{{$slot}}">
 <datalist id="presetColors">
     <option>#D32F2F</option>
     <option>#C2185B</option>

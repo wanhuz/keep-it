@@ -9,6 +9,10 @@ use Illuminate\Validation\Rules\File;
 
 class SettingController extends Controller
 {
+    public function hex_to_rgba($hex) {
+        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+        return $r . "," . $g . "," . $b;
+    }
 
     public function store(Request $request) {
         $userSetting = $request->all();
@@ -48,6 +52,9 @@ class SettingController extends Controller
             }
             else if (str_contains($setting, "-tpc")) {
                 $value = $value / 100;
+            }
+            else if (str_contains($setting, "-color")) {
+                $value = SettingController::hex_to_rgba($value);
             }
 
             Setting::updateOrCreate(
