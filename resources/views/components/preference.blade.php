@@ -153,7 +153,6 @@
             <div class="modal-footer">
                 <button class="btn btn-outline-primary border border-0 ms-auto" id="saveUserConfBtn">Save</button>
                 <button class="btn btn-outline-primary border border-0" id="cancelUserConfBtn">Cancel</button> 
-                <button class="btn btn-outline-primary border border-0" id="applyUserConfBtn">Apply</button> 
             </div>
         </div>
     </div>

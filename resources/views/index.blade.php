@@ -20,8 +20,11 @@
         .card {
             background: rgba(255,255,255, {{$settings->firstWhere('key', '=', 'card-tpc')->value}});
         }
-        .navbar {
+        #header {
             background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, {{$settings->firstWhere('key', '=', 'header-tpc')->value}});
+        }
+        #sidebar {
+            background: rgba({{$settings->firstWhere('key', '=', 'side-color')->value}}, {{$settings->firstWhere('key', '=', 'sidebar-tpc')->value}});
         }
 
     </style>
@@ -38,9 +41,9 @@
     <x-editor></x-editor>
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg text-light sticky-top w-100">
+    <nav class="navbar navbar-expand-lg text-light sticky-top w-100" id="header">
         <div class="container-fluid w-100">
-            <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon me-2"></span></button>
+            <button class="btn me-3" type="button"  id="menu-btn"><span class="navbar-toggler-icon me-2"></span></button>
             <a class="navbar-brand me-5" href="#">{{$settings->firstWhere('key', '=', 'app-name')->value}}</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="d-flex ms-5" role="search" id="searchbar" action="/search">
@@ -60,28 +63,28 @@
 
   <div class="container-fluid" >
         <div class="row">    
-            <div class="col-2 bg-light vh-100 overflow-hidden w-auto" id="sidebar">
-                <div class="d-flex  flex-column gap-2 justify-between-content text-left mt-2" role="group" aria-label="Vertical button group" id="sidebar-menu" >
-                    <div id="sidebarBtn" class="d-flex flex-column position-fixed vh-100 ">
-                        <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
-                            @csrf
-                            <button type="button" class="btn btn-light ms-1 text-start" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
-                            <hr class="ms-1 my-1">
-                            <div id="tagList" class="d-flex flex-column">
-                                @foreach ($tags as $tag)
-                                    <x-tag-sidebtn>
-                                        <x-slot:value>{{$tag->name}}</x-slot>
-                                        {{$tag->name}}
-                                    </x-tag-sidebtn>
-                                @endforeach
-                            </div>
-                            <button type="button" id="tagAddBtn" class="btn btn-light ms-1 text-start"><i class="bi bi-plus-circle"></i><span class="ps-4">Add new tag</span></button>
-                        </form>
-                    </div>
+            <nav class="navbar navbar-expand d-flex flex-column align-item-start sidebar" id="sidebar">
+                <div id="sidebarBtn" class="d-flex flex-column vh-100 ">
+                    <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
+                        @csrf
+                        <button type="button" class="btn tag-btn ms-1 text-start" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
+                        <hr class="ms-1 my-1">
+                        <div id="tagList" class="d-flex flex-column">
+                            @foreach ($tags as $tag)
+                                <x-tag-sidebtn>
+                                    <x-slot:value>{{$tag->name}}</x-slot>
+                                    {{$tag->name}}
+                                </x-tag-sidebtn>
+                            @endforeach
+                        </div>
+                        <hr class="ms-1 my-1">
+                        <button type="button" id="tagAddBtn" class="btn tag-btn ms-1 text-start mb-auto"><i class="bi bi-plus-circle"></i><span class="ps-4">Manage tag</span></button>
+                    </form>
                 </div>
-            </div>
+            </nav>
+
             
-            <div class="col mt-4">
+            <div class="col mt-4 main-container">
                 <div class="container mb-3" id="editor">
                     <div class="text-center ">
                         <div id="simpleEditor" class="input-group mb-3 "> 

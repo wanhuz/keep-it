@@ -1,33 +1,9 @@
 function toggleSidebar() {
-    const sidebar = document.getElementById("sidebar");
-    const sidebarText = document.querySelectorAll("#sidebar span");
-    const sidebarMenu = document.getElementById("sidebar-menu");
+    var sidebar = document.querySelector("#sidebar")
+    var container = document.querySelector(".main-container")
 
-    if (sidebarText.item(0).classList.contains("d-none")) {
-        sidebarText.forEach(text => {
-            text.classList.remove("d-none");
-        })
-
-        sidebarMenu.style.width = "230px";
-
-        document.querySelectorAll("#sidebar-menu button").forEach(button => {
-            button.style.borderRadius = "70px;";
-            button.style.paddingRight = "50px";
-        })
-    }
-    else {
-        sidebarText.forEach(text => {
-            text.classList.add("d-none");
-        })
-
-        sidebarMenu.style.width = "50px";
-        document.querySelectorAll("#sidebar-menu button").forEach(button => {
-            button.style.borderRadius = "100px";
-            button.style.paddingRight = "10px";
-        })
-
-
-    }
+    sidebar.classList.toggle("active-nav")
+    container.classList.toggle("active-cont")
 }
 
 function createSidebarBtn(tagText) {
@@ -117,7 +93,7 @@ $("#all-note-sidebar-btn").on('click', function(e) {
     updateCardContainer();
 })
 
-const sidebarMenu = $("#sidebar-menu");
+const sidebarMenu = $("#sidebar");
 
-document.getElementById("sidebar-btn").addEventListener('click', toggleSidebar);
+document.getElementById("menu-btn").addEventListener('click', toggleSidebar);
 sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', refreshCardContainerLayout);
