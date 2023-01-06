@@ -7,7 +7,8 @@ const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
 mediaItemContainer.masonry( {
-    itemSelector: '.card'
+    itemSelector: '.card',
+    fitWidth: true
 });
 
 let contentRefresh = window.setInterval(updatePage, 5000);

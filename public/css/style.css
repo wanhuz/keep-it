@@ -127,7 +127,7 @@ textarea {
 }
 
 .active-cont {
-    margin-left: 250px;
+    margin-left: 250px; 
 }
 
 .main-container {
@@ -144,4 +144,8 @@ textarea {
     -moz-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.3);
     box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.3);
+}
+
+#card-container {    
+    margin: 0 auto;
 }

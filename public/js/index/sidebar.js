@@ -1,9 +1,11 @@
 function toggleSidebar() {
-    var sidebar = document.querySelector("#sidebar")
+    let sidebar = document.querySelector("#sidebar")
     var container = document.querySelector(".main-container")
 
     sidebar.classList.toggle("active-nav")
     container.classList.toggle("active-cont")
+    
+    container.style.width = "1px"; //Force main container to recalculate masonry container width
 }
 
 function createSidebarBtn(tagText) {
