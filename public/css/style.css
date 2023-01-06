@@ -50,18 +50,20 @@
 }
 
 .card-title {
-    font-size: medium;
+    font-size: inherit; 
 }
 
 .card {
+    --large-width: 20rem;
+    --medium-width: 18rem;
+    --small-width: 14rem;
+    --large-height: 10rem;
+    --medium-height: 7rem;
+    --small-height: 4rem;
+    
     margin: 5px;
-
-
 }
 
-.card-text {
-    font-size: 15px;
-}
 
 textarea {
     resize: none;

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="icon" type="image/x-icon" href="{{asset('storage/' . $settings->firstWhere('key', '=', 'favicon-img')->value)}}">
 
+    <!-- User defined style -->
     <style>
         body {  
             background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
@@ -25,6 +26,24 @@
         }
         #sidebar {
             background: rgba({{$settings->firstWhere('key', '=', 'side-color')->value}}, {{$settings->firstWhere('key', '=', 'sidebar-tpc')->value}});
+        }
+
+        .card {
+            width: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-width);
+            min-height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);
+        }
+
+        @if ($settings->firstWhere('key', '=', 'card-size-style')->value == "fixed")
+
+        .card-text {
+            height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);
+            overflow-y: hidden;
+        }
+
+        @endif
+
+        .card {
+            font-size: {{$settings->firstWhere('key', '=', 'card-font-size')->value}};
         }
 
     </style>
@@ -116,18 +135,15 @@
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <div class="d-flex flex-row flex-wrap" id="card-container">
-                        @foreach ($notes as $note)
-                            <x-card>
-                                <x-slot:id>{{$note->id}}</x-slot>
-                                <x-slot:revision_count>{{$note->revision_count}}</x-slot>
-                                <x-slot:title>{{$note->title}}</x-slot>
-                                <x-slot:body>{{$note->body}}</x-slot>
-                            </x-card>
-                        @endforeach
-                    
-                    </div>
+                <div class="d-flex flex-row flex-wrap" id="card-container">
+                    @foreach ($notes as $note)
+                        <x-card>
+                            <x-slot:id>{{$note->id}}</x-slot>
+                            <x-slot:revision_count>{{$note->revision_count}}</x-slot>
+                            <x-slot:title>{{$note->title}}</x-slot>
+                            <x-slot:body>{{$note->body}}</x-slot>
+                        </x-card>
+                    @endforeach
                 </div>
             </div>
 

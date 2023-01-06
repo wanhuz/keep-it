@@ -48,7 +48,7 @@
                                         <select class="form-select" aria-label="Default" id="cardStyleInput" name="card-size-style">
                                             <option selected>Default</option>
                                             <option value="dynamic">Dynamic</option>
-                                            <option value="static">Static</option>
+                                            <option value="fixed">Fixed</option>
                                         </select>                                
                                     </div>
 
@@ -58,7 +58,7 @@
                                             <option selected>Default</option>
                                             <option value="small">Small</option>
                                             <option value="medium">Medium (default)</option>
-                                            <option value="big">Big</option>
+                                            <option value="large">Big</option>
                                         </select>                                
                                     </div>
 
@@ -68,7 +68,7 @@
                                             <option selected>Default</option>
                                             <option value="small">Small</option>
                                             <option value="medium">Medium</option>
-                                            <option value="big">Big</option>
+                                            <option value="large">Large</option>
                                         </select>                                
                                     </div>
                                 </form>
@@ -130,11 +130,6 @@
                                     <div class="mb-3 gap-2 align-items-center">
                                             <label for="sidebarTransparentInput" class="form-label">Sidebar transparency</label>
                                             <input class="d-block w-100" type="range" name="sidebar-tpc" id="sidebarTransparentInput">
-                                    </div>
-
-                                    <div class="mb-3 gap-2 align-items-center">
-                                            <label for="cardEditorTransparentInput" class="form-label">Card editor background transparency</label>
-                                            <input class="d-block w-100" type="range" name="cardEditor-tpc" id="cardEditorTransparentInput">
                                     </div>
                                 </div>
                             </form> 
