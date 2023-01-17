@@ -127,11 +127,11 @@ textarea {
 }
 
 .active-cont {
-    margin-left: 250px;
+    margin-left: 300px;
 }
 
 .main-container {
-    transition: 0.4s;
+    transition: 0.2s;
 }
 
 .tag-btn {

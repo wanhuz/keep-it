@@ -59,9 +59,7 @@ $("#saveUserConfBtn").on('click', function(e) {
         contentType: false,
         enctype: 'multipart/form-data',
         success: function() {
-            console.log("yep");
-            // updatePage();
-            // $('#fullNoteEditor').modal('hide');
+            location.reload()
         },
         error: function(errorMsg){
             let errorMsgs = errorMsg['responseJSON']['errors'];
