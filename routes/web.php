@@ -29,6 +29,7 @@ Route::post('/add-tag', [TagController::class, 'tag_note']);
 Route::post('/load-note-by-tag', [PostController::class, 'load_note_by_tag']);
 Route::get('/search', [PostController::class, 'search']);
 
+Route::get('/get-setting', [SettingController::class, 'get']);
 Route::post('/post-setting', [SettingController::class, 'store']);
 //Route::get('/', [PostController::class, 'index'])->middleware('auth');
 //Route::post('/posts', [PostController::class, 'store'])->middleware('auth');

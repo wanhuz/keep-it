@@ -14,6 +14,10 @@ class SettingController extends Controller
         return $r . "," . $g . "," . $b;
     }
 
+    public function get() {
+        return Setting::all();
+    }
+
     public function store(Request $request) {
         $userSetting = $request->all();
         $maxFileSize = str_replace("M", "", ini_get('upload_max_filesize'));

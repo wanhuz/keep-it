@@ -1,6 +1,64 @@
 
+
+  
+function rgbToHex(r, g, b) {
+    function componentToHex(c) {
+        var hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+  
+
 $("#userprefBtn").on('click', function(e) {
     e.preventDefault();
+
+    $.ajax({
+        type: "GET",
+        url: "/get-setting",
+        success: function(settings) {
+            let rgbColor;
+            settings.filter(function(setting) {
+                switch (setting.key) {
+                    case "app-name":
+                        document.getElementById("applicationNameInput").value = setting.value;
+                        break;
+                    case "card-size-style":
+                        document.querySelectorAll("#cardStyleInput option").forEach(option => {option.value == setting.value ? option.selected = true : null})
+                        break;
+                    case "card-size":
+                        document.querySelectorAll("#cardSizeInput option").forEach(option => {option.value == setting.value ? option.selected = true : null})
+                        break;
+                    case "card-font-size":
+                        document.querySelectorAll("#cardFontSizeInput option").forEach(option => {option.value == setting.value ? option.selected = true : null})
+                        break;
+                    case "head-color":
+                        rgbColor = setting.value.split(",");
+                        document.querySelector("#headColorInput input").value = rgbToHex(parseInt(rgbColor[0]), parseInt(rgbColor[1]), parseInt(rgbColor[2]));
+                        break;
+                    case "side-color":
+                        rgbColor = setting.value.split(",");
+                        document.querySelector("#sideColorInput input").value = rgbToHex(parseInt(rgbColor[0]), parseInt(rgbColor[1]), parseInt(rgbColor[2]));
+                        break;
+                    case "bg-color":
+                        rgbColor = setting.value.split(",");
+                        document.querySelector("#bgColorInput input").value = rgbToHex(parseInt(rgbColor[0]), parseInt(rgbColor[1]), parseInt(rgbColor[2]));
+                        break;
+                    case "header-tpc":
+                        document.getElementById("headerTransparentInput").value = setting.value * 100;
+                        break;
+                    case "sidebar-tpc":
+                        document.getElementById("sidebarTransparentInput").value = setting.value * 100;
+                        break;
+                    case "card-tpc":
+                        document.getElementById("cardTransparentInput").value = setting.value * 100;
+                        break;
+                }
+                
+            })
+        }
+    })
 
     $('#userPreferenceModal').modal('show');
 })

@@ -15,8 +15,6 @@ class PostController extends Controller
         $notes = Notes::all();
         $tags = Tag::all();
         $settings = Setting::all();
-
-        // return $settings->firstWhere('key', '=', 'app-name');
         
         return view('index', compact('notes', 'tags', 'settings'));
     }

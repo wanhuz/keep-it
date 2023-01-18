@@ -46,7 +46,6 @@
                                     <div class="mb-3">
                                         <label for="cardStyleInput" class="form-label">Card size style</label>
                                         <select class="form-select" aria-label="Default" id="cardStyleInput" name="card-size-style">
-                                            <option selected>Default</option>
                                             <option value="dynamic">Dynamic</option>
                                             <option value="fixed">Fixed</option>
                                         </select>                                
@@ -55,9 +54,8 @@
                                     <div class="mb-3">
                                         <label for="cardSizeInput" class="form-label">Card default size</label>
                                         <select class="form-select" aria-label="Default" id="cardSizeInput" name="card-size">
-                                            <option selected>Default</option>
                                             <option value="small">Small</option>
-                                            <option value="medium">Medium (default)</option>
+                                            <option value="medium">Medium</option>
                                             <option value="large">Big</option>
                                         </select>                                
                                     </div>
@@ -65,7 +63,6 @@
                                     <div class="mb-3">
                                         <label for="cardFontSizeInput" class="form-label">Card font size</label>
                                         <select class="form-select" aria-label="Default" id="cardFontSizeInput" name="card-font-size">
-                                            <option selected>Default</option>
                                             <option value="small">Small</option>
                                             <option value="medium">Medium</option>
                                             <option value="large">Large</option>
@@ -81,18 +78,18 @@
                                     @csrf
                                     <div class="mb-3 d-flex gap-2 align-items-center">
                                             <label for="exampleFormControlInput1" class="form-label">Header color</label>
-                                            <div class="ms-auto"><x-form.color-picker>head-color</x-form.color-picker></div>
+                                            <div class="ms-auto" id="headColorInput"><x-form.color-picker>head-color</x-form.color-picker></div>
                                     </div>
 
                                     <div class="mb-3 d-flex gap-2 align-items-center">
                                             <label for="exampleFormControlInput1" class="form-label">Sidebar color</label>
-                                            <div class="ms-auto"><x-form.color-picker>side-color</x-form.color-picker></div>
+                                            <div class="ms-auto" id="sideColorInput"><x-form.color-picker>side-color</x-form.color-picker></div>
                                             
                                     </div>
 
                                     <div class="mb-3 d-flex gap-2 align-items-center">
                                             <label for="exampleFormControlInput1" class="form-label">Background color</label>
-                                            <div class="ms-auto"><x-form.color-picker>bg-color</x-form.color-picker></div>
+                                            <div class="ms-auto" id="bgColorInput"><x-form.color-picker>bg-color</x-form.color-picker></div>
                                     </div>
                                 </form>
                             </div>
