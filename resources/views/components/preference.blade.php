@@ -35,6 +35,11 @@
                                         <input class="ms-auto form-control mb-2" type="file" id="faviconInput" name="favicon-img" accept=".ico">
                                         <div id="favicon-error-msg"></div>
                                     </div>
+
+                                    <div class="mb-3 gap-2 align-items-center">           
+                                        <label for="removeFaviconImgInput" >Remove website image icon</label>
+                                        <input class="ms-5 form-check-input" type="checkbox" id="removeFaviconImgInput" name="remove-favicon-img">
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -102,6 +107,11 @@
                                     <div class="mb-3 gap-2 align-items-center">
                                         <label for="backgroundImgInput" class="form-label">Background image</label>
                                         <input class="ms-auto form-control" type="file" id="backgroundImgInput" name="bg-img" accept="image/*">
+                                    </div>
+
+                                    <div class="mb-3 gap-2 align-items-center">           
+                                        <label for="removeBackgroundImgInput" >Remove background image</label>
+                                        <input class="ms-5 form-check-input" type="checkbox" id="removeBackgroundImgInput" name="remove-bg-img">
                                     </div>
 
                                     <div id="bg-img-error-msg"></div>

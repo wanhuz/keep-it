@@ -17,6 +17,7 @@
             background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
             background-size: cover; 
             background-attachment: fixed;
+            background-color: rgb({{$settings->firstWhere('key', '=', 'bg-color')->value}});
         }
         .card {
             background: rgba(255,255,255, {{$settings->firstWhere('key', '=', 'card-tpc')->value}});

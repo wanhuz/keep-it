@@ -60,6 +60,18 @@ class SettingController extends Controller
             else if (str_contains($setting, "-color")) {
                 $value = SettingController::hex_to_rgba($value);
             }
+            else if ($setting == "remove-favicon-img") {
+                $favicon = Setting::firstWhere("key", "=", "favicon-img");
+                $favicon->value = "";
+                $favicon->save();
+                continue;
+            }
+            else if ($setting == "remove-bg-img") {
+                $bgimg = Setting::firstWhere("key", "=", "bg-img");
+                $bgimg->value = "";
+                $bgimg->save();
+                continue;
+            }
 
             Setting::updateOrCreate(
                 ['key' => $setting],
