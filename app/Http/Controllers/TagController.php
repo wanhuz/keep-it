@@ -5,20 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Notes;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
+    private function getUser() {
+        $userId = Auth::id();
+        return User::find($userId);
+    }
+
     public function add(Request $request) {
 
         $attributes = request()->validate([
             'name' => 'required',
         ]);
-    
-        Tag::create($attributes);
+
+        $user = $this->getUser();
+        $user->tags()->create($attributes);
     }
 
     public function load() {
-        return Tag::all();
+        $user = $this->getUser();
+        return $user->tags()->get();
     }
 
     public function load_notes_tag() {
@@ -36,8 +45,9 @@ class TagController extends Controller
             'notes_id' => 'required',
             'tag_id' => 'required' 
         ]);
-
-        $note = Notes::find($request->notes_id);
+        
+        $user = $this->getUser();
+        $note = $user->notes()->find($request->notes_id);
 
         if ($request->tag_id[0] == 0) {
             $note->tags()->detach();
