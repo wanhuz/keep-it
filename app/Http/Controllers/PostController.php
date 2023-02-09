@@ -19,12 +19,18 @@ class PostController extends Controller
     }
 
     public function index() {
+        $userid = Auth::id();
         $user = $this->getUser();
 
         $notes = $user->notes()->get();
         $tags = $user->tags()->get();
-        $settings = Setting::all();
-        
+        $settings = $user->settings()->get();
+
+        if ($settings->first() == null) {
+            SettingService::init($userid);
+            $settings = $user->settings()->get();
+        };
+
         return view('index', compact('notes', 'tags', 'settings'));
     }
 

@@ -108,7 +108,6 @@ $("#saveUserConfBtn").on('click', function(e) {
         }
     })
 
-    
     $.ajax({
         type: "POST",
         url: "/post-setting",
