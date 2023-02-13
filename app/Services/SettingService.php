@@ -8,6 +8,8 @@ use Illuminate\Session\SessionManager;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\File;
 
 class SettingService {
     private function getUser() {

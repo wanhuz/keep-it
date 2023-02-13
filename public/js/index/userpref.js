@@ -10,6 +10,11 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
   
+$("#logoutBtn").on('click', function(e) {
+    e.preventDefault();
+
+    document.getElementById('logout-form').submit();
+})
 
 $("#userprefBtn").on('click', function(e) {
     e.preventDefault();

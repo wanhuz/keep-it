@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Setting;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\File;
 use App\Services\SettingService;
 
 class SettingController extends Controller

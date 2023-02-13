@@ -71,9 +71,18 @@
                     <input id="search-input" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
-            <div class="navbar-right">
-                <button class="btn" type="button" id="sidebar-btn"><span class="bi bi-person-circle me-2"></span></button>
-                <button class="btn" type="button" id="userprefBtn"><span class="bi bi-gear me-2"></span></button>
+
+            <div class="btn-group me-4">
+                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="bi bi-person-circle me-2"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-lg-end mt-2">
+                    <li><button class="dropdown-item" type="button" id="userprefBtn"><i class="bi bi-gear me-3"></i>Settings</button></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                    <li><button class="dropdown-item" type="button" id="logoutBtn"><i class="bi bi-box-arrow-right me-3"></i>Logout</button></li>
+                </ul>
             </div>
         </div>
     </nav>
