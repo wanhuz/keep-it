@@ -78,6 +78,16 @@ function updateModalTag(noteTag) {
     });
 }
 
+function createTagListElement(tagName) {
+    let taglistexample = `<a href="#" class="list-group-item list-group-item-action">A second link item</a>`;
+
+    let taglist = document.createElement("li");
+    taglist.classList.add("list-group-item", "list-group-item-action", "border", "border-0");
+    taglist.textContent = tagName;
+
+    return taglist
+}
+
 $("#submitTag").on('click', function(e) {
     e.stopPropagation();
 
@@ -105,3 +115,23 @@ $("#submitTag").on('click', function(e) {
         }
     })
 });
+
+$("#manageTagBtn").on('click', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: "/load-tag",
+        type: 'GET',
+        success: function(data) {
+            let allTag = data;
+
+            let currentTagListContainer = document.getElementById("currentTagList");
+
+            allTag.forEach(tag => {
+                currentTagListContainer.append(createTagListElement(tag.name));
+            });
+        }
+    })
+
+    $('#tagManagerModal').modal('show');
+})

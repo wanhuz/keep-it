@@ -55,7 +55,7 @@
     <x-preference></x-preference>
 
     <!-- Tag editor -->
-    <x-tag-add></x-tag-add>
+    <x-tag-manager></x-tag-manager>
 
     <!-- Fullscreen text editor -->
     <x-editor></x-editor>
@@ -107,7 +107,7 @@
                             @endforeach
                         </div>
                         <hr class="ms-1 my-1">
-                        <button type="button" id="tagAddBtn" class="btn tag-btn ms-1 text-start mb-auto"><i class="bi bi-plus-circle"></i><span class="ps-4">Manage tag</span></button>
+                        <button type="button" id="manageTagBtn" class="btn tag-btn ms-1 text-start mb-auto"><i class="bi bi-plus-circle"></i><span class="ps-4">Manage tag</span></button>
                     </form>
                 </div>
             </nav>

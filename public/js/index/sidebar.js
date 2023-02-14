@@ -45,12 +45,6 @@ function refreshSidebar() {
     })
 }
 
-$("#tagAddBtn").on('click', function(e) {
-    e.preventDefault();
-
-    $('#tagAddModal').modal('show');
-})
-
 $(document).on('click', '#addTagBtn', function(e) {
     e.preventDefault();
 
