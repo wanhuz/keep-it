@@ -78,12 +78,35 @@ function updateModalTag(noteTag) {
     });
 }
 
-function createTagListElement(tagName) {
-    let taglistexample = `<a href="#" class="list-group-item list-group-item-action">A second link item</a>`;
+function updateManageTagModal() {
+    $.ajax({
+        url: "/load-tag",
+        type: 'GET',
+        success: function(data) {
+            let allTag = data;
+
+            let currentTagListContainer = document.getElementById("currentTagList");
+            currentTagListContainer.innerHTML = "";
+
+            allTag.forEach(tag => {
+                currentTagListContainer.append(createTagListElement(tag.name, tag.id));
+            });
+        }
+    })
+}
+
+function createTagListElement(tagName, tagId) {
+    let taglistexample = `<li class="list-group-item list-group-item-action border border-0 me-auto d-flex justify-content-between align-items-start"><button type="button" class="btn-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></li>`;
 
     let taglist = document.createElement("li");
-    taglist.classList.add("list-group-item", "list-group-item-action", "border", "border-0");
+    taglist.classList.add("list-group-item", "list-group-item-action", "border", "border-0", "d-flex", "justify-content-between", "align-items-start");
     taglist.textContent = tagName;
+    taglist.dataset.id = tagId;
+    let deletebtn = document.createElement("button");
+    deletebtn.type = "button";
+    deletebtn.classList.add("deletetag-btn");
+    deletebtn.classList.add("btn-close");
+    taglist.append(deletebtn);
 
     return taglist
 }
@@ -119,19 +142,56 @@ $("#submitTag").on('click', function(e) {
 $("#manageTagBtn").on('click', function(e) {
     e.preventDefault();
 
+    updateManageTagModal();
+    $('#tagManagerModal').modal('show');
+})
+
+$('#closeManageTagBtn').on('click', function(e) {
+    e.preventDefault();
+    $('#tagManagerModal').modal('hide');
+})
+
+$('body').on('click', '.deletetag-btn', function(e) {
+    e.preventDefault();
+
+    let formData = $("#tagEditForm").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+    let tagId = e.currentTarget.parentNode.getAttribute("data-id");
+
     $.ajax({
-        url: "/load-tag",
-        type: 'GET',
-        success: function(data) {
-            let allTag = data;
-
-            let currentTagListContainer = document.getElementById("currentTagList");
-
-            allTag.forEach(tag => {
-                currentTagListContainer.append(createTagListElement(tag.name));
-            });
+        url: '/delete-tag',
+        type: 'POST',
+        data: {
+            '_token' : formToken,
+            'tagid' : tagId
+        },
+        success: function() {
+            refreshSidebar();
+            updateManageTagModal();
+            updateTag();
         }
     })
+});
 
-    $('#tagManagerModal').modal('show');
+$(document).on('click', '#addTagBtn', function(e) {
+    e.preventDefault();
+
+    let formData = $("#tagAddForm").serializeArray();
+    let formToken = formData.find(data => data.name == "_token").value;
+    let newTagName = formData.find(data => data.name == "tagName").value;
+
+    $.ajax({
+        type: "POST",
+        url: "/post-tag",
+        data: {
+            "_token" : formToken,
+            'name' : newTagName
+        },
+        success: function() {
+            $("#tagAddForm")[0].reset();
+            refreshSidebar();
+            updateManageTagModal();
+            updateTag();
+        }
+    })
 })

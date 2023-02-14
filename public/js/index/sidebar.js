@@ -45,26 +45,7 @@ function refreshSidebar() {
     })
 }
 
-$(document).on('click', '#addTagBtn', function(e) {
-    e.preventDefault();
 
-    let formData = $("#tagAddForm").serializeArray();
-    let formToken = formData.find(data => data.name == "_token").value;
-    let newTagName = formData.find(data => data.name == "tagName").value;
-
-    $.ajax({
-        type: "POST",
-        url: "/post-tag",
-        data: {
-            "_token" : formToken,
-            'name' : newTagName
-        },
-        success: function() {
-            $("#tagAddForm")[0].reset();
-            refreshSidebar();
-        }
-    })
-})
 
 $(document).on('click', '.sidebar-btn', function(e) {
     e.preventDefault();

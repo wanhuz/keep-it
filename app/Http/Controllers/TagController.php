@@ -59,4 +59,30 @@ class TagController extends Controller
 
         return;
     }
+
+    public function update(Request $request) {
+
+        $attributes = request()->validate([
+            'id' => 'required',
+            'name' => 'required' 
+        ]);
+
+        $user = $this->getUser();
+        $tag = $user->tags()->find($request->id);
+
+        $tag->name = $request->name;
+        $tag->save();
+    }
+
+    public function delete(Request $request) {
+
+        $attributes = request()->validate([
+            'tagid' => 'required'
+        ]);
+
+        $user = $this->getUser();
+
+        $tag = $user->tags()->find($request->tagid);
+        $tag->delete();
+    }
 }

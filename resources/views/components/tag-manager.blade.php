@@ -10,7 +10,11 @@
             <div class="modal-body">
                 <div class="" id="newTag">
                     <div class="mb-3 gap-2 align-items-center w-100" id="currentTag">
-                        <ul class="list-group border" id="currentTagList"></ul>
+                        <form id="tagEditForm">
+                            @csrf
+                            <ul class="list-group border" id="currentTagList">
+                            </ul>
+                        </form>
                     </div>
 
                     <form id="tagAddForm">
@@ -24,7 +28,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-outline-primary border border-0 ms-auto">Close</button>
+                <button id="closeManageTagBtn" class="btn btn-outline-primary border border-0 ms-auto">Close</button>
             </div>
         </div>
     </div>
