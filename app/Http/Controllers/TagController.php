@@ -77,12 +77,12 @@ class TagController extends Controller
     public function delete(Request $request) {
 
         $attributes = request()->validate([
-            'tagid' => 'required'
+            'id' => 'required'
         ]);
 
         $user = $this->getUser();
 
-        $tag = $user->tags()->find($request->tagid);
+        $tag = $user->tags()->find($request->id);
         $tag->delete();
     }
 }
