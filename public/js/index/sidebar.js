@@ -7,23 +7,22 @@ function toggleSidebar() {
 }
 
 function createSidebarBtn(tagText) {
+    `<button type="button" class="btn tag-btn ms-1 text-start sidebar-btn" value="{{ $value }}"><i class="bi bi-bookmark"></i><span class="ps-4">{{ $slot }}</span></button>`
+
     let sidebarBtn = document.createElement("button");
-    sidebarBtn.classList.add("btn");
-    sidebarBtn.classList.add("btn-light");
-    sidebarBtn.classList.add("ms-1");
-    sidebarBtn.classList.add("text-start");
+    sidebarBtn.classList.add("btn", "tag-btn", "ms-1", "text-start", "sidebar-btn");
+    sidebarBtn.value = tagText;
+    sidebarBtn.type = "button";
 
-    let icon = document.createElement("i");
-    icon.classList.add("bi");
-    icon.classList.add("bi-bookmark");
+    let sidebarIcon = document.createElement("icon");
+    sidebarIcon.classList.add("bi", "bi-bookmark");
 
-    let text = document.createElement("span");
-    text.classList.add("ps-4");
-    text.textContent = tagText;
+    let spanText = document.createElement("span");
+    spanText.classList.add("ps-4");
+    spanText.textContent = tagText;
 
-    
-    sidebarBtn.append(icon);
-    sidebarBtn.append(text);
+    sidebarBtn.append(sidebarIcon);
+    sidebarBtn.append(spanText);
     
     return sidebarBtn;
 }
