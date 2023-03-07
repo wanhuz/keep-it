@@ -15,11 +15,16 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger("user_id")->unsigned();
             $table->string('title');
             $table->text('body');
             $table->integer('revision_count')->default(0);
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
+            $table->foreign("user_id")
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

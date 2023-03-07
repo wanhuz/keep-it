@@ -4,37 +4,85 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keep-it</title>
+    <title>{{$settings->firstWhere('key', '=', 'app-name')->value}}</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/color.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="icon" type="image/x-icon" href="{{asset('storage/' . $settings->firstWhere('key', '=', 'favicon-img')->value)}}">
+
+    <!-- User defined style -->
+    <style>
+        body {  
+            background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
+            background-size: cover; 
+            background-attachment: fixed;
+            background-color: rgb({{$settings->firstWhere('key', '=', 'bg-color')->value}});
+        }
+        .card {
+            background: rgba(255,255,255, {{$settings->firstWhere('key', '=', 'card-tpc')->value}});
+        }
+        #header {
+            background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, {{$settings->firstWhere('key', '=', 'header-tpc')->value}});
+        }
+        #sidebar {
+            background: rgba({{$settings->firstWhere('key', '=', 'side-color')->value}}, {{$settings->firstWhere('key', '=', 'sidebar-tpc')->value}});
+        }
+
+        .card {
+            width: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-width);
+            min-height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);
+        }
+
+        @if ($settings->firstWhere('key', '=', 'card-size-style')->value == "fixed")
+
+        .card-text {
+            height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);
+            overflow-y: hidden;
+        }
+
+        @endif
+
+        .card {
+            font-size: {{$settings->firstWhere('key', '=', 'card-font-size')->value}};
+        }
+
+    </style>
 </head>
 <body>
-    <!-- Hidden form to get note by tag -->
-    <form id="formGetNoteByTag">
-        @csrf
-    </form>
+
+    <!-- User preference editor -->
+    <x-preference></x-preference>
 
     <!-- Tag editor -->
-    <x-tag-add></x-tag-add>
+    <x-tag-manager></x-tag-manager>
 
     <!-- Fullscreen text editor -->
     <x-editor></x-editor>
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-warning text-light sticky-top w-100">
+    <nav class="navbar navbar-expand-lg text-light sticky-top w-100" id="header">
         <div class="container-fluid w-100">
-            <button class="btn" type="button"  id="sidebar-btn"><span class="navbar-toggler-icon me-2"></span></button>
-            <a class="navbar-brand me-5" href="#">Keep-it</a>
+            <button class="btn me-3" type="button"  id="menu-btn"><span class="navbar-toggler-icon me-2"></span></button>
+            <a class="navbar-brand me-5" href="#">{{$settings->firstWhere('key', '=', 'app-name')->value}}</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-5" role="search" id="searchbar">
-                    <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex ms-5" role="search" id="searchbar" action="/search">
+                    @csrf
+                    <input id="search-input" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>
-            <div class="navbar-right">
-                <button class="btn" type="button" id="sidebar-btn"><span class="bi bi-list-nested me-2"></span></button>
-                <button class="btn" type="button" id="sidebar-btn"><span class="bi bi-person-circle me-2"></span></button>
-                <button class="btn" type="button" id="sidebar-btn2"><span class="bi bi-gear me-2"></span></button>
+
+            <div class="btn-group me-4">
+                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="bi bi-person-circle me-2"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-lg-end mt-2">
+                    <li><button class="dropdown-item" type="button" id="userprefBtn"><i class="bi bi-gear me-3"></i>Settings</button></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                    <li><button class="dropdown-item" type="button" id="logoutBtn"><i class="bi bi-box-arrow-right me-3"></i>Logout</button></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -44,27 +92,28 @@
 
   <div class="container-fluid" >
         <div class="row">    
-            <div class="col-2 bg-light vh-100 overflow-hidden w-auto" id="sidebar">
-                <div class="d-flex  flex-column gap-2 justify-between-content text-left mt-2" role="group" aria-label="Vertical button group" id="sidebar-menu" >
-                    <div id="sidebarBtn" class="d-flex flex-column position-fixed vh-100 ">
-                        <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
-                            @csrf
-                            <button type="button" class="btn btn-light ms-1 text-start" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
-                            <div id="tagList" class="d-flex flex-column">
-                                @foreach ($tags as $tag)
-                                    <x-tag-sidebtn>
-                                        <x-slot:value>{{$tag->name}}</x-slot>
-                                        {{$tag->name}}
-                                    </x-tag-sidebtn>
-                                @endforeach
-                            </div>
-                            <button type="button" id="tagAddBtn" class="btn btn-light ms-1 text-start"><i class="bi bi-plus-circle"></i><span class="ps-4">Add new tag</span></button>
-                        </form>
-                    </div>
+            <nav class="navbar navbar-expand d-flex flex-column align-item-start sidebar" id="sidebar">
+                <div id="sidebarBtn" class="d-flex flex-column vh-100 ">
+                    <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
+                        @csrf
+                        <button type="button" class="btn tag-btn ms-1 text-start" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
+                        <hr class="ms-1 my-1">
+                        <div id="tagList" class="d-flex flex-column">
+                            @foreach ($tags as $tag)
+                                <x-tag-sidebtn>
+                                    <x-slot:value>{{$tag->name}}</x-slot>
+                                    {{$tag->name}}
+                                </x-tag-sidebtn>
+                            @endforeach
+                        </div>
+                        <hr class="ms-1 my-1">
+                        <button type="button" id="manageTagBtn" class="btn tag-btn ms-1 text-start mb-auto"><i class="bi bi-plus-circle"></i><span class="ps-4">Manage tag</span></button>
+                    </form>
                 </div>
-            </div>
+            </nav>
+
             
-            <div class="col mt-4">
+            <div class="col mt-4 main-container">
                 <div class="container mb-3" id="editor">
                     <div class="text-center ">
                         <div id="simpleEditor" class="input-group mb-3 "> 
@@ -96,18 +145,15 @@
                     </div>
                 </div>
 
-                <div class="text-center">
-                    <div class="d-flex flex-row flex-wrap" id="card-container">
-                        @foreach ($notes as $note)
-                            <x-card>
-                                <x-slot:id>{{$note->id}}</x-slot>
-                                <x-slot:revision_count>{{$note->revision_count}}</x-slot>
-                                <x-slot:title>{{$note->title}}</x-slot>
-                                <x-slot:body>{{$note->body}}</x-slot>
-                            </x-card>
-                        @endforeach
-                    
-                    </div>
+                <div class="d-flex flex-row flex-wrap" id="card-container">
+                    @foreach ($notes as $note)
+                        <x-card>
+                            <x-slot:id>{{$note->id}}</x-slot>
+                            <x-slot:revision_count>{{$note->revision_count}}</x-slot>
+                            <x-slot:title>{{$note->title}}</x-slot>
+                            <x-slot:body>{{$note->body}}</x-slot>
+                        </x-card>
+                    @endforeach
                 </div>
             </div>
 
@@ -125,6 +171,8 @@
     <script src="{{asset('js/index/sidebar.js')}}"></script>
     <script src="{{asset('js/index/editor.js')}}"></script>
     <script src="{{asset('js/index/misc.js')}}"></script>
+    <script src="{{asset('js/index/search.js')}}"></script>
+    <script src="{{asset('js/index/userpref.js')}}"></script>
     <script src="{{asset('js/index/init.js')}}"></script>
 </body>
 </html>

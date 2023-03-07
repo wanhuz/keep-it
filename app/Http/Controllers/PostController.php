@@ -4,16 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Notes;
 use App\Models\Tag;
+use App\Models\Setting;
+use App\Models\User;
+use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Services\SettingService;
 
 class PostController extends Controller
 {
+    private function getUser() {
+        $userId = Auth::id();
+        return User::find($userId);
+    }
+
     public function index() {
-        $notes = Notes::all();
-        $tags = Tag::all();
-        
-        return view('index', ['notes' => $notes], ['tags' => $tags]);
+        $userid = Auth::id();
+        $user = $this->getUser();
+
+        $notes = $user->notes()->get();
+        $tags = $user->tags()->get();
+        $settings = $user->settings()->get();
+
+        if ($settings->first() == null) {
+            SettingService::init($userid);
+            $settings = $user->settings()->get();
+        };
+
+        return view('index', compact('notes', 'tags', 'settings'));
     }
 
     public function store(Request $request) {
@@ -23,12 +42,14 @@ class PostController extends Controller
             'body' => 'required',
         ]);
     
-
-        Notes::create($attributes);
+        $user = $this->getUser();
+        $user->notes()->create($attributes);
     }
 
     public function load() {
-        return json_encode(Notes::all()) ;
+        $user = $this->getUser();
+
+        return json_encode($user->notes()->get()) ;
     }
 
     public function update(Request $request) {
@@ -38,9 +59,11 @@ class PostController extends Controller
             'body' => 'required',
         ]);
 
-        Notes::where('id', $request->id)->increment('revision_count', 1);
+        $user = $this->getUser();
 
-        $note = Notes::find($request->id);
+        $user->notes()->where('id', $request->id)->increment('revision_count', 1);
+
+        $note = $user->notes()->find($request->id);
 
         $note->title = $request->title;
         $note->body = $request->body;
@@ -50,22 +73,30 @@ class PostController extends Controller
     }
 
     public function delete(Request $request) {
+        $user = $this->getUser();
 
-        $note = Notes::find($request->id);
+        $note = $user->notes()->find($request->id);
 
         $note->delete();
     }
 
     public function load_note_by_tag(Request $request) {
+        $user = $this->getUser();
+
         $tag = $request->tag;
 
-        $note_with_tag = Notes::whereHas('tags', function ($query) use($tag) {
-                                return $query->where('tags.name', '=', $tag);
-                                })->get();
+        $note_with_tag = $user->notes()->whereHas('tags', function ($query) use($tag) {
+                                                return $query->where('tags.name', '=', $tag);})->get();
         
         return json_encode($note_with_tag);
         
     }
-}
+
+    public function search() {
+        $user = $this->getUser();
+
+        return $user->notes()->filter(request(['searchQuery', 'filterBy']))->get();
+    }
+} 
 
 
