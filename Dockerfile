@@ -35,8 +35,7 @@ WORKDIR /var/www
 # Copy entrypoint script
 RUN mkdir -p /entry && \
     chown -R $user:$user /entry
-COPY ./dev/script/entrypoint.sh /entry/
-COPY ./dev/script/first-run /entry/
+COPY ./dev/script/ /entry/
 RUN chown $user:$user /entry
 
 USER $user

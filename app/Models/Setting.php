@@ -13,7 +13,7 @@ class Setting extends Model
     protected $fillable = [
         'key',
         'value',
-        'user_id'
+        'user_id',
     ];
 
     public $timestamps = false;
