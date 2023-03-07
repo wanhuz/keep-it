@@ -10,6 +10,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Services\SettingService;
 
 class PostController extends Controller
 {

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if test -e /first-run; then
+    composer install
+    composer update
+
+    php /var/www/artisan key:generate
+    php /var/www/artisan migrate:install
+    rm /first-run
+fi
+
+

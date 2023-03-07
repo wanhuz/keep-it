@@ -2,7 +2,7 @@
 document.getElementById("simpleEditor").addEventListener('click', () => {
     document.getElementById("simpleEditor").classList.add("d-none");
     document.getElementById("fullEditor").classList.remove("d-none");
-    document.getElementById("fullEditorTextArea").focus();
+    document.getElementById("bodyTextArea").focus();
 });
 
 document.getElementById("cancelBtn").addEventListener('click', () => {
