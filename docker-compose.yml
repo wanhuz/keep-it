@@ -1,13 +1,7 @@
 version: "3.7"
 services:
   app:
-    build:
-      args:
-        user: keepit
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: keepit-app
+    image: wanhuz/keepit:latest
     container_name: keepit-app
     restart: unless-stopped
     working_dir: /var/www/
@@ -18,19 +12,7 @@ services:
     networks:
       - keepit
 
-  db:
-    image: mysql:5.7
-    container_name: keepit-db
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: keepit-db
-      MYSQL_ROOT_PASSWORD: keepit-test
-      MYSQL_PASSWORD: keepit-test
-      MYSQL_USER: keepit-user
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
-    networks:
-      - keepit
+
 
   nginx:
     image: nginx:alpine
