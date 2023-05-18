@@ -2,7 +2,7 @@
   <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-![image](https://github.com/wanhuz/keep-it/assets/12682216/83a4b5af-3f40-4c69-9d31-12984edf9bfd)
+![image](https://github.com/wanhuz/keep-it/assets/12682216/0580a8e2-4ad8-452f-aefe-355d8e5edb12)
 
 
 ## Keep-It
