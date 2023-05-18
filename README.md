@@ -2,18 +2,7 @@
   <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-<table>
-  <tr>
-     <td>Main page</td>
-     <td>Note editor</td>
-     <td>Tag editor</td>
-  </tr>
-  <tr>
-    <td><img src=https://user-images.githubusercontent.com/12682216/232377494-2d55c836-a451-4abb-8b8b-d17d1b5e871a.png></td>
-    <td><img src=https://user-images.githubusercontent.com/12682216/232377582-06ecf0f8-757d-40c6-b50c-16f44786d765.png></td>
-    <td><img src=https://user-images.githubusercontent.com/12682216/232377616-2131e6cc-55ef-4766-8a85-8602b893761d.png></td>
-  </tr>
-</table>
+![image](https://github.com/wanhuz/keep-it/assets/12682216/83a4b5af-3f40-4c69-9d31-12984edf9bfd)
 
 
 ## Keep-It
