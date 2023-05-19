@@ -61,42 +61,41 @@
     <x-editor></x-editor>
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg text-light sticky-top w-100" id="header">
-        <div class="container-fluid w-100">
-            <button class="btn me-3" type="button"  id="menu-btn"><span class="navbar-toggler-icon me-2"></span></button>
-            <a class="navbar-brand me-5" href="#">{{$settings->firstWhere('key', '=', 'app-name')->value}}</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-5" role="search" id="searchbar" action="/search">
+    <nav id="header" class="navbar navbar-expand-lg text-light sticky-top">
+        <div class="container-fluid">
+            <button id="menu-btn" class="btn ms-3 me-3 nav-btn" type="button"><i class="bi bi-list"></i></button>
+
+            <a class="navbar-brand me-5 text-white" href="#">{{$settings->firstWhere('key', '=', 'app-name')->value}}</a>
+   
+            <div class="collapse navbar-collapse">
+                <form class="d-flex" role="search" id="searchbar" action="/search">
                     @csrf
                     <input id="search-input" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
                 </form>
-            </div>
+            </div>    
 
-            <div class="btn-group me-4">
-                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="bi bi-person-circle me-2"></span>
-                </button>
+            <div class="me-4">
+                <button type="button" class="btn nav-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-gear"></i></button>
                 <ul class="dropdown-menu dropdown-menu-lg-end mt-2">
                     <li><button class="dropdown-item" type="button" id="userprefBtn"><i class="bi bi-gear me-3"></i>Settings</button></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                    </form>
                     <li><button class="dropdown-item" type="button" id="logoutBtn"><i class="bi bi-box-arrow-right me-3"></i>Logout</button></li>
                 </ul>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST"> @csrf </form>
             </div>
+
         </div>
     </nav>
 
 
     <!-- Contents -->
 
-  <div class="container-fluid" >
+    <div class="container-fluid" >
         <div class="row">    
-            <nav class="navbar navbar-expand d-flex flex-column align-item-start sidebar" id="sidebar">
-                <div id="sidebarBtn" class="d-flex flex-column vh-100 ">
+            <aside class="d-flex flex-column align-item-start sidebar" id="sidebar">
+                <div id="sidebarBtn" class="vh-100 ">
                     <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
                         @csrf
-                        <button type="button" class="btn tag-btn ms-1 text-start" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
+                        <button type="button" class="btn tag-btn ms-1 mt-1 text-start w-100" id="all-note-sidebar-btn"><i class="bi bi-stickies"></i><span class="ps-4">Notes</span></button>
                         <hr class="ms-1 my-1">
                         <div id="tagList" class="d-flex flex-column">
                             @foreach ($tags as $tag)
@@ -107,55 +106,55 @@
                             @endforeach
                         </div>
                         <hr class="ms-1 my-1">
-                        <button type="button" id="manageTagBtn" class="btn tag-btn ms-1 text-start mb-auto"><i class="bi bi-plus-circle"></i><span class="ps-4">Manage tag</span></button>
+                        <button type="button" id="manageTagBtn" class="btn tag-btn ms-1 text-start mb-auto w-100"><i class="bi bi-plus-circle"></i><span class="ps-4">Manage tag</span></button>
                     </form>
                 </div>
-            </nav>
+            </aside>
 
             
-            <div class="col mt-4 main-container">
-                <div class="container mb-3" id="editor">
-                    <div class="text-center ">
+            <main class="col mt-4 main-container">
+                <div class="container-fluid">
+                    <div class="mx-auto mb-3" id="editor">
                         <div id="simpleEditor" class="input-group mb-3 "> 
-                            <input type="text" class="form-control shadow-none" placeholder="Take a note.." aria-label="Note" aria-roledescription="basic-addon1" aria-expanded="false">
+                            <input type="text" class="form-control shadow-none" placeholder="Take a note.." >
                             <button class="btn btn-light btn-outline-secondary" id="cancel-btn"><i class="bi bi-list-task"></i></button>
                             <button class="btn btn-light btn-outline-secondary"><i class="bi bi-image"></i></button>
                         </div>
-                    </div>
 
-                    <!-- Iframe will prevent page from breaking when closing the editor -->
-                    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe> 
-                    <div class="d-none" id="fullEditor" >
-                        <div class="card">
-                            <form target="dummyframe" id="postform">
-                                @csrf
-                                <div id="fullEditorCard" class="card-body" >
-                                        <input type="text" name="title" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
-                                        <textarea name="body" id="bodyTextArea" class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3"></textarea>
-                                </div>
-                                <div class="card-footer d-flex flex-row">
-                                    <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-list-task"></i></button>
-                                    <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-image"></i></button>
-                                    
-                                    <button class="btn btn-light border border-0 ms-auto" id="cancelBtn"><i class="bi bi-x"></i></button>
-                                    <button type="submit" class="btn btn-light border border-0" id="submitBtn"><i class="bi bi-check-lg"></i></button>
-                                </div>
-                            </form>
+                        <!-- Iframe will prevent page from breaking when closing the editor -->
+                        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe> 
+                        <div class="d-none" id="fullEditor" >
+                            <div class="card">
+                                <form target="dummyframe" id="postform">
+                                    @csrf
+                                    <div id="fullEditorCard" class="card-body" >
+                                            <input type="text" name="title" id="titleTextArea" class="form-control border border-0 shadow-none" placeholder="Title">
+                                            <textarea name="body" id="bodyTextArea" class="form-control border border-0 shadow-none" placeholder="Take a note.." id="fullEditorTextArea" cols="30" rows="3"></textarea>
+                                    </div>
+                                    <div class="card-footer d-flex flex-row">
+                                        <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-list-task"></i></button>
+                                        <button class="btn btn-light btn-outline-secondary border border-0"><i class="bi bi-image"></i></button>
+                                        
+                                        <button class="btn btn-light border border-0 ms-auto" id="cancelBtn"><i class="bi bi-x"></i></button>
+                                        <button type="submit" class="btn btn-light border border-0" id="submitBtn"><i class="bi bi-check-lg"></i></button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="d-flex flex-row flex-wrap" id="card-container">
-                    @foreach ($notes as $note)
-                        <x-card>
-                            <x-slot:id>{{$note->id}}</x-slot>
-                            <x-slot:revision_count>{{$note->revision_count}}</x-slot>
-                            <x-slot:title>{{$note->title}}</x-slot>
-                            <x-slot:body>{{$note->body}}</x-slot>
-                        </x-card>
-                    @endforeach
+                    <div class="d-flex flex-row flex-wrap" id="card-container">
+                        @foreach ($notes as $note)
+                            <x-card>
+                                <x-slot:id>{{$note->id}}</x-slot>
+                                <x-slot:revision_count>{{$note->revision_count}}</x-slot>
+                                <x-slot:title>{{$note->title}}</x-slot>
+                                <x-slot:body>{{$note->body}}</x-slot>
+                            </x-card>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            </main>
 
         </div>
     </div>
