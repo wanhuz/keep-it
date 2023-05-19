@@ -34,17 +34,7 @@
     width: 35%;
 }
 
-#fullEditorTextArea {
-    resize: none;
-}
 
-#editor {
-    width: 500px;
-}
-
-#fullEditor {
-    margin: 0px;
-}
 
 #simpleEditor button {
     border: 1px solid gainsboro;
