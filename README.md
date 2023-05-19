@@ -1,6 +1,9 @@
 <p align="left">
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+![image](https://github.com/wanhuz/keep-it/assets/12682216/0580a8e2-4ad8-452f-aefe-355d8e5edb12)
+
 
 ## Keep-It
 
@@ -12,17 +15,12 @@ Keep-it is current a work in progress project. It starts as a hobby project to l
 
 - Post note
 - Tag and filter note
-
-## Upcoming feature
-
 - Search through note
 - Edit and remove tag
+- User customization such as background image or interface color
+
+## Upcoming feature
 - Embed image and video in note
-- Ability to customize to user preference such as background image or interface color
-
-## Demo
-
-Demo can be accessed at [Heroku](https://keep-its.herokuapp.com/)
 
 ## License
 
