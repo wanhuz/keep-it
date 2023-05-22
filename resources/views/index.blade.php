@@ -68,9 +68,9 @@
             <a class="navbar-brand me-5 text-white" href="#">{{$settings->firstWhere('key', '=', 'app-name')->value}}</a>
    
             <div class="collapse navbar-collapse">
-                <form class="d-flex" role="search" id="searchbar" action="/search">
+                <form id="searchbar" class="d-flex ms-5" role="search" action="/search">
                     @csrf
-                    <input id="search-input" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+                    <input id="search-input" class="form-control" type="search" placeholder="Search" aria-label="Search">
                 </form>
             </div>    
 
