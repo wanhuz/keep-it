@@ -210,10 +210,15 @@ $(document).on('click', '.note', function(e) {
     document.getElementById('titleEditor').value = clickedNoteTitle;
     document.getElementById('bodyEditor').value = clickedNoteBody;
 
+    // Resize note area
+    $("textarea").trigger("input");
+
     if (clickedNoteTags === undefined)  {
         tagEditor.innerHTML = "";
         return;
     }
+
+
 
     clickedNoteTags = String(clickedNoteTags).split(",");
     
