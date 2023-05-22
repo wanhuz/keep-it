@@ -1,4 +1,5 @@
 var mediaItemContainer = $('#card-container');
+var $mediaItemContainer = mediaItemContainer;
 let currentPageTag = null;
 let currentSearchTerm = null; 
 
@@ -7,10 +8,13 @@ const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
 mediaItemContainer.masonry( {
-    itemSelector: '.card'
+    itemSelector: '.card',
+    isFitWidth: true,
+    resize: false,
+    transitionDuration: '0.4s'
 });
 
-let contentRefresh = window.setInterval(updatePage, 5000);
+// let contentRefresh = window.setInterval(updatePage, 5000);
 
 updatePage();
 

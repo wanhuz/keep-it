@@ -91,7 +91,7 @@
 
     <div class="container-fluid" >
         <div class="row">    
-            <aside class="d-flex flex-column align-item-start sidebar" id="sidebar">
+            <aside class="col align-item-start sidebar" id="sidebar">
                 <div id="sidebarBtn" class="vh-100 ">
                     <form id="sidebar-btn-form" action="/load-note-by-tag" method="get">
                         @csrf
@@ -113,8 +113,6 @@
 
             
             <main class="col mt-4 main-container">
-                <div class="container-fluid">
-
                     <div id="editor" class="row ms-auto mx-auto mb-3">
                         <!-- Iframe will prevent page from breaking when closing the editor -->
                         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe> 
@@ -147,7 +145,7 @@
                         </div>
                     </div>
 
-                    <div id="card-container" class="row flex-wrap">
+                    <div id="card-container" class="row flex-wrap mx-auto ms-auto">
                         @foreach ($notes as $note)
                             <x-card>
                                 <x-slot:id>{{$note->id}}</x-slot>
@@ -157,8 +155,6 @@
                             </x-card>
                         @endforeach
                     </div>
-
-                </div>
             </main>
 
         </div>
