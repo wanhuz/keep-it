@@ -70,4 +70,5 @@ $("#all-note-sidebar-btn").on('click', function(e) {
 const sidebarMenu = $("#sidebar");
 
 document.getElementById("menu-btn").addEventListener('click', toggleSidebar);
-sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', refreshCardContainerLayout);
+sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', () => {$(mediaItemContainer).masonry('layout');});
+// sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', () => {$('.main-container').width(1)});

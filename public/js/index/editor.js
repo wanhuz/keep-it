@@ -9,6 +9,7 @@ document.getElementById("cancelBtn").addEventListener('click', () => {
     document.getElementById("fullEditor").classList.add("d-none");
     document.getElementById("simpleEditor").classList.remove("d-none");
     $("#postform")[0].reset();
+    document.getElementById("bodyTextArea").style.height = null;
 })
 
 $(document).on('click', '#submitBtn', function() {
@@ -28,6 +29,7 @@ $(document).on('click', '#submitBtn', function() {
         success: function() {
             updatePage();
             $("#postform")[0].reset();
+            document.getElementById("bodyTextArea").style.height = null;
         }
     })
 })
@@ -122,3 +124,21 @@ $("#editorTagList").on('click', function (e) {
 $('#fullNoteEditor').on('hidden.bs.modal', function () {
     document.querySelector("#fullNoteEditor").setAttribute('data-id', -1);
 })
+
+//Init editor's textarea to be resized based on user input
+
+function initTextAreaToResizable() {
+    $("textarea#bodyTextArea").on("input", function () {
+        if (this.clientHeight < this.scrollHeight) {
+            this.style.height = 0;
+            this.style.height = (this.scrollHeight)  + "px";
+        }
+    });
+    
+    $("textarea#bodyEditor").each(function () {
+        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+    }).on("input", function () {
+        this.style.height = 0;
+        this.style.height = (this.scrollHeight) + "px";
+    });
+}
