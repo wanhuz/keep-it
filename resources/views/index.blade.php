@@ -145,7 +145,7 @@
                         </div>
                     </div>
 
-                    <div id="card-container" class="row flex-wrap mx-auto ms-auto">
+                    <div id="card-container" class="row flex-wrap ms-5">
                         @foreach ($notes as $note)
                             <x-card>
                                 <x-slot:id>{{$note->id}}</x-slot>

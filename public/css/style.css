@@ -109,8 +109,7 @@ textarea {
 }
 
 .active-cont {
-    /* margin-left: 230px; */
-    padding-left: 230px;
+    padding-left: 250px;
 }
 
 .nav-btn {
@@ -137,8 +136,4 @@ textarea {
     -moz-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1);
     box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1);
-}
-
-#card-container {
-    margin: 0 auto;
 }
