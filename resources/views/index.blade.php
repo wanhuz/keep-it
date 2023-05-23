@@ -75,7 +75,7 @@
             </div>    
 
             <div class="me-4">
-                <button type="button" class="btn nav-btn" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-gear"></i></button>
+                <button type="button" class="btn nav-btn" data-bs-toggle="dropdown" aria-expanded="false">{{auth()->user()->name;}}</button>
                 <ul class="dropdown-menu dropdown-menu-lg-end mt-2">
                     <li><button class="dropdown-item" type="button" id="userprefBtn"><i class="bi bi-gear me-3"></i>Settings</button></li>
                     <li><button class="dropdown-item" type="button" id="logoutBtn"><i class="bi bi-box-arrow-right me-3"></i>Logout</button></li>
