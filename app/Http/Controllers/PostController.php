@@ -32,7 +32,7 @@ class PostController extends Controller
             $settings = $user->settings()->get();
         };
 
-        return view('index', compact('notes', 'tags', 'settings'));
+        return view('/home/home', compact('notes', 'tags', 'settings'));
     }
 
     public function store(Request $request) {
