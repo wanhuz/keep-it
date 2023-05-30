@@ -21,9 +21,7 @@
     @yield('components')
     @yield('navigation')
 
-    <div class='container-fluid'>
-        @yield('content')
-    </div>
+    @yield('content')
 
     @include('common.scripts')
     @yield('scripts')

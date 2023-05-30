@@ -8,9 +8,7 @@
     </style>
 @endsection
 
-    
-
-<!-- Navigation components -->
+<!-- Navbar -->
 @section('navigation')
     <x-navigation.navbar>
         <x-slot:title>{{ $settings->firstWhere('key', '=', 'app-name')->value }}</x-slot>
