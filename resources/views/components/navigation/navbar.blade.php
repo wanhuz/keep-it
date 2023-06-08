@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <button id="menu-btn" class="btn ms-3 me-3 nav-btn" type="button"><i class="bi bi-list"></i></button>
 
-        <a class="navbar-brand me-5 text-white">{{ $title }}</a>
+        <a class="navbar-brand me-5 text-white" href="/">{{ $title }}</a>
 
         <div class="collapse navbar-collapse">
             <form id="searchbar" class="d-flex ms-5" role="search" action="/search">

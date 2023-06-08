@@ -4,6 +4,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserHomeController;
+use App\Http\Controllers\UserLayoutController;
+use App\Http\Controllers\UserThemeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
@@ -30,8 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', [PostController::class, 'search']);
 
     // Settings
-    Route::get('/settings/home', [SettingController::class, 'index']);
-    Route::get('/get-setting', [SettingController::class, 'get']);
-    Route::post('/post-setting', [SettingController::class, 'store']);
+    Route::get('/settings/home', [UserHomeController::class, 'index']);
+    Route::get('/get-setting', [UserHomeController::class, 'get']);
+    Route::get('/settings/layout', [UserLayoutController::class, 'index']);
+    Route::get('/settings/theme', [UserThemeController::class, 'index']);
+    Route::post('/post-setting', [UserHomeController::class, 'store']);
 
 });

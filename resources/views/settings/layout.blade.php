@@ -4,6 +4,8 @@
 
     <h2>Layout</h2>
     <form action="/post-setting" method="POST">
+        @csrf
+
         <x-preference.card>
             <x-slot:title>Card size style</x-slot>
             <x-slot:desc>Change how text in card are displayed.</x-slot>
@@ -15,7 +17,7 @@
             </x-slot>
         </x-preference.card>
 
-        <hr>
+        <hr class="mt-5">
 
         <x-preference.card>
             <x-slot:title>Card default size</x-slot>
@@ -29,7 +31,7 @@
             </x-slot>
         </x-preference.card>
 
-        <hr>
+        <hr class="mt-5">
         
         <x-preference.card>
             <x-slot:title>Card font size</x-slot>
@@ -44,7 +46,7 @@
         </x-preference.card>
 
         <div class="mt-5 my-5 float-end">
-            <button type="button" class="btn btn-primary px-4">Save</button>
+            <button type="submit" class="btn btn-primary px-4">Save</button>
         </div>
     </form>
 

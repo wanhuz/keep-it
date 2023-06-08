@@ -26,9 +26,9 @@
                             <div>
                                 <h5 class="mb-3">Categories</h5>
                                 <div class="list-group gap-2 list-group-flush">
-                                    <a class="list-group-item list-group-item-action" href="#" role="button">Home</a>
-                                    <a class="list-group-item list-group-item-action" href="#" role="button">Layout</a>
-                                    <a class="list-group-item list-group-item-action" href="#" role="button">Theme</a>
+                                    <a class="list-group-item list-group-item-action" href="/settings/home" role="button">Home</a>
+                                    <a class="list-group-item list-group-item-action" href="/settings/layout" role="button">Layout</a>
+                                    <a class="list-group-item list-group-item-action" href="/settings/theme" role="button">Theme</a>
                                 </div>
                             </div>
                         </div>
