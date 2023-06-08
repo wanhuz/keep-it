@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', [PostController::class, 'search']);
 
     // Settings
+    Route::get('/settings/home', [SettingController::class, 'index']);
     Route::get('/get-setting', [SettingController::class, 'get']);
     Route::post('/post-setting', [SettingController::class, 'store']);
 

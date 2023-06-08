@@ -10,6 +10,13 @@ class SettingController extends Controller
 {
     protected $settingService;
 
+    public function index() {
+        
+        $settings = $this->settingService->get();
+
+        return view('settings/home', compact('settings'));
+    }
+
     public function __construct(SettingService $settingService) {
         $this->settingService = $settingService;
     }
