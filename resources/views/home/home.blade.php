@@ -16,7 +16,6 @@
 @endsection
 
 @section('components')
-    <x-preference.manager></x-preference.manager>
     <x-tag.manager></x-tag.manager>
     <x-card.editor></x-card.editor>
 @endsection

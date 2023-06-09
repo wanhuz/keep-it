@@ -7,12 +7,20 @@
         @csrf
 
         <x-preference.card>
-            <x-slot:title>Navigation bar color</x-slot>
-            <x-slot:desc>Change navigation bar color.</x-slot>
+            <x-slot:title>Display name</x-slot>
+            <x-slot:desc>Display name will be displayed on top navigation bar. <br> This does not change username. </x-slot>
             <x-slot:form>
-                <div class="float-end">
-                    <x-form.color-picker>head-color</x-form.color-picker>  
-                </div>                         
+                <input type="text" class="form-control" id="applicationNameInput" aria-label="applicationName" aria-describedby="app-name" name="app-name">                       
+            </x-slot>
+        </x-preference.card>
+
+        <hr class="mt-5">
+
+        <x-preference.card>
+            <x-slot:title>User avatar</x-slot>
+            <x-slot:desc>Add or change user avatar.</x-slot>
+            <x-slot:form>
+                <input class="ms-auto form-control mb-2" type="file" id="faviconInput" name="favicon-img" accept=".jpg, .png">
             </x-slot>
         </x-preference.card>
 

@@ -6,26 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Services\SettingService;
 
-class SettingController extends Controller
+class ProfileController extends Controller
 {
     protected $settingService;
 
-    public function index() {
-        
+    public function user() {
         $settings = $this->settingService->get();
+        return view('settings/user', compact('settings'));
+    }
 
-        return view('settings/home', compact('settings'));
+    public function security() {
+        $settings = $this->settingService->get();
+        return view('settings/security', compact('settings'));
     }
 
     public function __construct(SettingService $settingService) {
         $this->settingService = $settingService;
-    }
-
-    public function store(Request $request) {
-        $this->settingService->handleStore($request);
-    }
-
-    public function get() {
-        return $this->settingService->get();
     }
 }
