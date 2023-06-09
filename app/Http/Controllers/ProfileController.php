@@ -23,4 +23,9 @@ class ProfileController extends Controller
     public function __construct(SettingService $settingService) {
         $this->settingService = $settingService;
     }
+
+    public function store(Request $request) {
+        $this->settingService->storeName($request->name);
+        return back();
+    }
 }

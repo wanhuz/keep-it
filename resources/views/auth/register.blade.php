@@ -8,7 +8,7 @@
     <form method="POST" action="/register">
         @csrf
         <div class="d-flex flex-column align-items-center mb-3 flex-fill form-outline gap-2">
-            <input name="name" type="text" class="form-control py-2" placeholder="Username"/>
+            <input name="username" type="text" class="form-control py-2" placeholder="Username"/>
             <input name="email" type="email" class="form-control py-2" placeholder="Email address"/>
             <input name="password" type="password" class="form-control py-2" placeholder="Password"/>
             <input name="password_confirmation" type="password"  class="form-control py-2" placeholder="Repeat your password"/>

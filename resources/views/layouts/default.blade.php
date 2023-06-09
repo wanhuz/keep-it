@@ -14,6 +14,6 @@
 @section('navigation')
     <x-navigation.navbar>
         <x-slot:title>{{ $settings->firstWhere('key', '=', 'app-name')->value }}</x-slot>
-        <x-slot:username>{{ auth()->user()->name; }}</x-slot>
+        <x-slot:username>{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->username; }}</x-slot>
     </x-navigation.navbar>
 @endsection

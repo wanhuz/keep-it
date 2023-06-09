@@ -3,14 +3,14 @@
 @section('forms')
 
     <h2>User</h2>
-    <form action="/post-setting" method="POST">
+    <form action="/settings/user" method="POST">
         @csrf
 
         <x-preference.card>
             <x-slot:title>Display name</x-slot>
             <x-slot:desc>Display name will be displayed on top navigation bar. <br> This does not change username. </x-slot>
             <x-slot:form>
-                <input type="text" class="form-control" id="applicationNameInput" aria-label="applicationName" aria-describedby="app-name" name="app-name">                       
+                <input type="text" class="form-control" name="name">                       
             </x-slot>
         </x-preference.card>
 
@@ -25,7 +25,7 @@
         </x-preference.card>
 
         <div class="mt-5 my-5 float-end">
-            <button type="submit" class="btn btn-primary px-4">Save</button>
+            <button type="submit" class="btn btn-primary px-4">Submit</button>
         </div>
     </form>
 

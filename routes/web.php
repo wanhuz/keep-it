@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings/theme', [CustomizationController::class, 'theme']);
     Route::get('/settings/user', [ProfileController::class, 'user']);
     Route::get('/settings/security', [ProfileController::class, 'security']);
+
+    Route::post('/settings/user', [ProfileController::class, 'store']);
     Route::get('/get-setting', [CustomizationController::class, 'get']);
     Route::post('/post-setting', [CustomizationController::class, 'store']);
 

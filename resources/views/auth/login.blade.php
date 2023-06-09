@@ -8,7 +8,7 @@
     <form method="POST" action="login">
         @csrf
         <div class="d-flex flex-column align-items-center mb-3 flex-fill form-outline gap-2">
-            <input name="name" type="name" id="name" class="form-control py-2" value="{{ old('name') }}" placeholder="Username"/>
+            <input name="username" type="name" id="name" class="form-control py-2" value="{{ old('name') }}" placeholder="Username"/>
             <input name="password" type="password" class="form-control py-2" placeholder="Password"/>
         </div>
 

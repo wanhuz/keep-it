@@ -17,7 +17,7 @@
         </x-preference.card>
 
         <div class="mt-5 my-5 float-end">
-            <button type="submit" class="btn btn-primary px-4">Save</button>
+            <button type="submit" class="btn btn-primary px-4">Submit</button>
         </div>
     </form>
 
