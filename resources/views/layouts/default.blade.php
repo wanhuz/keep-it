@@ -6,6 +6,8 @@
     <style>
         @include('common.user-stylesheets')
     </style>
+
+    <link rel="stylesheet" href="{{asset('css/navbar.css')}}">
 @endsection
 
 <!-- Navbar -->

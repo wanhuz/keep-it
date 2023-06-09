@@ -20,6 +20,14 @@
         min-height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);
     }
 
+    button[type=submit] {
+        background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, {{$settings->firstWhere('key', '=', 'header-tpc')->value}});
+    }
+
+    button[type=submit]:hover {
+        background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, 1);
+    }
+
 @if ($settings->firstWhere('key', '=', 'card-size-style')->value == "fixed")
     .card-text {
         height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);

@@ -1,8 +1,8 @@
-@extends('layouts.settings.customization')
+@extends('layouts.settings.profile')
 
 @section('forms')
 
-    <h2>Theme</h2>
+    <h2>User</h2>
     <form action="/post-setting" method="POST">
         @csrf
 

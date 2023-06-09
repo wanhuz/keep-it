@@ -1,4 +1,4 @@
-@extends('layouts.settings')
+@extends('layouts.settings.customization')
 
 @section('forms')
 

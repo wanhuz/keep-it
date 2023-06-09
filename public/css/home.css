@@ -1,10 +1,3 @@
-.ml-n1 { margin-left: -0.25rem !important; }
-.ml-n2 { margin-left: -0.5rem !important; }
-.ml-n3 { margin-left: -1rem !important; }
-.ml-n4 { margin-left: -1.5rem !important; }
-.ml-n5 { margin-left: -3rem !important; }
-.mb-6 { margin-bottom: 5rem !important;}
-
 .zoom {
     animation: zoomIn 0.2s;
     -moz-animation: zoomIn 0.2s; /* Firefox */
@@ -29,10 +22,6 @@
     to { scale: 1; }
 }
 
-
-#searchbar {
-    width: 35%;
-}
 
 #simpleEditor button {
     border: 1px solid gainsboro;
@@ -91,18 +80,7 @@ textarea {
 }
 
 .active-cont {
-    padding-left: 250px;
-}
-
-.nav-btn {
-    color: #fff;
-    border-radius: 0;
-}
-
-.nav-btn:hover {
-    -moz-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.2);
+    padding-left: 230px;
 }
 
 .main-container {

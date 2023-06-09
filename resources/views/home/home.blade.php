@@ -23,9 +23,9 @@
 
 <!-- Main -->
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
         <div class='row'>    
-            <main class='col mt-4 main-container'>
+            <main class='col main-container'>
                     <div id='editor' class='row ms-auto mx-auto mb-3'>
                         <!-- Iframe will prevent page from breaking when closing the editor -->
                         <iframe name='dummyframe' id='dummyframe' style='display: none;'></iframe> 
@@ -33,8 +33,8 @@
                         <div class='col-sm-3 mx-auto'> 
                             <div id='simpleEditor' class='input-group mb-3'> 
                                 <input type='text' class='form-control shadow-none' placeholder='Take a note..' >
-                                <button class='btn btn-light btn-outline-secondary' id='cancel-btn'><i class='bi bi-list-task'></i></button>
-                                <button class='btn btn-light btn-outline-secondary'><i class='bi bi-image'></i></button>
+                                <!-- <button class='btn btn-light btn-outline-secondary' id='cancel-btn'><i class='bi bi-list-task'></i></button>
+                                <button class='btn btn-light btn-outline-secondary'><i class='bi bi-image'></i></button> -->
                             </div>
 
                             <div class='d-none' id='fullEditor' >
@@ -50,7 +50,7 @@
                                             <button class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-image'></i></button>
                                             
                                             <button class='btn btn-light border border-0 ms-auto' id='cancelBtn'><i class='bi bi-x'></i></button>
-                                            <button type='submit' class='btn btn-light border border-0' id='submitBtn'><i class='bi bi-check-lg'></i></button>
+                                            <button class='btn btn-light border border-0' id='submitBtn'><i class='bi bi-check-lg'></i></button>
                                         </div>
                                     </form>
                                 </div>
