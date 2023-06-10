@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
+use Image;
+use Storage;
 
 class ProfileService {
     private function getUser() {
@@ -25,8 +27,14 @@ class ProfileService {
 
         if ($request->hasFile('avatarImg')) {
             $this->validateAvatar($request);
-            $this->storeAvatar($user, $request->avatarImg);
+            $this->storeAvatar($user, $request->file('avatarImg'));
         }
+    }
+
+    public function getProfile() {
+        $user = $this->getUser();
+
+        return $user;
     }
 
     private function storeName($user, $name) {
@@ -36,7 +44,8 @@ class ProfileService {
 
     private function storeAvatar($user, $imgFile) {
         $avatarPath = $imgFile->store("uploads/avatar");
-
+        $this->resizeAvatar($avatarPath);
+        
         $user->avatar = $avatarPath;
         $user->save();
     }
@@ -50,6 +59,11 @@ class ProfileService {
                 File::image()->max($maxFileSize * 1024)
             ]
         ]);
+    }
+
+    private function resizeAvatar($filePath) {
+        $image = Image::make(Storage::get($filePath))->fit(150)->encode();
+        Storage::put($filePath, $image);
     }
 
 }

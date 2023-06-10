@@ -14,7 +14,8 @@ class ProfileController extends Controller
 
     public function user() {
         $settings = $this->settingService->get();
-        return view('settings/user', compact('settings'));
+        $userProfile = $this->profileService->getProfile();
+        return view('settings/user', compact('settings', 'userProfile'));
     }
 
     public function security() {

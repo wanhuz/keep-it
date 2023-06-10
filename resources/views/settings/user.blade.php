@@ -20,10 +20,10 @@
             <x-slot:title>User avatar</x-slot>
             <x-slot:desc>Add or change user avatar.</x-slot>
             <x-slot:form>
-                <div>
-                    <img src=" {{  asset('storage/avatar/default.png') }}" alt="" class="img-thumbnail border-0">
+                <div class="d-flex flex-column align-items-center"> 
+                    <img src="{{ isset($userProfile->avatar) ? asset('storage/' . $userProfile->avatar) : asset('avatar-default.png')  }}" alt="" class="img-thumbnail border-0 rounded-circle" width="150" height="150">
+                    <input class="mt-3 ms-auto form-control form-control-sm mb-2" type="file" name="avatarImg" accept=".jpg, .png">
                 </div>
-                <input class="ms-auto form-control mb-2 " type="file" name="avatarImg" accept=".jpg, .png">
             </x-slot>
         </x-preference.card>
 
