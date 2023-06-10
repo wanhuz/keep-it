@@ -3,7 +3,7 @@
 @section('forms')
 
     <h2>User</h2>
-    <form action="/settings/user" method="POST">
+    <form action="/settings/user" method="POST" enctype="multipart/form-data">
         @csrf
 
         <x-preference.card>
@@ -20,7 +20,7 @@
             <x-slot:title>User avatar</x-slot>
             <x-slot:desc>Add or change user avatar.</x-slot>
             <x-slot:form>
-                <input class="ms-auto form-control mb-2" type="file" id="faviconInput" name="favicon-img" accept=".jpg, .png">
+                <input class="ms-auto form-control mb-2" type="file" name="avatarImg" accept=".jpg, .png">
             </x-slot>
         </x-preference.card>
 

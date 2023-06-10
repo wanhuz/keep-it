@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Services\SettingService;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
     protected $settingService;
+    protected $profileService;
 
     public function user() {
         $settings = $this->settingService->get();
@@ -20,12 +22,13 @@ class ProfileController extends Controller
         return view('settings/security', compact('settings'));
     }
 
-    public function __construct(SettingService $settingService) {
+    public function __construct(SettingService $settingService, ProfileService $profileService) {
         $this->settingService = $settingService;
+        $this->profileService = $profileService;
     }
 
     public function store(Request $request) {
-        $this->settingService->storeName($request->name);
+        $this->profileService->handleStore($request);
         return back();
     }
 }

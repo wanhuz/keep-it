@@ -120,11 +120,4 @@ class SettingService {
         return $userSetting;
     }
 
-    public function storeName($name) {
-        $user = $this->getUser();
-
-        $user->name = $name;
-        $user->save();
-    }
-
 }
