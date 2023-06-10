@@ -9,6 +9,7 @@ if test -e /entry/first-run; then
     /entry/wait-for-it.sh db:3306 -t 45
     php /var/www/artisan config:cache
     php /var/www/artisan key:generate
+    php /var/www/artisan config:cache
     php /var/www/artisan migrate
     rm -rf /entry/first-run
 fi
