@@ -20,7 +20,10 @@
             <x-slot:title>User avatar</x-slot>
             <x-slot:desc>Add or change user avatar.</x-slot>
             <x-slot:form>
-                <input class="ms-auto form-control mb-2" type="file" name="avatarImg" accept=".jpg, .png">
+                <div>
+                    <img src=" {{  asset('storage/avatar/default.png') }}" alt="" class="img-thumbnail border-0">
+                </div>
+                <input class="ms-auto form-control mb-2 " type="file" name="avatarImg" accept=".jpg, .png">
             </x-slot>
         </x-preference.card>
 
