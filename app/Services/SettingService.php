@@ -37,10 +37,6 @@ class SettingService {
             'bg-color' => '242,242,242',
             'head-color' => '2,136,209',
             'side-color' => '255,255,255',
-            'header-tpc' => '1',
-            'sidebar-tpc' => '1',
-            'card-tpc' => '1',
-            'bg-img' => '',
             'favicon-img' => ''
         );
 

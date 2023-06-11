@@ -22,6 +22,7 @@
 
 <!-- Main -->
 @section('content')
+
     <div class="container-fluid mt-5">
         <div class='row'>    
             <main class='col main-container'>

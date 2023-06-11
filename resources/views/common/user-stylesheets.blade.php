@@ -1,40 +1,35 @@
     body {  
-        background-image: url("{{asset('storage/' . $settings->firstWhere('key', '=', 'bg-img')->value)}}");
-        background-size: cover; 
-        background-attachment: fixed;
-        background-color: rgb({{$settings->firstWhere('key', '=', 'bg-color')->value}});
-    }
-
-    .card {
-        background: rgba(255,255,255, {{$settings->firstWhere('key', '=', 'card-tpc')->value}});
+        background-color: rgb({{ setting('bg-color') }});
     }
 
     #header {
-        background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, {{$settings->firstWhere('key', '=', 'header-tpc')->value}});
+        background: rgb({{ setting('head-color') }});
     }
+    
     #sidebar {
-        background: rgba({{$settings->firstWhere('key', '=', 'side-color')->value}}, {{$settings->firstWhere('key', '=', 'sidebar-tpc')->value}});
+        background: rgb({{ setting('side-color') }});
     }
+
     .card {
-        width: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-width);
-        min-height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);
+        width: var(--{{ setting('card-size') }}-width);
+        min-height: var(--{{ setting('card-size') }}-height);
     }
 
     button[type=submit] {
-        background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, {{$settings->firstWhere('key', '=', 'header-tpc')->value}});
+        background: rgb({{ setting('head-color') }});
     }
 
     button[type=submit]:hover {
-        background: rgba({{$settings->firstWhere('key', '=', 'head-color')->value}}, 1);
+        background: rgba({{ setting('head-color') }}, 1);
     }
 
-@if ($settings->firstWhere('key', '=', 'card-size-style')->value == "fixed")
+@if (setting('card-size-style') == "fixed")
     .card-text {
-        height: var(--{{$settings->firstWhere('key', '=', 'card-size')->value}}-height);
+        height: var(--{{ setting('card-size') }}-height);
         overflow-y: hidden;
     }
 @endif
 
     .card {
-        font-size: {{$settings->firstWhere('key', '=', 'card-font-size')->value}};
+        font-size: {{ setting('card-font-size') }};
     }

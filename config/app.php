@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
+        App\Providers\SettingsServiceProvider::class,
         
         /*
          * Application Service Providers...
@@ -196,6 +197,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
+        
 
     ],
 
