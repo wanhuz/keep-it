@@ -21,7 +21,7 @@
                         @csrf
                         <div class="input-group mb-1 gap-2 align-items-center">
                             <input type="text" name="tagName" class="form-control" placeholder="Add new tag" aria-label="Add new tag" aria-describedby="add-tag">
-                            <button type="submit" class="btn btn-primary border border-0" type="button" id="addTagBtn">Add Tag</button>
+                            <button type="submit" class="btn btn-primary colored-btn border border-0" type="button" id="addTagBtn">Add Tag</button>
                         </div>
                     </form>
                 </div>

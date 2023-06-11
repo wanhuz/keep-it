@@ -11,13 +11,16 @@
             <x-slot:desc>Change navigation bar color.</x-slot>
             <x-slot:form>
                 <div class="float-end">
-                    <x-form.color-picker>head-color</x-form.color-picker>  
+                    <x-form.color-picker>
+                        <x-slot:name>head-color</x-slot>
+                        <x-slot:value>{{ rgbToHex(setting('head-color')) }}</x-slot>
+                    </x-form.color-picker>  
                 </div>                         
             </x-slot>
         </x-preference.card>
 
         <div class="mt-5 my-5 float-end">
-            <button type="submit" class="btn btn-primary px-4">Submit</button>
+            <button type="submit" class="btn btn-primary colored-btn px-4">Submit</button>
         </div>
     </form>
 

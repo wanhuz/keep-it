@@ -30,7 +30,7 @@
         </x-preference.card>
 
         <div class="mt-5 my-5 float-end">
-            <button type="submit" class="btn btn-primary px-4">Submit</button>
+            <button type="submit" class="btn btn-primary colored-btn px-4">Submit</button>
         </div>
     </form>
 

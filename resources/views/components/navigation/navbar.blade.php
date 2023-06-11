@@ -18,9 +18,10 @@
                     <x-slot:size>30</x-slot>
                 </x-user.avatar>
             </button>
-            <x-navigation.dropdown></x-navigation.dropdown>
+            
             <form id="logout-form" action="{{ route('logout') }}" method="POST"> 
                 @csrf 
+                <x-navigation.dropdown></x-navigation.dropdown>
             </form>
         </div>
 

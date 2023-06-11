@@ -15,11 +15,11 @@
         min-height: var(--{{ setting('card-size') }}-height);
     }
 
-    button[type=submit] {
+    .colored-btn {
         background: rgb({{ setting('head-color') }});
     }
 
-    button[type=submit]:hover {
+    .colored-btn:hover {
         background: rgba({{ setting('head-color') }}, 1);
     }
 

@@ -10,7 +10,7 @@
             <x-slot:title>Reset password</x-slot>
             <x-slot:desc>Request a password reset.</x-slot>
             <x-slot:form>
-                <button type="submit" class="float-end btn btn-primary px-4">Reset password</button>
+                <button type="submit" class="float-end btn btn-primary colored-btn px-4">Reset password</button>
             </x-slot>
         </x-preference.card>
 
