@@ -12,9 +12,16 @@
         </div>    
 
         <div class="me-4">
-            <button type="button" class="btn nav-btn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $username }}</button>
+            <button type="button" class="btn nav-btn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="me-2">{{ $username }}</span> 
+                <x-user.avatar>
+                    <x-slot:size>30</x-slot>
+                </x-user.avatar>
+            </button>
             <x-navigation.dropdown></x-navigation.dropdown>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST"> @csrf </form>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST"> 
+                @csrf 
+            </form>
         </div>
 
     </div>

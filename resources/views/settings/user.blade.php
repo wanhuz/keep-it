@@ -21,8 +21,10 @@
             <x-slot:desc>Add or change user avatar.</x-slot>
             <x-slot:form>
                 <div class="d-flex flex-column align-items-center"> 
-                    <img src="{{ !empty(user('avatar')) ?  asset('storage/' . user('avatar')) : asset('avatar-default.png')  }}" alt="" class="img-thumbnail border-0 rounded-circle" width="150" height="150">
-                    <input class="mt-3 ms-auto form-control form-control-sm mb-2" type="file" name="avatarImg" accept=".jpg, .png">
+                <x-user.avatar>
+                    <x-slot:size>150</x-slot>
+                </x-user.avatar>                    
+                <input class="mt-3 ms-auto form-control form-control-sm mb-2" type="file" name="avatarImg" accept=".jpg, .png">
                 </div>
             </x-slot>
         </x-preference.card>

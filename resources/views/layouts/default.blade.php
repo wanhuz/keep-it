@@ -1,5 +1,5 @@
-@extends('layouts.base', [  'title' => $settings->firstWhere('key', '=', 'app-name')->value,
-                            'favicon' => asset('storage/' . $settings->firstWhere('key', '=', 'favicon-img')->value) ])
+@extends('layouts.base', [  'title' => setting('app-name'),
+                            'favicon' => asset('storage/' . setting('favicon-img')) ])
 
 <!-- User custom stylesheets -->
 @section('stylesheets')
@@ -13,7 +13,7 @@
 <!-- Navbar -->
 @section('navigation')
     <x-navigation.navbar>
-        <x-slot:title>{{ $settings->firstWhere('key', '=', 'app-name')->value }}</x-slot>
-        <x-slot:username>{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->username; }}</x-slot>
+        <x-slot:title>{{ setting('app-name') }}</x-slot>
+        <x-slot:username>{{ !empty(user('name')) ? user('name') : user('username'); }}</x-slot>
     </x-navigation.navbar>
 @endsection

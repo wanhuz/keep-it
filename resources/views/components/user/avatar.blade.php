@@ -1,0 +1,1 @@
+<img src="{{ !empty(user('avatar')) ?  asset('storage/' . user('avatar')) : asset('avatar-default.png')  }}" alt="" class=" border-0 rounded-circle" width="{{ $size }}" height="{{ $size }}">

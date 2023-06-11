@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
+use Artisan;
 
 class SettingService {
     private function getUser() {
@@ -76,22 +77,6 @@ class SettingService {
 
                 $value = $fileInput->store($fileName); 
             }
-            else if ($setting == "bg-img") {
-                $fileName = "bg-img";
-                $fileInput = request()->file($fileName);
-                
-                Validator::validate($userSetting, [
-                    $fileName => [
-                        'required',
-                        File::image()->max($maxFileSize * 1024)
-                    ]
-                ]);
-
-                $value = $fileInput->store($fileName);
-            }
-            else if (str_contains($setting, "-tpc")) {
-                $value = $value / 100;
-            }
             else if (str_contains($setting, "-color")) {
                 $value = $this->hex_to_rgba($value);
             }
@@ -101,19 +86,31 @@ class SettingService {
                 $favicon->save();
                 continue;
             }
-            else if ($setting == "remove-bg-img") {
-                $bgimg = Setting::firstWhere("key", "=", "bg-img");
-                $bgimg->value = "";
-                $bgimg->save();
-                continue;
-            }
 
             $setting = $user->settings()->firstWhere('key', '=', $setting);
             $setting->value = $value;
             $setting->save();
         }
-        
+
+        Artisan::call('cache:clear');
+
         return $userSetting;
     }
 
 }
+
+// private function validateFavicon() {
+//     //..
+// }
+
+// private function storeFavicon() {
+//     //..
+// }
+
+// private function storeColor() {
+//     //..
+// }
+
+// private function removeFavicon() {
+
+// }
