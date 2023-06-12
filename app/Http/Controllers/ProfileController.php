@@ -3,28 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Setting;
-use App\Services\SettingService;
 use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
-    protected $settingService;
     protected $profileService;
 
     public function user() {
-        $settings = $this->settingService->get();
-        $userProfile = $this->profileService->getProfile();
-        return view('settings/user', compact('settings', 'userProfile'));
+        return view('settings/user');
     }
 
     public function security() {
-        $settings = $this->settingService->get();
-        return view('settings/security', compact('settings'));
+        return view('settings/security');
     }
 
-    public function __construct(SettingService $settingService, ProfileService $profileService) {
-        $this->settingService = $settingService;
+    public function __construct(ProfileService $profileService) {
         $this->profileService = $profileService;
     }
 

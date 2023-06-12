@@ -14,8 +14,8 @@
             <div class="row mb-4">
                 <div class="d-flex flex-row">
                     <div class="list-group list-group-horizontal gap-2 list-group-flush mx-auto text-nowrap">
-                        <a class="list-group-item list-group-item-action" href="/settings/user" role="button"><i class="bi bi-people"></i><span class="ms-3">Profile</span></a>
-                        <a class="list-group-item list-group-item-action" href="/settings/home" role="button"><i class="bi bi-sliders"></i><span class="ms-3">Customization</span></a>
+                        <a class="list-group-item list-group-item-action border-0 rounded-0" href="/settings/user" role="button"><i class="bi bi-people"></i><span class="ms-3">Profile</span></a>
+                        <a class="list-group-item list-group-item-action border-0 rounded-0" href="/settings/home" role="button"><i class="bi bi-sliders"></i><span class="ms-3">Customization</span></a>
                     </div>
                 </div>
             </div>

@@ -13,14 +13,9 @@ use Illuminate\Validation\Rules\File;
 use Artisan;
 
 class SettingService {
-    private function getUser() {
-        $userId = Auth::id();
-        return User::find($userId);
-    }
 
-    private function hex_to_rgba($hex) {
-        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
-        return $r . "," . $g . "," . $b;
+    private function getUser() {
+        return Auth::user();
     }
 
     public function get() {
@@ -78,7 +73,7 @@ class SettingService {
                 $value = $fileInput->store($fileName); 
             }
             else if (str_contains($setting, "-color")) {
-                $value = $this->hex_to_rgba($value);
+                $value = hexToRgba($value);
             }
             else if ($setting == "remove-favicon-img") {
                 $favicon = Setting::firstWhere("key", "=", "favicon-img");
@@ -91,8 +86,6 @@ class SettingService {
             $setting->value = $value;
             $setting->save();
         }
-
-        Artisan::call('cache:clear');
 
         return $userSetting;
     }
@@ -114,3 +107,4 @@ class SettingService {
 // private function removeFavicon() {
 
 // }
+

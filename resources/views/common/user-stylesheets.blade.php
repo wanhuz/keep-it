@@ -16,12 +16,15 @@
     }
 
     .colored-btn {
-        background: rgb({{ setting('head-color') }});
+        color: white;
+        background-color: rgb({{ setting('head-color') }});
     }
 
     .colored-btn:hover {
-        background: rgba({{ setting('head-color') }}, 1);
+        color: white;
+        background-color: rgb({{ setting('head-color') }});
     }
+
 
 @if (setting('card-size-style') == "fixed")
     .card-text {

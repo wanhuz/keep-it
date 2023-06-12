@@ -11,18 +11,15 @@ class CustomizationController extends Controller
     protected $settingService;
 
     public function home() {
-        $settings = $this->settingService->get();
-        return view('settings/home', compact('settings'));
+        return view('settings/home');
     }
 
     public function layout() {
-        $settings = $this->settingService->get();
-        return view('settings/layout', compact('settings'));
+        return view('settings/layout');
     }
 
     public function theme() {
-        $settings = $this->settingService->get();
-        return view('settings/theme', compact('settings'));
+        return view('settings/theme');
     }
 
     public function __construct(SettingService $settingService) {

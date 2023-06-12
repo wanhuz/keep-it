@@ -1,5 +1,5 @@
 <ul class="dropdown-menu dropdown-menu-end end-0 me-4 pb-3 px-3">
-    <li class="dropdown-header text-center pt-3 w-100 px-5">
+    <li class="dropdown-header text-center pt-3 w-100 px-5 text-dark">
         <x-user.avatar>
             <x-slot:size>100</x-slot>
         </x-user.avatar>
