@@ -5,6 +5,9 @@
 @section('stylesheets')
     <style>
         @include('common.user-stylesheets')
+        .ProseMirror:focus {
+            outline: none;
+            }
     </style>
 
     <link rel="stylesheet" href="{{asset('css/navbar.css')}}">

@@ -22,10 +22,10 @@
 
 <!-- Main -->
 @section('content')
-
     <div class="container-fluid mt-5">
         <div class='row'>    
             <main class='col main-container'>
+                    
                     <div id='editor' class='row ms-auto mx-auto mb-3'>
                         <!-- Iframe will prevent page from breaking when closing the editor -->
                         <iframe name='dummyframe' id='dummyframe' style='display: none;'></iframe> 
@@ -43,7 +43,8 @@
                                         @csrf
                                         <div id='fullEditorCard' class='card-body' >
                                                 <input type='text' name='title' id='titleTextArea' class='form-control border border-0 shadow-none' placeholder='Title'>
-                                                <textarea name='body' id='bodyTextArea' class='form-control border border-0 shadow-none' placeholder='Take a note..' id='fullEditorTextArea' cols='30' rows='3'></textarea>
+                                                <div id='bodyTextArea' class="element form-control border border-0 shadow-none"></div>
+                                                <!-- <textarea name='body' id='bodyTextArea' class='form-control border border-0 shadow-none' placeholder='Take a note..' id='fullEditorTextArea' cols='30' rows='3'></textarea> -->
                                         </div>
                                         <div class='card-footer d-flex flex-row'>
                                             <button class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-list-task'></i></button>
@@ -71,16 +72,4 @@
             </main>
         </div>
     </div>
-@endsection
-
-<!-- Javascripts -->
-@section('scripts')
-<script src="{{asset('js/home/tag.js')}}"></script>
-<script src="{{asset('js/home/card.js')}}"></script>
-<script src="{{asset('js/home/sidebar.js')}}"></script>
-<script src="{{asset('js/home/editor.js')}}"></script>
-<script src="{{asset('js/home/misc.js')}}"></script>
-<script src="{{asset('js/home/search.js')}}"></script>
-<script src="{{asset('js/home/userpref.js')}}"></script>
-<script src="{{asset('js/home/init.js')}}"></script>
 @endsection

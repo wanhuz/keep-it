@@ -1,3 +1,5 @@
+
+
 //Add note editor
 document.getElementById("simpleEditor").addEventListener('click', () => {
     document.getElementById("simpleEditor").classList.add("d-none");
@@ -15,7 +17,9 @@ document.getElementById("cancelBtn").addEventListener('click', () => {
 $(document).on('click', '#submitBtn', function() {
     let formData = $("#postform").serializeArray();
     let noteTitle = formData.find(data => data.name == "title").value;
-    let noteBody = formData.find(data => data.name == "body").value;
+    const json = editor.getJSON();
+    let noteBody = json;
+    // let noteBody = formData.find(data => data.name == "body").value;
     let formToken = formData.find(data => data.name == "_token").value;
 
     $.ajax({

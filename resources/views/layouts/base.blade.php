@@ -12,9 +12,11 @@
     <!-- Common stylesheets and extra stylesheets-->
     @include('common.stylesheets')
     @yield('stylesheets')
-
+    
     <!-- Icon -->
     <link rel="icon" type="image/x-icon" href="{{ $favicon }}">
+    @include('common.scripts')
+    @vite('resources/js/app.js')
 </head>
 
 <body>
@@ -23,7 +25,7 @@
 
     @yield('content')
 
-    @include('common.scripts')
+    
     @yield('scripts')
 </body>
 </html>
