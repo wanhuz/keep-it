@@ -1,4 +1,7 @@
-function createTag(tagName) {
+import { refreshCardContainerLayout } from "./card";
+import { refreshSidebar } from "./sidebar";
+
+export function createTag(tagName) {
     `<button class="card-tag btn  bg-light rounded-pill text-center pt-0 ms-2 my-2 "><p class="mb-5">text</p></button>`
 
     let btn = document.createElement("button");
@@ -51,7 +54,7 @@ function createTagListElement(tagName, tagId) {
     return taglist
 }
 
-function updateTag(updateModalTag) {
+export function updateTag(updateModalTag) {
     $.ajax({
         url: "/load-note-tag",
         type: 'GET',
@@ -135,131 +138,149 @@ function updateManageTagModal() {
     })
 }
 
-$("#submitTag").on('click', function(e) {
-    e.stopPropagation();
-
-    let formData = $("#editorForm").serializeArray();
-    let formToken = formData.find(data => data.name == "_token").value;
-    let noteId = document.querySelector("#fullNoteEditor").dataset.id;
-    let formUpdateTag = Array();
+export function initClickSubmitTag() {
+    $("#submitTag").on('click', function(e) {
+        e.stopPropagation();
     
-    document.querySelectorAll(".tag-checkbox input:checked").forEach((tagChecked) => {
-        formUpdateTag.push(tagChecked.value);
+        let formData = $("#editorForm").serializeArray();
+        let formToken = formData.find(data => data.name == "_token").value;
+        let noteId = document.querySelector("#fullNoteEditor").dataset.id;
+        let formUpdateTag = Array();
+        
+        document.querySelectorAll(".tag-checkbox input:checked").forEach((tagChecked) => {
+            formUpdateTag.push(tagChecked.value);
+        });
+    
+        if (formUpdateTag < 1) formUpdateTag.push(0); //Laravel breaks if empty array is posted, 0 is placeholder for if no checkbox is checked
+    
+        $.ajax({
+            url: "/add-tag",
+            type: 'POST',
+            data: {
+                "_token" : formToken,
+                "notes_id" : noteId,
+                "tag_id" : formUpdateTag
+            },
+            success: function() {
+                updateTag(updateModalTag);
+            }
+        })
     });
+}
 
-    if (formUpdateTag < 1) formUpdateTag.push(0); //Laravel breaks if empty array is posted, 0 is placeholder for if no checkbox is checked
-
-    $.ajax({
-        url: "/add-tag",
-        type: 'POST',
-        data: {
-            "_token" : formToken,
-            "notes_id" : noteId,
-            "tag_id" : formUpdateTag
-        },
-        success: function() {
-            updateTag(updateModalTag);
-        }
-    })
-});
-
-$("#manageTagBtn").on('click', function(e) {
-    e.preventDefault();
-
-    updateManageTagModal();
-    $('#tagManagerModal').modal('show');
-})
-
-$('#closeManageTagBtn').on('click', function(e) {
-    e.preventDefault();
-    $('#tagManagerModal').modal('hide');
-})
-
-$('body').on('click', '.deletetag-btn', function(e) {
-    e.preventDefault();
-
-    let formData = $("#tagEditForm").serializeArray();
-    let formToken = formData.find(data => data.name == "_token").value;
-    let tagId = e.currentTarget.parentNode.parentNode.getAttribute("data-id");
-
-    $.ajax({
-        url: '/delete-tag',
-        type: 'POST',
-        data: {
-            '_token' : formToken,
-            'id' : tagId
-        },
-        success: function() {
-            refreshSidebar();
-            updateManageTagModal();
-            updateTag();
-        }
-    })
-});
-
-$('body').on('click', '.edittag-btn', function(e) {
-    e.preventDefault();
-
-    let tagName =  e.currentTarget.parentNode.parentNode.getAttribute("data-name");
-    let tagInput = document.getElementById(tagName + "TagInput");
-    
-    tagInput.readOnly = false;
-    tagInput.focus();
-});
-
-$('body').on('blur', '.edittag-input', function(e) {
-    e.preventDefault();
-
-    let formData = $("#tagEditForm").serializeArray();
-    let formToken = formData.find(data => data.name == "_token").value;
-    let tagId = e.currentTarget.parentNode.getAttribute("data-id");
-    let currentTagName = e.currentTarget.parentNode.getAttribute("data-name");
-    let newTagName = document.getElementById(currentTagName + "TagInput").value;
-    
-    if (!newTagName || newTagName == currentTagName) return;
-
-    $.ajax({
-        url: '/update-tag',
-        type: 'POST',
-        data: {
-            '_token' : formToken,
-            'id' : tagId,
-            'name' : newTagName,
-        },
-        success: function() {
-            refreshSidebar();
-            updateManageTagModal();
-            updateTag();
-        }
-    })
-})
-
-$('body').on('keypress', '.edittag-input', function(e) {
-    if (e.which == '13') {
+export function initClickOpenTagManager() {
+    $("#manageTagBtn").on('click', function(e) {
         e.preventDefault();
-        e.currentTarget.blur();
-    }
-})
+    
+        updateManageTagModal();
+        $('#tagManagerModal').modal('show');
+    })
+}
 
-$(document).on('click', '#addTagBtn', function(e) {
-    e.preventDefault();
+export function initClickCloseTagManager() {
+    $('#closeManageTagBtn').on('click', function(e) {
+        e.preventDefault();
+        $('#tagManagerModal').modal('hide');
+    })
+}
 
-    let formData = $("#tagAddForm").serializeArray();
-    let formToken = formData.find(data => data.name == "_token").value;
-    let newTagName = formData.find(data => data.name == "tagName").value;
 
-    $.ajax({
-        type: "POST",
-        url: "/post-tag",
-        data: {
-            "_token" : formToken,
-            'name' : newTagName
-        },
-        success: function() {
-            $("#tagAddForm")[0].reset();
-            refreshSidebar();
-            updateManageTagModal();
-            updateTag();
+export function initClickDeleteTagBtn() {
+    $('body').on('click', '.deletetag-btn', function(e) {
+        e.preventDefault();
+    
+        let formData = $("#tagEditForm").serializeArray();
+        let formToken = formData.find(data => data.name == "_token").value;
+        let tagId = e.currentTarget.parentNode.parentNode.getAttribute("data-id");
+    
+        $.ajax({
+            url: '/delete-tag',
+            type: 'POST',
+            data: {
+                '_token' : formToken,
+                'id' : tagId
+            },
+            success: function() {
+                refreshSidebar();
+                updateManageTagModal();
+                updateTag();
+            }
+        })
+    });
+}
+
+export function initClickEditTagBtn() {
+    $('body').on('click', '.edittag-btn', function(e) {
+        e.preventDefault();
+    
+        let tagName =  e.currentTarget.parentNode.parentNode.getAttribute("data-name");
+        let tagInput = document.getElementById(tagName + "TagInput");
+        
+        tagInput.readOnly = false;
+        tagInput.focus();
+    });
+}
+
+
+export function initBlurEditTagInput() {
+    $('body').on('blur', '.edittag-input', function(e) {
+        e.preventDefault();
+    
+        let formData = $("#tagEditForm").serializeArray();
+        let formToken = formData.find(data => data.name == "_token").value;
+        let tagId = e.currentTarget.parentNode.getAttribute("data-id");
+        let currentTagName = e.currentTarget.parentNode.getAttribute("data-name");
+        let newTagName = document.getElementById(currentTagName + "TagInput").value;
+        
+        if (!newTagName || newTagName == currentTagName) return;
+    
+        $.ajax({
+            url: '/update-tag',
+            type: 'POST',
+            data: {
+                '_token' : formToken,
+                'id' : tagId,
+                'name' : newTagName,
+            },
+            success: function() {
+                refreshSidebar();
+                updateManageTagModal();
+                updateTag();
+            }
+        })
+    })
+}
+
+export function initKeypressEditTagBtn() {
+    $('body').on('keypress', '.edittag-input', function(e) {
+        if (e.which == '13') {
+            e.preventDefault();
+            e.currentTarget.blur();
         }
     })
-})
+}
+
+export function initClickAddTagBtn() {
+    $(document).on('click', '#addTagBtn', function(e) {
+        e.preventDefault();
+    
+        let formData = $("#tagAddForm").serializeArray();
+        let formToken = formData.find(data => data.name == "_token").value;
+        let newTagName = formData.find(data => data.name == "tagName").value;
+    
+        $.ajax({
+            type: "POST",
+            url: "/post-tag",
+            data: {
+                "_token" : formToken,
+                'name' : newTagName
+            },
+            success: function() {
+                $("#tagAddForm")[0].reset();
+                refreshSidebar();
+                updateManageTagModal();
+                updateTag();
+            }
+        })
+    })
+}

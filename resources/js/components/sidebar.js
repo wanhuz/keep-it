@@ -1,3 +1,5 @@
+import {get as getCardContainer} from './container'
+
 function toggleSidebar() {
     var sidebar = document.querySelector("#sidebar")
     var container = document.querySelector(".main-container")
@@ -27,7 +29,7 @@ function createSidebarBtn(tagText) {
     return sidebarBtn;
 }
 
-function refreshSidebar() {
+export function refreshSidebar() {
     $.ajax({
         url: "/load-tag",
         type: 'GET',
@@ -44,31 +46,32 @@ function refreshSidebar() {
     })
 }
 
+export function initSidebar() {
+    let mediaItemContainer = getCardContainer();
 
-
-$(document).on('click', '.sidebar-btn', function(e) {
-    e.preventDefault();
-
-    let clickedTag = e.target.value;
-
-    if (clickedTag === undefined) { //If user clicked the icon, return the parent button's value
-        clickedTag = e.target.parentElement.value;
-    }
-    currentSearchTerm = null;
-    currentPageTag = clickedTag;
-    updateCardContainerByTag(clickedTag, true);
-})
-
-$("#all-note-sidebar-btn").on('click', function(e) {
-    e.preventDefault();
-
-    currentSearchTerm = null;
-    currentPageTag = null;
-    updateCardContainer();
-})
-
-const sidebarMenu = $("#sidebar");
-
-document.getElementById("menu-btn").addEventListener('click', toggleSidebar);
-sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', () => {$(mediaItemContainer).masonry('layout');});
-// sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', () => {$('.main-container').width(1)});
+    $(document).on('click', '.sidebar-btn', function(e) {
+        e.preventDefault();
+    
+        let clickedTag = e.target.value;
+    
+        if (clickedTag === undefined) { //If user clicked the icon, return the parent button's value
+            clickedTag = e.target.parentElement.value;
+        }
+        currentSearchTerm = null;
+        currentPageTag = clickedTag;
+        updateCardContainerByTag(clickedTag, true);
+    })
+    
+    $("#all-note-sidebar-btn").on('click', function(e) {
+        e.preventDefault();
+    
+        currentSearchTerm = null;
+        currentPageTag = null;
+        updateCardContainer();
+    })
+    
+    const sidebarMenu = $("#sidebar");
+    
+    document.getElementById("menu-btn").addEventListener('click', toggleSidebar);
+    sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', () => {$(mediaItemContainer).masonry('layout');});
+}

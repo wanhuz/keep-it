@@ -1,8 +1,8 @@
-import './editor-tiptap.js';
-import './tag.js';
-import './card.js';
-import './sidebar.js';
-import './editor.js';
-import './misc.js';
-import './search.js';
+import './wysiwyg/tiptap.js';
+import './components/tag.js';
+import './components/card.js';
+import './components/sidebar.js';
+import './components/editor.js';
+import './misc/misc.js';
+import './components/search.js';
 import './init.js';
