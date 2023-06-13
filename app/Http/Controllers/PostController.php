@@ -19,22 +19,6 @@ class PostController extends Controller
         return User::find($userId);
     }
 
-    public function index() {
-        $userid = Auth::id();
-        $user = $this->getUser();
-
-        $notes = $user->notes()->get();
-        $tags = $user->tags()->get();
-        $settings = $user->settings()->get();
-
-        if ($settings->first() == null) {
-            SettingService::init($userid);
-            $settings = $user->settings()->get();
-        };
-
-        return view('/home/home', compact('notes', 'tags', 'settings'));
-    }
-
     public function store(Request $request) {
 
         $attributes = request()->validate([
