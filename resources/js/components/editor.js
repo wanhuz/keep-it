@@ -1,3 +1,6 @@
+import getEditor from '../wysiwyg/tiptap.js'
+import { updatePage } from './container';
+
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
         document.getElementById("simpleEditor").classList.add("d-none");
@@ -17,12 +20,12 @@ export function initClickCancelEditor() {
 
 export function initClickSubmitEditor() {
     $(document).on('click', '#submitBtn', function() {
-        let formData = $("#postform").serializeArray();
-        let noteTitle = formData.find(data => data.name == "title").value;
-        const json = editor.getJSON();
-        let noteBody = json;
-        // let noteBody = formData.find(data => data.name == "body").value;
-        let formToken = formData.find(data => data.name == "_token").value;
+        const editor = getEditor();
+        const formData = $("#postform").serializeArray();
+
+        const noteTitle = formData.find(data => data.name == "title").value;
+        const noteBody = editor.getJSON();
+        const formToken = formData.find(data => data.name == "_token").value;
     
         $.ajax({
             type: "POST",

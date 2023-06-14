@@ -11,20 +11,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Services\SettingService;
+use Tiptap;
 
 class HomeController extends Controller
 {
-    private function getUser() {
-        $userId = Auth::id();
-        return User::find($userId);
-    }
 
     public function index() {
-        $userid = Auth::id();
-        $user = $this->getUser();
-
+        $user = Auth::user();
         $notes = $user->notes()->get();
-        $tags = $user->tags()->get();
+
         $settings = $user->settings()->get();
 
         if ($settings->first() == null) {
@@ -32,6 +27,6 @@ class HomeController extends Controller
             $settings = $user->settings()->get();
         };
 
-        return view('/home/home', compact('notes', 'tags', 'settings'));
+        return view('/home/home');
     }
 }

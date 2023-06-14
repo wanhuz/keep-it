@@ -9,8 +9,9 @@ import BulletList from '@tiptap/extension-bullet-list'
 import Placeholder from '@tiptap/extension-placeholder'
 import Link from '@tiptap/extension-link'
 
+const editor = initEditor();
 
-export default function initEditor() {
+function initEditor() {
   return new Editor({
     element: document.querySelector('.element'),
     extensions: [
@@ -38,6 +39,9 @@ export default function initEditor() {
   })
 }
 
+export default function getEditor() {
+  return editor;
+}
 
 
 

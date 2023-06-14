@@ -105,7 +105,8 @@ export function createCard(title, text, id, lastupdated) {
     let card = document.createElement("div");
     let innerdiv = document.createElement("div");;
     let cardtitle = document.createElement("h5");
-    let cardtext = document.createElement("p");
+    // let cardtext = document.createElement("p");
+    let cardbody =  document.createElement('div');
     let titleNode = document.createTextNode(title);
     let textNode = document.createTextNode(text);
     let cardTagContainer = document.createElement("div");
@@ -113,7 +114,7 @@ export function createCard(title, text, id, lastupdated) {
 
     card.classList.add("card");
     card.classList.add("note");
-    card.style.width = "18rem";
+    // card.style.width = "18rem";
 
     innerdiv.classList.add("card-body");
     innerdiv.classList.add("text-start");
@@ -122,9 +123,12 @@ export function createCard(title, text, id, lastupdated) {
     cardtitle.classList.add("card-title");
     cardtitle.append(titleNode);
     innerdiv.append(cardtitle);
-    cardtext.classList.add("card-text");
-    cardtext.append(textNode);
-    innerdiv.append(cardtext);
+    cardbody.classList.add('card-text');
+    cardbody.innerHTML = text;
+    innerdiv.append(cardbody);
+    // cardtext.classList.add("card-text");
+    // cardtext.append(textNode);
+    // innerdiv.append(cardtext);
 
     cardTagContainer.classList.add("card-tags", "d-flex", "flex-row", "flex-wrap", "ms-2");
     card.append(cardTagContainer);

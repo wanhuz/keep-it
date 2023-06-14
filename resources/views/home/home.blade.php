@@ -11,7 +11,7 @@
 @section('navigation')
     @parent
 
-    <x-navigation.sidebar :tags='$tags'>
+    <x-navigation.sidebar>
     </x-navigation.sidebar>
 @endsection
 
@@ -61,14 +61,6 @@
                     </div>
 
                     <div id='card-container' class='row flex-wrap ms-5'>
-                        @foreach ($notes as $note)
-                            <x-card.note>
-                                <x-slot:id>{{$note->id}}</x-slot>
-                                <x-slot:revision_count>{{$note->revision_count}}</x-slot>
-                                <x-slot:title>{{$note->title}}</x-slot>
-                                <x-slot:body>{{$note->body}}</x-slot>
-                            </x-card.note>
-                        @endforeach
                     </div>
             </main>
         </div>
