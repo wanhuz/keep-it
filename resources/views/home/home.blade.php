@@ -3,6 +3,8 @@
 <!-- Head -->
 @section('stylesheets')
     <link rel="stylesheet" href="{{asset('css/home.css')}}">
+    <link rel="stylesheet" href="{{asset('css/editor.css')}}">
+    <link rel="stylesheet" href="{{asset('css/card.css')}}">
 
     @parent
 @endsection
@@ -33,9 +35,6 @@
                         <div class='col-sm-3 mx-auto'> 
                             <div id='simpleEditor' class='input-group mb-3'> 
                                 <input type='text' class='form-control shadow-none' placeholder='Take a note..' >
-                                
-                                <!-- <button class='btn btn-light btn-outline-secondary' id='cancel-btn'><i class='bi bi-list-task'></i></button>
-                                <button class='btn btn-light btn-outline-secondary'><i class='bi bi-image'></i></button> -->
                             </div>
 
                             <div class='d-none' id='fullEditor' >
@@ -45,11 +44,10 @@
                                         <div id='fullEditorCard' class='card-body' >
                                                 <input type='text' name='title' id='titleTextArea' class='form-control border border-0 shadow-none' placeholder='Title'>
                                                 <div id='fullEditorTextArea' class="element pt-4 form-control border border-0 shadow-none"></div>
-                                                <!-- <textarea name='body' id='bodyTextArea' class='form-control border border-0 shadow-none' placeholder='Take a note..' id='fullEditorTextArea' cols='30' rows='3'></textarea> -->
                                         </div>
                                         <div class='card-footer d-flex flex-row'>
-                                            <button id="bulletBtn" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-list-task'></i></button>
-                                            <button class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-image'></i></button>
+                                            <button id="bulletListBtn" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-list-task'></i></button>
+                                            <button id="orderedListBtn" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-123'></i></button>
                                             
                                             <button class='btn btn-light border border-0 ms-auto' id='cancelBtn'><i class='bi bi-x'></i></button>
                                             <button class='btn btn-light border border-0' id='submitBtn'><i class='bi bi-check-lg'></i></button>
@@ -65,17 +63,5 @@
             </main>
         </div>
     </div>
-    <style>
-        .element p.is-editor-empty:first-child::before {
-            content: attr(data-placeholder);
-            float: left;
-            color: #adb5bd;
-            pointer-events: none;
-            height: 0;
-        }
-
-        .ProseMirror:focus {
-            outline: none;
-        }
-    </style>
+    
 @endsection

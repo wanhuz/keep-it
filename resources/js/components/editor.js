@@ -143,4 +143,15 @@ export function initHiddenEditor() {
     })
 }
 
+export function initEditor() {
+    const editor = getEditor();
+
+    $('#bulletListBtn').on('click', function() {
+        editor.commands.toggleBulletList();
+    })
+
+    $('#orderedListBtn').on('click', function() {
+        editor.commands.toggleOrderedList();
+    })
+}
 

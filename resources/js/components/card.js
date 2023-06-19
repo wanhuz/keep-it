@@ -100,38 +100,22 @@ export function refreshCardContainerLayout() {
     $(mediaItemContainer).masonry('layout');
 }
 
-export function createCard(title, text, id, lastupdated) {
+export function createCard(title, content, id) {
 
-    let card = document.createElement("div");
-    let innerdiv = document.createElement("div");;
-    let cardtitle = document.createElement("h5");
-    // let cardtext = document.createElement("p");
-    let cardbody =  document.createElement('div');
-    let titleNode = document.createTextNode(title);
-    let textNode = document.createTextNode(text);
-    let cardTagContainer = document.createElement("div");
-    card.dataset.id = id;
+    const cardHtml = `
+    <div class="card note" data-revision-count="1"  data-id="${id}" >
+        
+        <div class="card-body text-start">
+            <h5 class="card-title">${title}</h5>
+            <div class="card-content">${content}</div>
+        </div>
+    
+        <div class="card-tags d-flex flex-row flex-wrap ms-2"></div>
+    </div>
+    `
 
-    card.classList.add("card");
-    card.classList.add("note");
-    // card.style.width = "18rem";
-
-    innerdiv.classList.add("card-body");
-    innerdiv.classList.add("text-start");
-    card.append(innerdiv);
-
-    cardtitle.classList.add("card-title");
-    cardtitle.append(titleNode);
-    innerdiv.append(cardtitle);
-    cardbody.classList.add('card-text');
-    cardbody.innerHTML = text;
-    innerdiv.append(cardbody);
-    // cardtext.classList.add("card-text");
-    // cardtext.append(textNode);
-    // innerdiv.append(cardtext);
-
-    cardTagContainer.classList.add("card-tags", "d-flex", "flex-row", "flex-wrap", "ms-2");
-    card.append(cardTagContainer);
+    const card = document.createElement("div");
+    card.innerHTML = cardHtml;
 
     return card;
 }

@@ -63,7 +63,7 @@ class PostService {
         $user = Auth::user();
         $note = $user->notes()->filter($request->all())->get();
         
-        return $this->editorService->parseNoteBodyHTML($note);
+        return $this->editorService->transformNoteBodyHTML($note);
     }
 
 

@@ -1,0 +1,20 @@
+
+.card {
+    box-sizing: border-box;
+}
+
+.card-title {
+    margin-bottom: 2em;
+}
+
+.card-content p {
+    margin-top: -1em;
+}
+
+.card-content ul {
+    padding-left: 1.2em;
+}
+
+.card-content ol {
+    padding-left: 1.2em;
+}
