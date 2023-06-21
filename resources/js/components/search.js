@@ -1,4 +1,4 @@
-import {updateCardContainerBySearch, updateCardContainer} from './card.js'
+import {updateCardContainerBySearch, updateCardContainer, clearCardContainer} from './card.js'
 import { updateSearchTerm } from './container.js';
 
 let typingTimer;
@@ -34,6 +34,7 @@ function doneTyping() {
         updateCardContainerBySearch(searchQuery, true);
     }
     else {
+        clearCardContainer();
         updateCardContainer();
         updateSearchTerm(null);
     }
