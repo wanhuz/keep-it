@@ -16,7 +16,6 @@ export function initClickCancelEditor() {
         document.getElementById("fullEditor").classList.add("d-none");
         document.getElementById("simpleEditor").classList.remove("d-none");
         $("#postform")[0].reset();
-        document.getElementById("bodyTextArea").style.height = null;
     })
 }
 
@@ -40,7 +39,6 @@ export function initClickSubmitEditor() {
             success: function() {
                 updatePage();
                 $("#postform")[0].reset();
-                document.getElementById("bodyTextArea").style.height = null;
             }
         })
     })

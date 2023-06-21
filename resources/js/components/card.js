@@ -1,5 +1,5 @@
 import {updateTag, createTag} from './tag.js'
-import {get as getCardContainer} from './container.js'
+import {getCardContainer} from './container.js'
 
 //Note utility function
 export function getNewNoteId(currentNoteData, newNoteData) {

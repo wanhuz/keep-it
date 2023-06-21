@@ -1,4 +1,5 @@
 import { updateCardContainer, updateCardContainerBySearch, updateCardContainerByTag, refreshCardContainerLayout } from "./card";
+import { refreshSidebar } from "./sidebar";
 
 let currentPageTag = null;
 let currentSearchTerm = null; 
@@ -11,13 +12,11 @@ export function initCardContainer() {
     });
 }
 
-export function get() {
+export function getCardContainer() {
     return $('#card-container');
 }
 
 export function updatePage() {
-    let currentPageTag = null;
-
     if (currentPageTag)
         updateCardContainerByTag(currentPageTag, false);
     else if (currentSearchTerm) 
@@ -34,4 +33,20 @@ export function updateSearchTerm(searchTerm) {
 
 export function updatePageTag(tag) {
     currentPageTag = tag;
+}
+
+export function resetPageTag() {
+    currentPageTag = null;
+}
+
+export function resetSearchTerm() {
+    currentSearchTerm = null;
+}
+
+export function initPage() {
+    window.setInterval(updatePage, 5000);
+    window.setInterval(refreshSidebar, 5000);
+    
+    updatePage();
+    refreshSidebar();
 }

@@ -1,4 +1,5 @@
-import {get as getCardContainer} from './container'
+import {getCardContainer, resetPageTag, resetSearchTerm, updatePageTag} from './container'
+import { updateCardContainerByTag, updateCardContainer, clearCardContainer } from './card'
 
 function toggleSidebar() {
     var sidebar = document.querySelector("#sidebar")
@@ -57,16 +58,17 @@ export function initSidebar() {
         if (clickedTag === undefined) { //If user clicked the icon, return the parent button's value
             clickedTag = e.target.parentElement.value;
         }
-        currentSearchTerm = null;
-        currentPageTag = clickedTag;
+
+        updatePageTag(clickedTag);
         updateCardContainerByTag(clickedTag, true);
     })
     
     $("#all-note-sidebar-btn").on('click', function(e) {
         e.preventDefault();
     
-        currentSearchTerm = null;
-        currentPageTag = null;
+        clearCardContainer();
+        resetPageTag();
+        resetSearchTerm();
         updateCardContainer();
     })
     
