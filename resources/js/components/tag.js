@@ -54,6 +54,8 @@ function createTagListElement(tagName, tagId) {
     return taglist
 }
 
+
+
 export function updateTag(updateModalTag) {
     $.ajax({
         url: "/load-note-tag",

@@ -9,25 +9,15 @@ function toggleSidebar() {
     container.classList.toggle("active-cont")
 }
 
-function createSidebarBtn(tagText) {
-    `<button type="button" class="btn tag-btn ms-1 text-start sidebar-btn" value="{{ $value }}"><i class="bi bi-bookmark"></i><span class="ps-4">{{ $slot }}</span></button>`
+function createSidebarBtn(tagName) {
+    const tagBtnHtml = `
+    <button type="button" class="btn tag-btn ms-3 text-start sidebar-btn w-75" value="${tagName}"><i class="bi bi-bookmark"></i><span class="ps-3">${tagName}</span></button>
+    `
 
-    let sidebarBtn = document.createElement("button");
-    sidebarBtn.classList.add("btn", "tag-btn", "ms-1", "text-start", "sidebar-btn");
-    sidebarBtn.value = tagText;
-    sidebarBtn.type = "button";
+    const tagBtn = document.createElement("div");
+    tagBtn.innerHTML = tagBtnHtml;
 
-    let sidebarIcon = document.createElement("icon");
-    sidebarIcon.classList.add("bi", "bi-bookmark");
-
-    let spanText = document.createElement("span");
-    spanText.classList.add("ps-4");
-    spanText.textContent = tagText;
-
-    sidebarBtn.append(sidebarIcon);
-    sidebarBtn.append(spanText);
-    
-    return sidebarBtn;
+    return tagBtn;
 }
 
 export function refreshSidebar() {
