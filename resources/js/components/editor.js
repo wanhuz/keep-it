@@ -1,11 +1,13 @@
-import getEditor from '../wysiwyg/tiptap.js'
+import {getEditor, getEditPostEditor} from '../wysiwyg/tiptap.js'
 import { updatePage } from './container';
+import { createTag } from './tag.js';
 
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
+        const editor = getEditor();
         document.getElementById("simpleEditor").classList.add("d-none");
         document.getElementById("fullEditor").classList.remove("d-none");
-        // document.getElementById("bodyTextArea").focus();
+        editor.commands.focus();
     });
 }
 
@@ -47,12 +49,15 @@ export function initClickSubmitEditor() {
 
 export function initClickUpdateEditorBtn() {
     $(document).on('click', '#saveBtn', function(e) {
+        
         e.preventDefault();
+
+        const editor = getEditPostEditor();  
         let formData = $("#editorForm").serializeArray();
         let formToken = formData.find(data => data.name == "_token").value;
         let newNoteId = document.querySelector("#fullNoteEditor").dataset.id;
         let newNoteTitle = formData.find(data => data.name == "title").value;
-        let newNoteBody = formData.find(data => data.name == "body").value;
+        let newNoteBody = editor.getJSON();
 
         $.ajax({
             type: "POST",
@@ -146,12 +151,38 @@ export function initHiddenEditor() {
 export function initEditor() {
     const editor = getEditor();
 
-    $('#bulletListBtn').on('click', function() {
-        editor.commands.toggleBulletList();
-    })
-
-    $('#orderedListBtn').on('click', function() {
-        editor.commands.toggleOrderedList();
-    })
+    $('#bulletListBtn').on('click', () => editor.commands.toggleBulletList());
+    $('#orderedListBtn').on('click', () => editor.commands.toggleOrderedList());
 }
 
+//Event on click note
+export function initClickNote() {
+    $(document).on('click', '.note', function(e) {
+        const editor = getEditPostEditor();
+
+        $('#fullNoteEditor').modal('show');
+        let clickId = $(this).data('id');
+    
+        document.querySelector("#fullNoteEditor").setAttribute('data-id', clickId);
+        let tagEditor = document.getElementById("editorTags");
+        let clickedNoteTitle = document.querySelector(`.card.note[data-id="${clickId}"] .card-title`).outerText;
+        let clickedNoteBody = document.querySelector(`.card.note[data-id="${clickId}"] .card-content`).innerHTML;
+        let clickedNoteTags = document.querySelector(`.card.note[data-id="${clickId}"]`).dataset.tags;
+    
+        document.getElementById('titleEditor').value = clickedNoteTitle;
+        editor.commands.setContent(clickedNoteBody);
+    
+        if (clickedNoteTags === undefined)  {
+            tagEditor.innerHTML = "";
+            return;
+        }
+    
+        clickedNoteTags = String(clickedNoteTags).split(",");
+        
+        tagEditor.innerHTML = "";
+        clickedNoteTags.forEach(tag => {
+            tagEditor.append(createTag(tag));
+        });
+    
+    })
+}

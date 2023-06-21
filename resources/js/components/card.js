@@ -83,7 +83,7 @@ export function updateNote(updatedNoteId, newNoteData) {
     
     updatedNoteData.forEach(noteData => {
         document.querySelector(`[data-id = "${noteData.id}"] .card-title`).textContent = noteData.title;
-        document.querySelector(`[data-id = "${noteData.id}"] .card-text`).textContent = noteData.body;
+        document.querySelector(`[data-id = "${noteData.id}"] .card-content`).innerHTML = noteData.body;
         document.querySelector(`[data-id = "${noteData.id}"]`).setAttribute("data-revision-count", noteData.revision_count);
     })
 
@@ -187,36 +187,4 @@ export function updateCard(currentNoteData, newNoteData) {
 }
 
 
-//Event on click note
-export function initClickNote() {
-    $(document).on('click', '.note', function(e) {
 
-        $('#fullNoteEditor').modal('show');
-        let clickId = $(this).data('id');
-    
-        document.querySelector("#fullNoteEditor").setAttribute('data-id', clickId);
-        let tagEditor = document.getElementById("editorTags");
-        let clickedNoteTitle = document.querySelector(`.card.note[data-id="${clickId}"] .card-title`).outerText;
-        let clickedNoteBody = document.querySelector(`.card.note[data-id="${clickId}"] .card-text`).outerText;
-        let clickedNoteTags = document.querySelector(`.card.note[data-id="${clickId}"]`).dataset.tags;
-    
-        document.getElementById('titleEditor').value = clickedNoteTitle;
-        document.getElementById('bodyEditor').value = clickedNoteBody;
-    
-        // Resize note area
-        $("textarea").trigger("input");
-    
-        if (clickedNoteTags === undefined)  {
-            tagEditor.innerHTML = "";
-            return;
-        }
-    
-        clickedNoteTags = String(clickedNoteTags).split(",");
-        
-        tagEditor.innerHTML = "";
-        clickedNoteTags.forEach(tag => {
-            tagEditor.append(createTag(tag));
-        });
-    
-    })
-}

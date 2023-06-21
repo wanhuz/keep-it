@@ -8,11 +8,12 @@ import BulletList from '@tiptap/extension-bullet-list'
 import Placeholder from '@tiptap/extension-placeholder'
 import Link from '@tiptap/extension-link'
 
-const editor = initEditor();
+const addPostEditor = initEditor('#fullEditorTextArea');
+const editPostEditor = initEditor('#editPostEditor')
 
-function initEditor() {
+function initEditor(editorId) {
   return new Editor({
-    element: document.querySelector('.element'),
+    element: document.querySelector(editorId),
     extensions: [
       Document,
       Paragraph,
@@ -29,8 +30,12 @@ function initEditor() {
   })
 }
 
-export default function getEditor() {
-  return editor;
+export function getEditor() {
+  return addPostEditor;
+}
+
+export function getEditPostEditor() {
+  return editPostEditor;
 }
 
 

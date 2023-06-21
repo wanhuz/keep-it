@@ -1,7 +1,6 @@
 
-import {initEditor} from './components/editor.js'
+import {initEditor, initClickNote} from './components/editor.js'
 import {initCardContainer, updatePage} from './components/container.js'
-import {initClickNote} from './components/card.js'
 import { initSidebar, refreshSidebar } from './components/sidebar.js';
 import { initSearch } from './components/search.js';
 import { initPopover, initPreventDefaultBehavior } from './misc/misc.js';

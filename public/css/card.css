@@ -18,3 +18,7 @@
 .card-content ol {
     padding-left: 1.2em;
 }
+
+.note .card-body {
+    padding-bottom: 0 !important;
+}
