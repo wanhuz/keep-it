@@ -2,18 +2,16 @@ import {updateCardContainerBySearch, updateCardContainer, clearCardContainer} fr
 import { updateSearchTerm } from './container.js';
 
 let typingTimer;
-let doneTypingInterval = 1000;
+let doneTypingInterval = 500;
 let $textinput = $('#search-input');
 
 export function initSearch() {
-    $textinput.on('keyup', function() {
+    $textinput.on('keyup', () => {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(doneTyping, doneTypingInterval);
     });
     
-    $textinput.on('keydown', function() {
-        clearTimeout(typingTimer);
-    });
+    $textinput.on('keydown', () => clearTimeout(typingTimer));
     
     //Disable enter key
     $textinput.keypress(

@@ -12,10 +12,6 @@ export function initCardContainer() {
     });
 }
 
-export function getCardContainer() {
-    return $('#card-container');
-}
-
 export function updatePage() {
     if (currentPageTag)
         updateCardContainerByTag(currentPageTag, false);
@@ -27,9 +23,17 @@ export function updatePage() {
     refreshCardContainerLayout();
 }
 
+export function initPage() {
+    window.setInterval(updatePage, 5000);
+    window.setInterval(refreshSidebar, 5000);
+    
+    updatePage();
+    refreshSidebar();
+}
+
 export function updateSearchTerm(searchTerm) {
     currentSearchTerm = searchTerm;
-}
+} 
 
 export function updatePageTag(tag) {
     currentPageTag = tag;
@@ -43,10 +47,6 @@ export function resetSearchTerm() {
     currentSearchTerm = null;
 }
 
-export function initPage() {
-    window.setInterval(updatePage, 5000);
-    window.setInterval(refreshSidebar, 5000);
-    
-    updatePage();
-    refreshSidebar();
+export function getCardContainer() {
+    return $('#card-container');
 }

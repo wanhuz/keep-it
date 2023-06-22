@@ -57,7 +57,6 @@ export function initClickSubmitEditor() {
 
 export function initClickUpdateEditorBtn() {
     $(document).on('click', '#saveBtn', function(e) {
-        
         e.preventDefault();
 
         const editor = getEditPostEditor();  
@@ -143,10 +142,8 @@ export function initEditor() {
         e.preventDefault();
         editor.commands.toggleOrderedList();
     });
-
 }
 
-//Event on click note
 export function initClickNote() {
     $(document).on('click', '.note', function(e) {
         const editor = getEditPostEditor();
