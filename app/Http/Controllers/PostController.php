@@ -22,7 +22,7 @@ class PostController extends Controller
     }
 
     public function store(Request $request) {
-        $this->postService->handleStore($request);
+        return $this->postService->handleStore($request);
     }
 
     public function update(Request $request) {

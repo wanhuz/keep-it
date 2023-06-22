@@ -31,8 +31,10 @@ class PostService {
         $request->body = json_encode($request->body);
     
         $user = Auth::user();
-        $user->notes()->create(['title' => $request->title, 
-                                'body' => $request->body]);
+        $storedNote = $user->notes()->create(['title' => $request->title, 
+                                    'body' => $request->body]);
+
+        return $storedNote;
     }
 
     public function handleUpdate(Request $request) {

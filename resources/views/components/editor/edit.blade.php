@@ -1,4 +1,4 @@
-<div class="modal zoom" id="fullNoteEditor" tabindex="-1" aria-labelledby="fullNoteEditorLabel" aria-hidden="true">
+<div class="modal zoom" id="editEditor" tabindex="-1" aria-labelledby="editEditorLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <x-editor.base>

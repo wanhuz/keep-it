@@ -4,11 +4,11 @@
     <x-slot:contentId>fullEditorTextArea</x-slot>
     <x-slot:bulletListModalBtnId>bulletListBtn</x-slot>
     <x-slot:orderedListModalBtnId>orderedListBtn</x-slot>
-    <x-slot:dropdownTagListId>d</x-slot>
-    <x-slot:tagsContainerId>f</x-slot>
-    <x-slot:tagShowBtnId>d</x-slot>
-    <x-slot:dropdownTagListCheckboxId>f</x-slot>
-    <x-slot:submitTagBtnId>g</x-slot>
+    <x-slot:dropdownTagListId>dropdownAddTagList</x-slot>
+    <x-slot:tagsContainerId>tagAddEditorContainer</x-slot>
+    <x-slot:tagShowBtnId>tagAddEditorButton</x-slot>
+    <x-slot:dropdownTagListCheckboxId>tagAddEditorCheckboxList</x-slot>
+    <x-slot:submitTagBtnId>tagAddEditorSubmitBtn</x-slot>
     <x-slot:buttons>
         <button class='btn btn-light border border-0' id='cancelBtn'><i class='bi bi-x'></i></button>
     </x-slot>

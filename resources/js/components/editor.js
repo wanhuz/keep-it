@@ -1,7 +1,7 @@
 import {getEditor, getEditPostEditor} from '../wysiwyg/tiptap.js'
 import { updatePage } from './container';
-import { createTag } from '../ui/tag.js';
-import {createEditorTagCheckBox} from '../ui/tag.js';
+import {createTag, createEditorTagCheckBox} from '../ui/tag.js';
+import { submitTag } from './tag.js';
 
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
@@ -45,10 +45,17 @@ export function initClickSubmitEditor() {
                 'title' : noteTitle,
                 'body' : noteBody
             },
-            success: function() {
+            success: function(storedNote) {
                 updatePage();
                 titleTextArea.value = '';
                 editor.commands.clearContent();
+                let newTagId = [];
+                document.querySelectorAll('#tagAddEditorContainer .card-tag').forEach(tag => {
+                    newTagId.push(tag.value);
+                })
+
+                submitTag('#postform', storedNote.id, newTagId);
+                clearAddEditorTagContainer();
             }
         })
     })
@@ -62,7 +69,7 @@ export function initClickUpdateEditorBtn() {
         const editor = getEditPostEditor();  
         let formData = $("#editorForm").serializeArray();
         let formToken = formData.find(data => data.name == "_token").value;
-        let newNoteId = document.querySelector("#fullNoteEditor").dataset.id;
+        let newNoteId = document.querySelector("#editEditor").dataset.id;
         let newNoteTitle = formData.find(data => data.name == "title").value;
         let newNoteBody = editor.getJSON();
 
@@ -77,7 +84,7 @@ export function initClickUpdateEditorBtn() {
             },
             success: function() {
                 updatePage();
-                $('#fullNoteEditor').modal('hide');
+                $('#editEditor').modal('hide');
             }
         })
     })
@@ -89,7 +96,7 @@ export function initClickRemoveEditorBtn() {
     
         let formData = $("#editorForm").serializeArray();
         let formToken = formData.find(data => data.name == "_token").value;
-        let removedNoteId = document.querySelector("#fullNoteEditor").dataset.id;
+        let removedNoteId = document.querySelector("#editEditor").dataset.id;
     
         $.ajax({
             type: "POST",
@@ -100,7 +107,7 @@ export function initClickRemoveEditorBtn() {
             },
             success: function() {
                 updatePage();
-                $('#fullNoteEditor').modal('hide');
+                $('#editEditor').modal('hide');
             }
         })
     })
@@ -122,11 +129,27 @@ export function initClickEditorTagList() {
             }
         })
     });
+
+    $("#tagAddEditorButton").on('click', function (e) {
+        $.ajax({
+            url: "/load-tag",
+            type: 'GET',
+            success: function(data) {
+                let allTag = data;
+                let tagEditorContainer = document.getElementById("tagAddEditorCheckboxList");
+                tagEditorContainer.innerHTML = "";
+    
+                allTag.forEach(tag => {
+                    tagEditorContainer.append(createEditorTagCheckBox(tag.name, tag.id));
+                });
+            }
+        })
+    });
 }
 
 export function initHiddenEditor() {
-    $('#fullNoteEditor').on('hidden.bs.modal', function () {
-        document.querySelector("#fullNoteEditor").setAttribute('data-id', -1);
+    $('#editEditor').on('hidden.bs.modal', function () {
+        document.querySelector("#editEditor").setAttribute('data-id', -1);
     })
 }
 
@@ -148,10 +171,10 @@ export function initClickNote() {
     $(document).on('click', '.note', function(e) {
         const editor = getEditPostEditor();
 
-        $('#fullNoteEditor').modal('show');
+        $('#editEditor').modal('show');
         let clickId = $(this).data('id');
     
-        document.querySelector("#fullNoteEditor").setAttribute('data-id', clickId);
+        document.querySelector("#editEditor").setAttribute('data-id', clickId);
         let tagEditor = document.getElementById("editorTags");
         let clickedNoteTitle = document.querySelector(`.card.note[data-id="${clickId}"] .card-title`).outerText;
         let clickedNoteBody = document.querySelector(`.card.note[data-id="${clickId}"] .card-content`).innerHTML;
@@ -173,4 +196,8 @@ export function initClickNote() {
         });
     
     })
+}
+
+function clearAddEditorTagContainer() {
+    document.getElementById('tagAddEditorContainer').innerHTML = '';
 }

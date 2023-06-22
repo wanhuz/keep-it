@@ -55,15 +55,15 @@ export function createTagListModal(tagName, tagId) {
     return taglist
 }
 
-export function createTag(tagName) {
-    `<button class="card-tag btn  bg-light rounded-pill text-center pt-0 ms-2 my-2 "><p class="mb-5">text</p></button>`
+export function createTag(name, id) {
+    const tagPillHTML = `
+    <button class="card-tag btn btn-light rounded-pill text-center pt-0 ms-2 my-2" value="${id}">
+        <p class="mb-5">${name}</p>
+    </button>
+    `
 
-    let btn = document.createElement("button");
-    btn.classList.add("card-tag", "btn", "btn-light", "rounded-pill", "text-center", "pt-0", "ms-2", "my-2");
-    let text = document.createElement("p");
-    text.classList.add("mb-5");
-    text.textContent = tagName;
-    btn.append(text);
+    const tagCheckboxSpan = document.createElement("span");
+    tagCheckboxSpan.innerHTML = tagPillHTML;
 
-    return btn;
+    return tagCheckboxSpan;
 }

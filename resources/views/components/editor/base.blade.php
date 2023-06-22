@@ -9,13 +9,14 @@
             <div id='{{ $contentId }}' class="pt-4 form-control border border-0 shadow-none"></div>
         </div>
 
+        <div id="{{ $tagsContainerId }}" class="ms-3 mb-0"></div>
+        
         <div class="card-footer bg-light w-100">
             <button id="{{ $bulletListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-list-task'></i></button>
             <button id="{{ $orderedListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-123'></i></button>
 
             <div class="vr"></div>
             <span id="{{ $dropdownTagListId }}" class="dropdown">
-                <span id="{{ $tagsContainerId }}"></span>
                 <button id="{{ $tagShowBtnId }}" class="btn btn-light btn-outline-secondary border border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class='bi bi-tag'></i></button>
                 <div class="dropdown-menu">
                     <div id="{{ $dropdownTagListCheckboxId }}"></div>
