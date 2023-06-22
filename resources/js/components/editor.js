@@ -4,24 +4,32 @@ import { createTag } from './tag.js';
 
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
-        const editor = getEditor();
         document.getElementById("simpleEditor").classList.add("d-none");
         document.getElementById("fullEditor").classList.remove("d-none");
-        editor.commands.focus();
+        document.getElementById('titleTextArea').focus();
     });
 }
 
 export function initClickCancelEditor() {
-    document.getElementById("cancelBtn").addEventListener('click', () => {
+    document.getElementById("cancelBtn").addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const editor = getEditor();
+        const titleTextArea = document.getElementById('titleTextArea');
+
         document.getElementById("fullEditor").classList.add("d-none");
         document.getElementById("simpleEditor").classList.remove("d-none");
-        $("#postform")[0].reset();
+        titleTextArea.value = '';
+        editor.commands.clearContent();
     })
 }
 
 export function initClickSubmitEditor() {
-    $(document).on('click', '#submitBtn', function() {
+    $(document).on('click', '#submitBtn', function(e) {
+        e.preventDefault();
+
         const editor = getEditor();
+        const titleTextArea = document.getElementById('titleTextArea');
         const formData = $("#postform").serializeArray();
 
         const noteTitle = formData.find(data => data.name == "title").value;
@@ -38,7 +46,8 @@ export function initClickSubmitEditor() {
             },
             success: function() {
                 updatePage();
-                $("#postform")[0].reset();
+                titleTextArea.value = '';
+                editor.commands.clearContent();
             }
         })
     })
@@ -149,8 +158,16 @@ export function initHiddenEditor() {
 export function initEditor() {
     const editor = getEditor();
 
-    $('#bulletListBtn').on('click', () => editor.commands.toggleBulletList());
-    $('#orderedListBtn').on('click', () => editor.commands.toggleOrderedList());
+    $('#bulletListBtn').on('click', (e) => {
+        e.preventDefault();
+        editor.commands.toggleBulletList();
+    });
+
+    $('#orderedListBtn').on('click', (e) => {
+        e.preventDefault();
+        editor.commands.toggleOrderedList();
+    });
+
 }
 
 //Event on click note

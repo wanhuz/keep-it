@@ -13,13 +13,12 @@
 @section('navigation')
     @parent
 
-    <x-navigation.sidebar>
-    </x-navigation.sidebar>
+    <x-navigation.sidebar></x-navigation.sidebar>
 @endsection
 
 @section('components')
     <x-tag.manager></x-tag.manager>
-    <x-editor.modal></x-editor>
+    <x-editor.edit></x-editor>
 @endsection
 
 <!-- Main -->
@@ -27,21 +26,20 @@
     <div class="container-fluid mt-5">
         <div class='row'>    
             <main class='col main-container'>
-                    
-                    <div id='editor' class='row ms-auto mx-auto mb-3'>
-                        <!-- Iframe will prevent page from breaking when closing the editor -->
-                        <iframe name='dummyframe' id='dummyframe' style='display: none;'></iframe> 
 
-                        <div class='col-sm-3 mx-auto'> 
-                            <x-editor.placeholder></x-editor>
+                <!-- Editor -->
+                <div id='editor' class='row ms-auto mx-auto mb-3'>
+                    <div class='col-sm-3 mx-auto'> 
+                        <x-editor.placeholder></x-editor>
 
-                            <div class='d-none' id='fullEditor' >
-                                <x-editor.editor></x-editor>
-                            </div>
+                        <div id='fullEditor' class='d-none'>
+                            <x-editor.add></x-editor>
                         </div>
                     </div>
+                </div>
 
-                    <div id='card-container' class='row flex-wrap ms-5'></div>
+                <!-- Card container -->
+                <div id='card-container' class='row ms-5'></div>
             </main>
         </div>
     </div>
