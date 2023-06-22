@@ -2,29 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notes;
-use App\Models\Setting;
-use App\Models\User;
-use DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Services\SettingService;
+use App\Services\HomeService;
 
 class HomeController extends Controller
 {
+    protected $homeService;
+
+    public function __construct(HomeService $homeService) {
+        $this->homeService = $homeService;
+    }
 
     public function index() {
-        $user = Auth::user();
-        $notes = $user->notes()->get();
-
-        $settings = $user->settings()->get();
-
-        if ($settings->first() == null) {
-            SettingService::init($userid);
-            $settings = $user->settings()->get();
-        };
-
+        $this->homeService->initIfUserSettingDoesNotExist();
         return view('/home/home');
     }
 }
