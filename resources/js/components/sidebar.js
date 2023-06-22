@@ -1,5 +1,6 @@
 import {getCardContainer, resetPageTag, resetSearchTerm, updatePageTag} from './container'
 import { updateCardContainerByTag, updateCardContainer, clearCardContainer } from './card'
+import { createSidebarBtn } from '../ui/sidebar'
 
 function toggleSidebar() {
     var sidebar = document.querySelector("#sidebar")
@@ -7,17 +8,6 @@ function toggleSidebar() {
 
     sidebar.classList.toggle("active-nav")
     container.classList.toggle("active-cont")
-}
-
-function createSidebarBtn(tagName) {
-    const tagBtnHtml = `
-    <button type="button" class="btn tag-btn ms-3 text-start sidebar-btn w-75" value="${tagName}"><i class="bi bi-bookmark"></i><span class="ps-3">${tagName}</span></button>
-    `
-
-    const tagBtn = document.createElement("div");
-    tagBtn.innerHTML = tagBtnHtml;
-
-    return tagBtn;
 }
 
 export function refreshSidebar() {

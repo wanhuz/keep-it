@@ -10,7 +10,7 @@
                 <x-slot:dropdownTagListId>editorTagList</x-slot>
                 <x-slot:tagsContainerId>editorTags</x-slot>
                 <x-slot:tagShowBtnId>tagNoteBtn</x-slot>
-                <x-slot:dropdownTagListId>tagEditorCheckbox</x-slot>
+                <x-slot:dropdownTagListCheckboxId>tagEditorCheckbox</x-slot>
                 <x-slot:submitTagBtnId>submitTag</x-slot>
                 <x-slot:buttons>
                     <button id="removeBtn" class="btn btn-light btn-outline-secondary border border-0 ms-auto"><i class="bi bi-trash"></i></button> 

@@ -18,7 +18,7 @@
                 <span id="{{ $tagsContainerId }}"></span>
                 <button id="{{ $tagShowBtnId }}" class="btn btn-light btn-outline-secondary border border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class='bi bi-tag'></i></button>
                 <div class="dropdown-menu">
-                    <div id="{{ $dropdownTagListId }}"></div>
+                    <div id="{{ $dropdownTagListCheckboxId }}"></div>
                     <button id="{{ $submitTagBtnId }}" type="button" class="mt-3 btn colored-btn border border-0 mx-3 d-block">Save</button>
                 </div>
             </span>

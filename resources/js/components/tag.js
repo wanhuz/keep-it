@@ -1,60 +1,7 @@
 import { refreshCardContainerLayout } from "./card";
 import { refreshSidebar } from "./sidebar";
-
-export function createTag(tagName) {
-    `<button class="card-tag btn  bg-light rounded-pill text-center pt-0 ms-2 my-2 "><p class="mb-5">text</p></button>`
-
-    let btn = document.createElement("button");
-    btn.classList.add("card-tag", "btn", "btn-light", "rounded-pill", "text-center", "pt-0", "ms-2", "my-2");
-    let text = document.createElement("p");
-    text.classList.add("mb-5");
-    text.textContent = tagName;
-    btn.append(text);
-
-    return btn;
-}
-
-function createTagListElement(tagName, tagId) {
-    let taglistexample = `<li class="list-group-item list-group-item-action border border-0 me-auto d-flex justify-content-between align-items-start"><button type="button" class="btn-close" aria-label="Close"><i class="bi bi-x-lg"></i></button></li>`;
-
-    let taglist = document.createElement("li");
-    taglist.classList.add("list-group-item", "list-group-item-action", "border", "border-0", "d-flex", "justify-content-between", "align-items-start");
-    taglist.dataset.id = tagId;
-    taglist.dataset.name = tagName;
-
-    let tagNameInput = document.createElement("input");
-    tagNameInput.classList.add("border-0", "bg-transparent", "form-control", "py-0","shadow-none", "w-auto");
-    tagNameInput.classList.add("edittag-input");
-    tagNameInput.placeholder = tagName;
-    tagNameInput.readOnly = true;
-    tagNameInput.id = tagName + "TagInput"
-    taglist.append(tagNameInput);
-
-    let buttondiv = document.createElement("div");
-
-    let deletebtn = document.createElement("button");
-    deletebtn.type = "button";
-    deletebtn.classList.add("deletetag-btn", "pe-0", "py-0", "border", "border-0", "bg-transparent");
-    let deletebtnicon = document.createElement("icon");
-    deletebtnicon.classList.add("bi", "bi-x-lg");
-    deletebtn.append(deletebtnicon);
-
-
-    let editbtn = document.createElement("button");
-    editbtn.type = "button";
-    editbtn.classList.add("edittag-btn", "pe-1", "py-0", "border", "border-0", "bg-transparent");
-    let editbtnicon = document.createElement("icon");
-    editbtnicon.classList.add("bi", "bi-pencil-square");
-    editbtn.append(editbtnicon);
-    
-    buttondiv.append(editbtn)
-    buttondiv.append(deletebtn);
-    taglist.append(buttondiv);
-
-    return taglist
-}
-
-
+import { createTagListModal } from "../ui/tag";
+import { createTag } from "../ui/tag";
 
 export function updateTag(updateModalTag) {
     $.ajax({
@@ -134,7 +81,7 @@ function updateManageTagModal() {
             currentTagListContainer.innerHTML = "";
 
             allTag.forEach(tag => {
-                currentTagListContainer.append(createTagListElement(tag.name, tag.id));
+                currentTagListContainer.append(createTagListModal(tag.name, tag.id));
             });
         }
     })
