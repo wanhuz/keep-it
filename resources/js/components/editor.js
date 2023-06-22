@@ -1,7 +1,7 @@
 import {getEditor, getEditPostEditor} from '../wysiwyg/tiptap.js'
 import { updatePage } from './container';
 import {createTag, createEditorTagCheckBox} from '../ui/tag.js';
-import { submitTag } from './tag.js';
+import { submitTag } from './tag/editor.js';
 
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
@@ -30,7 +30,6 @@ export function initClickSubmitEditor() {
         e.preventDefault();
 
         const editor = getEditor();
-        const titleTextArea = document.getElementById('titleTextArea');
         const formData = $("#postform").serializeArray();
 
         const noteTitle = formData.find(data => data.name == "title").value;
@@ -47,18 +46,31 @@ export function initClickSubmitEditor() {
             },
             success: function(storedNote) {
                 updatePage();
-                titleTextArea.value = '';
-                editor.commands.clearContent();
-                let newTagId = [];
-                document.querySelectorAll('#tagAddEditorContainer .card-tag').forEach(tag => {
-                    newTagId.push(tag.value);
-                })
 
-                submitTag('#postform', storedNote.id, newTagId);
-                clearAddEditorTagContainer();
+                submitTag('#postform', storedNote.id, getAddEditorTagId());
+                clearAddEditor();
             }
         })
     })
+}
+
+function getAddEditorTagId() {
+    let tagId = [];
+
+    document.querySelectorAll('#tagAddEditorContainer .card-tag').forEach(tag => {
+        tagId.push(tag.value);
+    })
+
+    return tagId
+}
+
+function clearAddEditor() {
+    const editor = getEditor();
+    const titleTextArea = document.getElementById('titleTextArea');
+
+    titleTextArea.value = '';
+    editor.commands.clearContent();
+    clearAddEditorTagContainer();
 }
 
 

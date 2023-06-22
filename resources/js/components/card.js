@@ -1,4 +1,4 @@
-import {updateTag} from './tag.js'
+import {updateTag} from './tag/card.js'
 import {getCardContainer} from './container.js'
 import { createCard } from '../ui/card.js';
 

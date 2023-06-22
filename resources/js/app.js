@@ -1,5 +1,4 @@
 import './wysiwyg/tiptap.js';
-import './components/tag.js';
 import './components/card.js';
 import './components/sidebar.js';
 import './components/editor.js';

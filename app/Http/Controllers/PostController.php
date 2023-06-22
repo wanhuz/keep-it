@@ -33,17 +33,6 @@ class PostController extends Controller
         $this->postService->handleDelete($request);
     }
 
-    public function load_note_by_tag(Request $request) {
-        $user = Auth::user();
-
-        $tag = $request->tag;
-
-        $note_with_tag = $user->notes()->whereHas('tags', function ($query) use($tag) {
-                                                return $query->where('tags.name', '=', $tag);})->get();
-        
-        return json_encode($note_with_tag);
-    }
-
     public function search(Request $request) {
         return $this->postService->handleSearch($request);
     }

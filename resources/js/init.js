@@ -1,11 +1,12 @@
 
 import {initEditor, initClickNote} from './components/editor.js'
 import {initCardContainer, initPage} from './components/container.js'
-import { initSidebar } from './components/sidebar.js';
-import { initSearch } from './components/search.js';
-import { initPopover, initPreventDefaultBehavior } from './misc/misc.js';
+import {initSidebar} from './components/sidebar.js';
+import {initSearch} from './components/search.js';
+import {initPopover, initPreventDefaultBehavior } from './misc/misc.js';
 import {initClickSimpleEditor, initClickCancelEditor, initClickSubmitEditor, initClickUpdateEditorBtn, initHiddenEditor, initClickEditorTagList, initClickRemoveEditorBtn} from './components/editor.js'
-import { initBlurEditTagInput, initClickAddTagBtn, initClickCloseTagManager, initClickDeleteTagBtn, initClickEditTagBtn, initClickOpenTagManager, initClickSubmitTag } from './components/tag.js';
+import {initBlurEditTagInput, initClickAddTagBtn, initClickCloseTagManager, initClickDeleteTagBtn, initClickEditTagBtn, initClickOpenTagManager} from './components/tag/manager.js';
+import { initClickSubmitTag } from './components/tag/editor.js';
 
 initPreventDefaultBehavior();
 initPopover();
