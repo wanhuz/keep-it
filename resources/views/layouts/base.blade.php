@@ -16,7 +16,6 @@
     <!-- Icon -->
     <link rel="icon" type="image/x-icon" href="{{ $favicon }}">
     @include('common.scripts')
-    @vite('resources/js/app.js')
 </head>
 
 <body>

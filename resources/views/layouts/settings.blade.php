@@ -1,11 +1,5 @@
 @extends('layouts.default')
 
-@section('stylesheets')
-    <link rel="stylesheet" href="{{asset('css/settings.css')}}">
-
-    @parent
-@endsection
-
 
 @section('content')
     <div class="container mt-5">

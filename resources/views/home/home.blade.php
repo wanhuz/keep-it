@@ -9,6 +9,10 @@
     @parent
 @endsection
 
+@section('scripts')
+    @vite('resources/js/app.js')
+@endsection
+
 <!-- Body -->
 @section('navigation')
     @parent
