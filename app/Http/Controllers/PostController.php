@@ -2,100 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notes;
-use App\Models\Tag;
-use App\Models\Setting;
-use App\Models\User;
-use DB;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Services\SettingService;
+use App\Services\PostService;
 
 class PostController extends Controller
 {
-    private function getUser() {
-        $userId = Auth::id();
-        return User::find($userId);
-    }
+    protected $postService;
 
-    public function index() {
-        $userid = Auth::id();
-        $user = $this->getUser();
-
-        $notes = $user->notes()->get();
-        $tags = $user->tags()->get();
-        $settings = $user->settings()->get();
-
-        if ($settings->first() == null) {
-            SettingService::init($userid);
-            $settings = $user->settings()->get();
-        };
-
-        return view('/home/home', compact('notes', 'tags', 'settings'));
+    public function __construct(PostService $postService) {
+        $this->postService = $postService;
     }
 
     public function store(Request $request) {
-
-        $attributes = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
-    
-        $user = $this->getUser();
-        $user->notes()->create($attributes);
-    }
-
-    public function load() {
-        $user = $this->getUser();
-
-        return json_encode($user->notes()->get()) ;
+        return $this->postService->handleStore($request);
     }
 
     public function update(Request $request) {
-
-        $attributes = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
-
-        $user = $this->getUser();
-
-        $user->notes()->where('id', $request->id)->increment('revision_count', 1);
-
-        $note = $user->notes()->find($request->id);
-
-        $note->title = $request->title;
-        $note->body = $request->body;
-
-        $note->save();
-
+        $this->postService->handleUpdate($request);
     }
 
     public function delete(Request $request) {
-        $user = $this->getUser();
-
-        $note = $user->notes()->find($request->id);
-
-        $note->delete();
+        $this->postService->handleDelete($request);
     }
 
-    public function load_note_by_tag(Request $request) {
-        $user = $this->getUser();
-
-        $tag = $request->tag;
-
-        $note_with_tag = $user->notes()->whereHas('tags', function ($query) use($tag) {
-                                                return $query->where('tags.name', '=', $tag);})->get();
-        
-        return json_encode($note_with_tag);
-        
-    }
-
-    public function search() {
-        $user = $this->getUser();
-
-        return $user->notes()->filter(request(['searchQuery', 'filterBy']))->get();
+    public function search(Request $request) {
+        return $this->postService->handleSearch($request);
     }
 } 
 

@@ -21,9 +21,8 @@ Route::middleware('auth')->group(function () {
     // Tagging
     Route::get('/load-tag', [TagController::class, 'load']);
     Route::get('/load-note-tag', [TagController::class, 'load_notes_tag']);
-    Route::post('/load-note-by-tag', [PostController::class, 'load_note_by_tag']);
-    Route::post('/post-tag', [TagController::class, 'add']);
-    Route::post('/add-tag', [TagController::class, 'tag_note']);
+    Route::post('/post-tag', [TagController::class, 'store']);
+    Route::post('/add-tag', [TagController::class, 'tag']);
     Route::post('/delete-tag', [TagController::class, 'delete']);
     Route::post('/update-tag', [TagController::class, 'update']);
 

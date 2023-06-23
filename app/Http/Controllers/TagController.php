@@ -7,27 +7,22 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Services\TagService;
 
 class TagController extends Controller
 {
-    private function getUser() {
-        $userId = Auth::id();
-        return User::find($userId);
+    protected $tagService;
+
+    public function __construct(TagService $tagService) {
+        $this->tagService = $tagService;
     }
 
-    public function add(Request $request) {
-
-        $attributes = request()->validate([
-            'name' => 'required',
-        ]);
-
-        $user = $this->getUser();
-        $user->tags()->create($attributes);
+    public function store(Request $request) {
+        $this->tagService->handleStore($request);
     }
 
     public function load() {
-        $user = $this->getUser();
-        return $user->tags()->get();
+        return $this->tagService->handleLoad();
     }
 
     public function load_notes_tag() {
@@ -39,50 +34,15 @@ class TagController extends Controller
         return $notes_tag;
     }
 
-    public function tag_note(Request $request) {
-        
-        $attributes = request()->validate([
-            'notes_id' => 'required',
-            'tag_id' => 'required' 
-        ]);
-        
-        $user = $this->getUser();
-        $note = $user->notes()->find($request->notes_id);
-
-        if ($request->tag_id[0] == 0) {
-            $note->tags()->detach();
-        }
-        else { 
-            $note->tags()->sync($request->tag_id);
-        }
-        
-
-        return;
+    public function tag(Request $request) {
+        $this->tagService->handleTag($request);
     }
 
     public function update(Request $request) {
-
-        $attributes = request()->validate([
-            'id' => 'required',
-            'name' => 'required' 
-        ]);
-
-        $user = $this->getUser();
-        $tag = $user->tags()->find($request->id);
-
-        $tag->name = $request->name;
-        $tag->save();
+        $this->tagService->handleUpdate($request);
     }
 
     public function delete(Request $request) {
-
-        $attributes = request()->validate([
-            'id' => 'required'
-        ]);
-
-        $user = $this->getUser();
-
-        $tag = $user->tags()->find($request->id);
-        $tag->delete();
+        $this->tagService->handleDelete($request);
     }
 }

@@ -22,7 +22,7 @@ class SettingService {
         return $this->getUser()->settings()->get();
     }
 
-    public static function init($userId) {
+    public function init() {
         $userid = Auth::id();
 
         $defaultsettings = array(
@@ -88,6 +88,13 @@ class SettingService {
         }
 
         return $userSetting;
+    }
+
+    public function isUserSettingExists() {
+        $user = Auth::user();
+        $settings = $user->settings()->get();
+
+        return (!($settings->first() == null)) ? true : false;
     }
 
 }

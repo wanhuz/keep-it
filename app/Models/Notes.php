@@ -18,23 +18,8 @@ class Notes extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function tagFilter($query, $searchQuery, $filters) {
-        
-        $query->when($filter == "tag" ?? false, fn($query, $search, $filter) =>  
-            $query->where(fn($query) => 
-                $query->whereHas('tags', fn($query) =>
-                    $query->where('tags.name', '=', $filters['search']))
-            )
-        );
-        
- 
-        $query->when($filterBy == "search" ?? false, fn($query, $filters) =>  
-            $query->where(fn($query) =>
-                $query
-                    ->where("title", "like",  "%{$searchQuery}%")
-                    ->orWhere("body", "like", "%{$searchQuery}%")
-            )
-        );
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function scopeFilter($query, array $filters) {
@@ -60,9 +45,5 @@ class Notes extends Model
             }
         });
 
-    }
-
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id');
     }
 }
