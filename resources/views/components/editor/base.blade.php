@@ -15,7 +15,7 @@
             <button id="{{ $bulletListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-list-task'></i></button>
             <button id="{{ $orderedListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-123'></i></button>
 
-            <div class="vr"></div>
+            <div class="vr align-middle"></div>
             <span id="{{ $dropdownTagListId }}" class="dropdown">
                 <button id="{{ $tagShowBtnId }}" class="btn btn-light btn-outline-secondary border border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class='bi bi-tag'></i></button>
                 <div class="dropdown-menu">

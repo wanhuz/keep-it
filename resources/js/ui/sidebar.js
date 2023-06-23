@@ -1,8 +1,8 @@
-export function createSidebarBtn(tagName) {
+export function createSidebarBtn(btnName, btnId, btnIconClass, btnClass) {
     const tagBtnHtml = `
-    <button type="button" class="btn tag-btn ms-3 text-start sidebar-btn w-75" value="${tagName}">
-        <i class="bi bi-bookmark"></i>
-        <span class="ps-3">${tagName}</span>
+    <button type="button" id="${btnId}" class="btn ms-3 ${btnClass} text-start sidebar-btn w-75" value="${btnName}">
+        <i class="bi ${btnIconClass}"></i>
+        <span class="ps-3">${btnName}</span>
     </button>
     `
 

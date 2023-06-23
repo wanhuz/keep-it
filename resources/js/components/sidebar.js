@@ -21,7 +21,7 @@ export function refreshSidebar() {
             sidebarBtnContainer.innerHTML = "";
 
             allTag.forEach(tag => {
-                sidebarBtnContainer.append(createSidebarBtn(tag.name));
+                sidebarBtnContainer.append(createSidebarBtn(tag.name, tag.id, 'bi-bookmark', 'tag-btn'));
             });
         }
     })
@@ -29,31 +29,36 @@ export function refreshSidebar() {
 
 export function initSidebar() {
     let mediaItemContainer = getCardContainer();
+    const sidebarMenu = $("#sidebar");
 
     $(document).on('click', '.sidebar-btn', function(e) {
         e.preventDefault();
-    
-        let clickedTag = e.target.value;
-    
-        if (clickedTag === undefined) { //If user clicked the icon, return the parent button's value
-            clickedTag = e.target.parentElement.value;
-        }
-
-        updatePageTag(clickedTag);
-        updateCardContainerByTag(clickedTag, true);
-    })
+        initSidebarBtn(e);
+    });
     
     $("#all-note-sidebar-btn").on('click', function(e) {
         e.preventDefault();
-    
-        clearCardContainer();
-        resetPageTag();
-        resetSearchTerm();
-        updateCardContainer();
-    })
-    
-    const sidebarMenu = $("#sidebar");
+        initAllNoteSidebarBtn();
+    });
     
     document.getElementById("menu-btn").addEventListener('click', toggleSidebar);
     sidebarMenu.on('transitionend webkitTransitionEnd oTransitionEnd', () => {$(mediaItemContainer).masonry('layout');});
+}
+
+function initAllNoteSidebarBtn() {
+    clearCardContainer();
+    resetPageTag();
+    resetSearchTerm();
+    updateCardContainer();
+}
+
+function initSidebarBtn(e) {
+    let clickedTag = e.target.value;
+    
+    // If user clicked the icon, return the parent button's value
+    if (clickedTag === undefined)
+        clickedTag = e.target.parentElement.value;
+
+    updatePageTag(clickedTag);
+    updateCardContainerByTag(clickedTag, true);
 }

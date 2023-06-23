@@ -15,13 +15,9 @@ export function initClickCancelEditor() {
     document.getElementById("cancelBtn").addEventListener('click', (e) => {
         e.preventDefault();
 
-        const editor = getEditor();
-        const titleTextArea = document.getElementById('titleTextArea');
-
         document.getElementById("fullEditor").classList.add("d-none");
         document.getElementById("simpleEditor").classList.remove("d-none");
-        titleTextArea.value = '';
-        editor.commands.clearContent();
+        clearAddEditor();
     })
 }
 
@@ -70,7 +66,7 @@ function clearAddEditor() {
 
     titleTextArea.value = '';
     editor.commands.clearContent();
-    clearAddEditorTagContainer();
+    document.getElementById('tagAddEditorContainer').innerHTML = '';
 }
 
 
@@ -166,16 +162,27 @@ export function initHiddenEditor() {
 }
 
 export function initEditor() {
-    const editor = getEditor();
+    const addEditor = getEditor();
+    const editEditor = getEditPostEditor();
 
     $('#bulletListBtn').on('click', (e) => {
         e.preventDefault();
-        editor.commands.toggleBulletList();
+        addEditor.commands.toggleBulletList();
     });
 
     $('#orderedListBtn').on('click', (e) => {
         e.preventDefault();
-        editor.commands.toggleOrderedList();
+        addEditor.commands.toggleOrderedList();
+    });
+
+    $('#bulletListModalBtn').on('click', (e) => {
+        e.preventDefault();
+        editEditor.commands.toggleBulletList();
+    });
+
+    $('#orderedListModalBtn').on('click', (e) => {
+        e.preventDefault();
+        editEditor.commands.toggleOrderedList();
     });
 }
 
@@ -208,8 +215,4 @@ export function initClickNote() {
         });
     
     })
-}
-
-function clearAddEditorTagContainer() {
-    document.getElementById('tagAddEditorContainer').innerHTML = '';
 }
