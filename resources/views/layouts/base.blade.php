@@ -16,6 +16,7 @@
     <!-- Icon -->
     <link rel="icon" type="image/x-icon" href="{{ $favicon }}">
     @include('common.scripts')
+    @yield('scripts')
 </head>
 
 <body>
@@ -25,6 +26,6 @@
     @yield('content')
 
     
-    @yield('scripts')
+    
 </body>
 </html>

@@ -31,19 +31,16 @@
     font-size: inherit; 
 }
 
+/* All size are in proportion to 1.8:1.0 */
 .note {
-    --large-width: 20rem;
-    --medium-width: 18rem;
-    --small-width: 14rem;
-    --large-height: 10rem;
-    --medium-height: 7rem;
-    --small-height: 4rem;
-    
-    margin: 5px;
-}
+    --large-width: 306px;
+    --medium-width: 270px;
+    --small-width: 225px;
+    --large-height: 170px;
+    --medium-height: 150px;
+    --small-height: 125px;
 
-textarea {
-    resize: none;
+    margin: 5px;
 }
 
 .card-tag {
