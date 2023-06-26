@@ -57,7 +57,7 @@ export function createTagListModal(tagName, tagId) {
 
 export function createTag(name, id) {
     const tagPillHTML = `
-    <button class="card-tag btn btn-light rounded-pill text-center pt-0 ms-2 my-2" value="${id}">
+    <button class="card-tag note-tag btn btn-light rounded-pill text-center align-middle pt-0 ms-2 my-2" value="${id}">
         <p class="mb-5">${name}</p>
     </button>
     `

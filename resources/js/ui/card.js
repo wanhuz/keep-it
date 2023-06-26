@@ -2,7 +2,7 @@ export function createCard(title, content, id) {
     const cardHtml = `
     <div class="card note" data-revision-count="1"  data-id="${id}" >
         
-        <div class="card-body text-start">
+        <div class="card-body note-body text-start">
             <h5 class="card-title">${title}</h5>
             <div class="card-content">${content}</div>
         </div>
