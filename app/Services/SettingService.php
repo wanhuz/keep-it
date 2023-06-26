@@ -27,9 +27,9 @@ class SettingService {
 
         $defaultsettings = array(
             'app-name' => 'Keep-it',
-            'card-size-style' => 'fixed',
-            'card-size' => 'medium',
-            'card-font-size' => 'medium',
+            'card-size-style' => 'dynamic',
+            'card-size' => 'small',
+            'card-font-size' => 'small',
             'bg-color' => '242,242,242',
             'head-color' => '2,136,209',
             'side-color' => '255,255,255',
