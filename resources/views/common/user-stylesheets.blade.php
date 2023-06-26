@@ -40,6 +40,17 @@
             overflow-y: hidden;
         }
 
+        .note-content p {
+            overflow-y: hidden;
+            margin-top: 0;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0;
+            width: auto; 
+            height: 60px;
+        }
+
+
     @endif
 
     .note {
