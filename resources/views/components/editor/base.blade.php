@@ -14,6 +14,8 @@
         <div class="card-footer bg-light w-100">
             <button id="{{ $bulletListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-list-task'></i></button>
             <button id="{{ $orderedListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-123'></i></button>
+            <input id="{{ $inputImgId }}" type="file" class="d-none" />
+            <button id="{{ $addImageBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-card-image'></i></button>
 
             <div class="vr align-middle"></div>
             <span id="{{ $dropdownTagListId }}" class="dropdown">

@@ -4,6 +4,8 @@
     <x-slot:contentId>fullEditorTextArea</x-slot>
     <x-slot:bulletListModalBtnId>bulletListBtn</x-slot>
     <x-slot:orderedListModalBtnId>orderedListBtn</x-slot>
+    <x-slot:inputImgId>inputImgAdd</x-slot>
+    <x-slot:addImageBtnId>addImgAddBtn</x-slot>
     <x-slot:dropdownTagListId>dropdownAddTagList</x-slot>
     <x-slot:tagsContainerId>tagAddEditorContainer</x-slot>
     <x-slot:tagShowBtnId>tagAddEditorButton</x-slot>

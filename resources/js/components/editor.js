@@ -184,6 +184,7 @@ export function initEditor() {
         e.preventDefault();
         editEditor.commands.toggleOrderedList();
     });
+    initAddImageButton('#addImgAddBtn');
 }
 
 export function initClickNote() {
@@ -215,4 +216,17 @@ export function initClickNote() {
         });
     
     })
+}
+
+function initAddImageButton(btnId) {
+    $(btnId).on('click', (e) => {
+        e.preventDefault();
+
+        $("#inputImgAdd").val('');
+        $('#inputImgAdd').click();
+    })
+
+    $("#inputImgAdd").change(function(e) {
+        
+    });
 }
