@@ -32,3 +32,20 @@
 [data-type="taskList"] p {
     margin-left: 0.3em !important;
 } */
+
+/* Editor image container */
+.editor-img ul  {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0 !important;
+    display: flex;
+}
+
+.editor-img li  {
+    flex-grow: calc(var(--r));
+    flex-basis: 0;
+}
+
+.editor-img img  {
+    max-width: 100%;
+}

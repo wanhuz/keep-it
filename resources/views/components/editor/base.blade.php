@@ -3,7 +3,9 @@
 <div class="card">
     <form id="{{ $formId }}">
         @csrf
-        
+
+        <div id={{$editorContainerId}}></div>
+
         <div class="card-body">
             <input id="{{ $titleId }}" type="text" name="title" class="form-control border border-0 shadow-none" placeholder="Title">
             <div id='{{ $contentId }}' class="pt-4 form-control border border-0 shadow-none"></div>
@@ -18,6 +20,7 @@
             <button id="{{ $addImageBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-card-image'></i></button>
 
             <div class="vr align-middle"></div>
+
             <span id="{{ $dropdownTagListId }}" class="dropdown">
                 <button id="{{ $tagShowBtnId }}" class="btn btn-light btn-outline-secondary border border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class='bi bi-tag'></i></button>
                 <div class="dropdown-menu">

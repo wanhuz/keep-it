@@ -25,7 +25,7 @@
     <x-editor.edit></x-editor>
 @endsection
 
-<!-- Main -->
+<!--  Main -->
 @section('content')
     <div class="container-fluid mt-5">
         <div class='row'>    

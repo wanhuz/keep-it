@@ -2,6 +2,8 @@ import {getEditor, getEditPostEditor} from '../wysiwyg/tiptap.js'
 import { updatePage } from './container';
 import {createTag, createEditorTagCheckBox} from '../ui/tag.js';
 import { submitTag } from './tag/editor.js';
+import { addImageForPreview, getAspectRatioFromImg } from './editor-img.js'; 
+import { createPreviewImage } from '../ui/editor-img.js';
 
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
@@ -184,6 +186,7 @@ export function initEditor() {
         e.preventDefault();
         editEditor.commands.toggleOrderedList();
     });
+
     initAddImageButton('#addImgAddBtn');
 }
 
@@ -219,6 +222,8 @@ export function initClickNote() {
 }
 
 function initAddImageButton(btnId) {
+
+
     $(btnId).on('click', (e) => {
         e.preventDefault();
 
@@ -227,6 +232,18 @@ function initAddImageButton(btnId) {
     })
 
     $("#inputImgAdd").change(function(e) {
-        
+        const file = document.querySelector('#inputImgAdd').files[0];
+        const urlImg = URL.createObjectURL(file);
+        const img = new Image();
+
+        img.src = urlImg;
+
+        img.onload = () => {
+            const imgAspectRatio = getAspectRatioFromImg(img.width, img.height);
+            const previewImg = createPreviewImage(imgAspectRatio, urlImg);
+            addImageForPreview('addEditorImgContainerId', previewImg)
+        }
     });
+
+
 }

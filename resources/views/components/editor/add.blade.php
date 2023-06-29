@@ -1,5 +1,6 @@
 <x-editor.base>
     <x-slot:formId>postform</x-slot>
+    <x-slot:editorContainerId>addEditorImgContainerId</x-slot>
     <x-slot:titleId>titleTextArea</x-slot>
     <x-slot:contentId>fullEditorTextArea</x-slot>
     <x-slot:bulletListModalBtnId>bulletListBtn</x-slot>

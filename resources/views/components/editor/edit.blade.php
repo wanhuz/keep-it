@@ -3,6 +3,7 @@
         <div class="modal-content">
             <x-editor.base>
                 <x-slot:formId>editorForm</x-slot>
+                <x-slot:editorContainerId>editEditorContainerId</x-slot>
                 <x-slot:titleId>titleEditor</x-slot>
                 <x-slot:contentId>editPostEditor</x-slot>
                 <x-slot:bulletListModalBtnId>bulletListModalBtn</x-slot>
