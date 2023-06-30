@@ -1,5 +1,5 @@
-import {updateCardContainerBySearch, updateCardContainer, clearCardContainer} from './card.js'
-import { updateSearchTerm } from './container.js';
+import {updateCardContainerBySearch, updateCardContainer, clearCardContainer} from '../card/card.js'
+import { updateSearchTerm } from '../card/container.js';
 
 let typingTimer;
 let doneTypingInterval = 500;

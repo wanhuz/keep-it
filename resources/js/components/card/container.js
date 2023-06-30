@@ -1,5 +1,5 @@
 import { updateCardContainer, updateCardContainerBySearch, updateCardContainerByTag, refreshCardContainerLayout } from "./card";
-import { refreshSidebar } from "./sidebar";
+import { refreshSidebar } from "../sidebar/sidebar";
 
 let currentPageTag = null;
 let currentSearchTerm = null; 

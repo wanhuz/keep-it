@@ -1,9 +1,11 @@
 
-import { createEditorImageContainer } from "../ui/editor-img";
+import { createEditorImageContainer } from "../../views/editor-img";
+import {numberOfImgInContainer, clearImageList} from './image-container';
+
+const MAX_IMG_IN_ONE_CONTAINER = 3;
+const MAX_IMG_CONTAINER_ALLOWED = 3;
 
 export function addImageForPreview(editorImgContainerId, previewImgElement) {
-    const MAX_IMG_IN_ONE_CONTAINER = 3;
-    const MAX_IMG_CONTAINER_ALLOWED = 3;
     const imgContainer = document.querySelectorAll('.editor-img');
 
     for (let i = 0; i < MAX_IMG_CONTAINER_ALLOWED; i++) {
@@ -25,26 +27,23 @@ export function addImageForPreview(editorImgContainerId, previewImgElement) {
     }
 }
 
-export function getAspectRatioFromImg(width, height) {
+export function submitImages(noteId, imageFileList) {
+    let formData = new FormData();
+    formData.append('note_id', noteId);
 
-    // Greatest common divisor
-    function gcd(a,b) {
-        a = Math.abs(a);
-        b = Math.abs(b);
-        if (b > a) {var temp = a; a = b; b = temp;}
-        while (true) {
-            if (b == 0) return a;
-            a %= b;
-            if (a == 0) return b;
-            b %= a;
+    imageFileList.forEach(function(image, i) {
+        formData.append('image_' + i, image);
+    });
+
+    $.ajax({
+        url: "/image/post",
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: () => {
+            clearImageList();
         }
-    }
-
-    const GCD = gcd(width, height);
-    return (width / GCD) + '/' + (height / GCD);
+    })
 }
-
-function numberOfImgInContainer(imgContainer) {
-    return imgContainer.children[0].children.length;
-}
-

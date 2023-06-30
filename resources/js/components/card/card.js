@@ -1,6 +1,6 @@
-import {updateTag} from './tag/card.js'
+import {updateTag} from './tag.js'
 import {getCardContainer} from './container.js'
-import { createCard } from '../ui/card.js';
+import { createCard } from '../../views/card.js';
 
 //Note utility function
 export function getNewNoteId(currentNoteData, newNoteData) {

@@ -1,7 +1,7 @@
-import './wysiwyg/tiptap.js';
-import './components/card.js';
-import './components/sidebar.js';
-import './components/editor.js';
+import './components/wysiwyg/tiptap.js';
+import './components/card/card.js';
+import './components/sidebar/sidebar.js';
+import './components/editor/editor.js';
 import './misc/misc.js';
-import './components/search.js';
+import './components/search/search.js';
 import './init.js';

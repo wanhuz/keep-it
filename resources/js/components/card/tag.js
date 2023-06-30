@@ -1,5 +1,5 @@
-import { refreshCardContainerLayout } from "../card";
-import { createTag } from "../../ui/tag";
+import { refreshCardContainerLayout } from "./card";
+import { createTag } from "../../views/tag";
 
 export function updateTag() {
     $.ajax({

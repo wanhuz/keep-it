@@ -1,9 +1,11 @@
 import {getEditor, getEditPostEditor} from '../wysiwyg/tiptap.js'
-import { updatePage } from './container';
-import {createTag, createEditorTagCheckBox} from '../ui/tag.js';
-import { submitTag } from './tag/editor.js';
-import { addImageForPreview, getAspectRatioFromImg } from './editor-img.js'; 
-import { createPreviewImage } from '../ui/editor-img.js';
+import { updatePage } from '../card/container.js';
+import {createTag, createEditorTagCheckBox} from '../../views/tag.js';
+import { submitTag } from './tag.js';
+import { addImageForPreview, submitImages} from './image.js'; 
+import { getAspectRatioFromImg, getImageList, clearImageContainer } from './image-container.js';
+import { createPreviewImage } from '../../views/editor-img.js';
+
 
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
@@ -44,8 +46,10 @@ export function initClickSubmitEditor() {
             },
             success: function(storedNote) {
                 updatePage();
+                let imageList = getImageList();
 
                 submitTag('#postform', storedNote.id, getAddEditorTagId());
+                submitImages(storedNote.id, imageList);
                 clearAddEditor();
             }
         })
@@ -69,6 +73,7 @@ function clearAddEditor() {
     titleTextArea.value = '';
     editor.commands.clearContent();
     document.getElementById('tagAddEditorContainer').innerHTML = '';
+    clearImageContainer('addEditorImgContainerId');
 }
 
 
@@ -223,27 +228,28 @@ export function initClickNote() {
 
 function initAddImageButton(btnId) {
 
-
     $(btnId).on('click', (e) => {
         e.preventDefault();
-
-        $("#inputImgAdd").val('');
         $('#inputImgAdd').click();
     })
 
-    $("#inputImgAdd").change(function(e) {
-        const file = document.querySelector('#inputImgAdd').files[0];
-        const urlImg = URL.createObjectURL(file);
-        const img = new Image();
-
-        img.src = urlImg;
-
-        img.onload = () => {
-            const imgAspectRatio = getAspectRatioFromImg(img.width, img.height);
-            const previewImg = createPreviewImage(imgAspectRatio, urlImg);
-            addImageForPreview('addEditorImgContainerId', previewImg)
+    $("#inputImgAdd").change(() => {
+        let imageList = getImageList();
+        const files = document.querySelector('#inputImgAdd').files; 
+ 
+        for (let i = 0; i < files.length; i++) { 
+            let file = files[i];
+            const urlImg = URL.createObjectURL(file);
+            const img = new Image(); 
+    
+            img.src = urlImg;
+            imageList.push(file);
+    
+            img.onload = () => {
+                const imgAspectRatio = getAspectRatioFromImg(img.width, img.height);
+                const previewImg = createPreviewImage(imgAspectRatio, urlImg);
+                addImageForPreview('addEditorImgContainerId', previewImg)
+            }
         }
     });
-
-
 }
