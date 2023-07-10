@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     // Image
     Route::post('/image/post', [ImageController::class, 'store']);
+    Route::get('/image/get', [ImageController::class, 'get']);
 
     // Search
     Route::get('/search', [PostController::class, 'search']);

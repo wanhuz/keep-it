@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
+use App\Models\Notes;
 
 class ImageService {
 
@@ -15,6 +16,17 @@ class ImageService {
 
         $this->storeImages($noteId, $images);
 
+    }
+
+    public function handleGet() {
+        $user = Auth::user();
+        $notes = $user->notes();
+
+        $images = $notes->rightJoin('images', 'notes.id', '=', 'images.notes_id')
+                        ->select('images.notes_id', 'images.path', 'images.id')
+                        ->get();
+
+        return $images;
     }
 
     private function storeImages($noteId, $images) {

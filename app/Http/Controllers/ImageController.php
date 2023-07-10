@@ -16,4 +16,8 @@ class ImageController extends Controller
     public function store(Request $request) {
         $this->imageService->handleStore($request);
     }
+
+    public function get() {
+        return $this->imageService->handleGet();
+    }
 }

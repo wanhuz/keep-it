@@ -1,6 +1,8 @@
 import {updateTag} from './tag.js'
 import {getCardContainer} from './container.js'
 import { createCard } from '../../views/card.js';
+import { updateImage } from './image.js';
+
 
 //Note utility function
 export function getNewNoteId(currentNoteData, newNoteData) {
@@ -152,6 +154,7 @@ export function updateCardContainer(searchQuery = null, filterType = null, clear
                 
             updateCard(currentCard, newCard);
             updateTag();
+            updateImage();
             refreshCardContainerLayout();
         }})
 }

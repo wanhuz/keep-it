@@ -74,6 +74,7 @@ function clearAddEditor() {
     editor.commands.clearContent();
     document.getElementById('tagAddEditorContainer').innerHTML = '';
     clearImageContainer('addEditorImgContainerId');
+    clearImageList();
 }
 
 

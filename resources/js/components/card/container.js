@@ -50,3 +50,16 @@ export function resetSearchTerm() {
 export function getCardContainer() {
     return $('#card-container');
 }
+
+export function getCardsId() {
+    let cardIdList = [];
+    const noteElement = document.querySelectorAll('.note[data-id]');
+
+    noteElement.forEach(element => {
+        cardIdList.push(
+            parseInt(element.getAttribute('data-id'))
+        );
+    })
+
+    return cardIdList;
+}

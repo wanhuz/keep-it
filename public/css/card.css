@@ -1,4 +1,3 @@
-
 .card {
     box-sizing: border-box;
 }
@@ -23,3 +22,19 @@
     padding-bottom: 0 !important;
 }
 
+/* Image container */
+.card-img-container ul  {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0 !important;
+    display: flex;
+}
+
+.card-img-container li  {
+    flex-grow: calc(var(--r));
+    flex-basis: 0;
+}
+
+.card-img-container img  {
+    max-width: 100%;
+}
