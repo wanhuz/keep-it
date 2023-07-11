@@ -1,6 +1,6 @@
 export function createCard(title, content, id) {
     const cardHtml = `
-    <div class="card note" data-revision-count="1"  data-id="${id}" >
+    <div class="card note p-0" data-revision-count="1"  data-id="${id}" >
         <div class="card-img"></div>
 
         <div class="card-body note-body text-start">

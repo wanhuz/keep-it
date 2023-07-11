@@ -3,7 +3,7 @@ import { updatePage } from '../card/container.js';
 import {createTag, createEditorTagCheckBox} from '../../views/tag.js';
 import { submitTag } from './tag.js';
 import { addImageForPreview, submitImages} from './image.js'; 
-import { getAspectRatioFromImg, getImageList, clearImageContainer } from './image-container.js';
+import { getAspectRatioFromImg, getImageList, clearImageContainer, clearImageList} from './image-container.js';
 import { createPreviewImage } from '../../views/editor-img.js';
 
 
