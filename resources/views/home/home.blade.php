@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Card container -->
-                <div id='card-container' class='row ms-5'></div>
+                <div id='card-container' class='row ms-1'></div>
             </main>
         </div>
     </div>
