@@ -1,10 +1,10 @@
 import {getEditPostEditor} from '../wysiwyg/tiptap.js'
 import { updatePage } from '../card/container.js';
 import {createTag, createEditorTagCheckBox} from '../../views/tag.js';
-import { addImageForPreview} from './image.js'; 
-import { getAspectRatioFromImg, getImageList} from './image-container.js';
-import { createPreviewImage } from '../../views/editor-img.js';
-
+import { initEditorButtons} from './common.js';
+import { addImageForPreview } from './image/image.js';
+import { clearImageContainer } from './image/container.js';
+import { getAllPreviewElementCopy } from '../card/image.js';
 
 export function initClickUpdateEditorBtn() {
     $(document).on('click', '#saveBtn', function(e) {
@@ -78,23 +78,16 @@ export function initClickEditorTagList() {
 export function initHiddenEditor() {
     $('#editEditor').on('hidden.bs.modal', function () {
         document.querySelector("#editEditor").setAttribute('data-id', -1);
+        clearImageContainer('editEditorContainerId');
     })
 }
 
-export function initEditor() {
+export function initEditEditor() {
     const editEditor = getEditPostEditor();
 
-    $('#bulletListModalBtn').on('click', (e) => {
-        e.preventDefault();
-        editEditor.commands.toggleBulletList();
-    });
-
-    $('#orderedListModalBtn').on('click', (e) => {
-        e.preventDefault();
-        editEditor.commands.toggleOrderedList();
-    });
-
-    initAddImageButton('#addImgAddBtn');
+    initEditorButtons(editEditor, 'bulletListModalBtn', 'orderedListModalBtn');
+    // initAddImageButton('#addImgEditBtn', '#inputImgEdit');
+    // initEditorImageContainer('#inputImgEdit', '#editEditorContainerId');
 }
 
 export function initClickNote() {
@@ -109,49 +102,27 @@ export function initClickNote() {
         let clickedNoteTitle = document.querySelector(`.card.note[data-id="${clickId}"] .card-title`).outerText;
         let clickedNoteBody = document.querySelector(`.card.note[data-id="${clickId}"] .card-content`).innerHTML;
         let clickedNoteTags = document.querySelector(`.card.note[data-id="${clickId}"]`).dataset.tags;
+        let clickedNoteImageElement = getAllPreviewElementCopy(clickId);
     
         document.getElementById('titleEditor').value = clickedNoteTitle;
         editor.commands.setContent(clickedNoteBody);
     
         if (clickedNoteTags === undefined)  {
             tagEditor.innerHTML = "";
-            return;
         }
-    
-        clickedNoteTags = String(clickedNoteTags).split(",");
+        else {
+            clickedNoteTags = String(clickedNoteTags).split(",");
         
-        tagEditor.innerHTML = "";
-        clickedNoteTags.forEach(tag => {
-            tagEditor.append(createTag(tag));
-        });
-    
-    })
-}
-
-function initAddImageButton(btnId) {
-
-    $(btnId).on('click', (e) => {
-        e.preventDefault();
-        $('#inputImgAdd').click();
-    })
-
-    $("#inputImgAdd").change(() => {
-        let imageList = getImageList();
-        const files = document.querySelector('#inputImgAdd').files; 
- 
-        for (let i = 0; i < files.length; i++) { 
-            let file = files[i];
-            const urlImg = URL.createObjectURL(file);
-            const img = new Image(); 
-    
-            img.src = urlImg;
-            imageList.push(file);
-    
-            img.onload = () => {
-                const imgAspectRatio = getAspectRatioFromImg(img.width, img.height);
-                const previewImg = createPreviewImage(imgAspectRatio, urlImg);
-                addImageForPreview('addEditorImgContainerId', previewImg)
-            }
+            tagEditor.innerHTML = "";
+            clickedNoteTags.forEach(tag => {
+                tagEditor.append(createTag(tag));
+            });
         }
-    });
+
+        clickedNoteImageElement.forEach(previewImgElement => {
+            addImageForPreview('editEditorContainerId', previewImgElement);
+        })
+    
+    })
 }
+

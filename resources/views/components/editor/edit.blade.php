@@ -8,7 +8,7 @@
                 <x-slot:contentId>editPostEditor</x-slot>
                 <x-slot:bulletListModalBtnId>bulletListModalBtn</x-slot>
                 <x-slot:orderedListModalBtnId>orderedListModalBtn</x-slot>
-                <x-slot:inputImgId>inputImgEditBtn</x-slot>
+                <x-slot:inputImgId>inputImgEdit</x-slot>
                 <x-slot:addImageBtnId>addImgEditBtn</x-slot>
                 <x-slot:dropdownTagListId>editorTagList</x-slot>
                 <x-slot:tagsContainerId>editorTags</x-slot>

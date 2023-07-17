@@ -1,12 +1,13 @@
 
-import { createEditorImageContainer } from "../../views/editor-img";
-import {numberOfImgInContainer, clearImageList} from './image-container';
+import {createEditorImageContainer} from "../../../views/editor-img";
+import {clearImageList} from './list'; 
+import {numberOfImgInContainer} from "./container";
 
 const MAX_IMG_IN_ONE_CONTAINER = 3;
 const MAX_IMG_CONTAINER_ALLOWED = 3;
 
 export function addImageForPreview(editorImgContainerId, previewImgElement) {
-    const imgContainer = document.querySelectorAll('.editor-img');
+    const imgContainer = document.querySelectorAll(`#${editorImgContainerId} .editor-img`);
 
     for (let i = 0; i < MAX_IMG_CONTAINER_ALLOWED; i++) {
 

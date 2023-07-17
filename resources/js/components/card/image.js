@@ -1,6 +1,6 @@
 import { getCardsId } from "./container";
 import { createCardImageContainer } from "../../views/card";
-import { numberOfImgInContainer, getAspectRatioFromImg } from "../editor/image-container";
+import { numberOfImgInContainer, getAspectRatioFromImg } from "../editor/image/container";
 import { createPreviewImage } from "../../views/editor-img";
 
 export function updateImage() {
@@ -130,15 +130,25 @@ function updateImageSize(noteId) {
     currentNoteImgId = getNoteImageId(noteId);
 
     if (currentNoteImgId.length === 1) {
-        previewImgElement = getPreviewElement(noteId);
+        previewImgElement = getFirstPreviewElement(noteId);
         setPreviewImageSizeRatioToOne(previewImgElement);
     }
 }
 
-function getPreviewElement(noteId) {
-    return document.querySelector(`.note[data-id = "${noteId}"] .preview-img`)
+function getFirstPreviewElement(noteId) {
+    return document.querySelector(`.note[data-id = "${noteId}"] .preview-img`);
 }
 
 function setPreviewImageSizeRatioToOne(previewImgElement) {
     previewImgElement.classList.add('card-img-ratio-1');
+}
+
+export function getAllPreviewElementCopy(noteId) {
+    const previewImgElements =  document.querySelectorAll(`.note[data-id = "${noteId}"] .preview-img`);
+
+    let previewImgElementClone = [...previewImgElements].map((previewImgElement) => {
+        return previewImgElement.cloneNode(true);
+    })
+
+    return [...previewImgElementClone];
 }

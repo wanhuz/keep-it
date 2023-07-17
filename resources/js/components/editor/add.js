@@ -1,9 +1,11 @@
-import { submitTag } from './tag.js';
-import { submitImages} from './image.js'; 
-import { getImageList, clearImageContainer, clearImageList} from './image-container.js';
-import { getEditor } from '../wysiwyg/tiptap.js'
-import { updatePage } from '../card/container.js';
-import { createEditorTagCheckBox } from '../../views/tag.js';
+import {submitTag} from './tag.js';
+import {submitImages} from './image/image.js'; 
+import {clearImageContainer, initEditorImageContainerInput} from './image/container.js';
+import {getEditor} from '../wysiwyg/tiptap.js'
+import {updatePage} from '../card/container.js';
+import {createEditorTagCheckBox} from '../../views/tag.js';
+import {initEditorButtons, initOnClickEditorAddImageButton } from './common.js';
+import {getImageList, clearImageList} from './image/list.js';
 
 export function initClickSimpleEditor() {
     document.getElementById("simpleEditor").addEventListener('click', () => {
@@ -95,14 +97,9 @@ export function initOnClickAddEditorTagList() {
 
 export function initAddEditor() {
     const addEditor = getEditor();
-
-    $('#bulletListBtn').on('click', (e) => {
-        e.preventDefault();
-        addEditor.commands.toggleBulletList();
-    });
-
-    $('#orderedListBtn').on('click', (e) => {
-        e.preventDefault();
-        addEditor.commands.toggleOrderedList();
-    });
+    
+    initEditorButtons(addEditor, 'bulletListBtn', 'orderedListBtn');
+    initOnClickEditorAddImageButton('addImgAddBtn', 'inputImgAdd');
+    initEditorImageContainerInput('#inputImgAdd', 'addEditorImgContainerId');
 }
+
