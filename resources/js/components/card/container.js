@@ -24,7 +24,7 @@ export function updatePage() {
 }
 
 export function initPage() {
-    window.setInterval(updatePage, 5000);
+    window.setInterval(updatePage, 1000);
     window.setInterval(refreshSidebar, 5000);
     
     updatePage();

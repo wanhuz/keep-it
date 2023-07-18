@@ -39,6 +39,10 @@
     padding: 0;
     margin-bottom: 0 !important;
     display: flex;
+
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-top-right-radius: var(--bs-card-inner-border-radius);
+    overflow-x: hidden;
 }
 
 .editor-img li  {

@@ -13,7 +13,7 @@ export function initEditorButtons(editorWYSIWYG, bulletListBtnId, orderedListBtn
 export function initOnClickEditorAddImageButton(btnId, inputId) {
     $(`#${btnId}`).on('click', (e) => {
         e.preventDefault();
-        $(`${inputId}`).click();
+        $(`#${inputId}`).click();
     })
 }
 
