@@ -1,6 +1,6 @@
-import { updateTag } from "./card";
-import { refreshSidebar } from "../sidebar";
-import { createTagListModal } from "../../ui/tag";
+import { updateTag } from "../card/tag";
+import { refreshSidebar } from "../sidebar/sidebar";
+import { createTagListModal } from "../../views/tag";
 
 function updateManageTagModal() {
     $.ajax({

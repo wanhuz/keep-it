@@ -10,7 +10,6 @@ use App\Models\User;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
-use Artisan;
 
 class SettingService {
 

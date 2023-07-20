@@ -1,9 +1,12 @@
 
 
 <div class="card">
-    <form id="{{ $formId }}">
+    <form id="{{ $formId }}" >
         @csrf
-        
+
+        <div id={{$editorContainerId}}></div>
+        <input id="{{ $inputImgId }}" type="file" class="d-none" multiple />
+
         <div class="card-body">
             <input id="{{ $titleId }}" type="text" name="title" class="form-control border border-0 shadow-none" placeholder="Title">
             <div id='{{ $contentId }}' class="pt-4 form-control border border-0 shadow-none"></div>
@@ -14,8 +17,10 @@
         <div class="card-footer bg-light w-100">
             <button id="{{ $bulletListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-list-task'></i></button>
             <button id="{{ $orderedListModalBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-123'></i></button>
-
+           
+            <button id="{{ $addImageBtnId }}" class='btn btn-light btn-outline-secondary border border-0'><i class='bi bi-card-image'></i></button>
             <div class="vr align-middle"></div>
+
             <span id="{{ $dropdownTagListId }}" class="dropdown">
                 <button id="{{ $tagShowBtnId }}" class="btn btn-light btn-outline-secondary border border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class='bi bi-tag'></i></button>
                 <div class="dropdown-menu">

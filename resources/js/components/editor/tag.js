@@ -1,5 +1,5 @@
-import { updateTag } from "./card";
-import { createTag } from "../../ui/tag";
+import { updateTag } from "../card/tag";
+import { createTag } from "../../views/tag";
 
 function updateEditorTagContainer() {
     $.ajax({

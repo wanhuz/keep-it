@@ -14,12 +14,16 @@ class Notes extends Model
         'body',
     ];
 
-    public function tags() {
-        return $this->belongsToMany(Tag::class);
-    }
-
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function images() {
+        return $this->hasMany(Image::class, 'notes_id');
+    }
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
     }
 
     public function scopeFilter($query, array $filters) {

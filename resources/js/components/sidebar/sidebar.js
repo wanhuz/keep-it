@@ -1,6 +1,6 @@
-import {getCardContainer, resetPageTag, resetSearchTerm, updatePageTag} from './container'
-import { updateCardContainerByTag, updateCardContainer, clearCardContainer } from './card'
-import { createSidebarBtn } from '../ui/sidebar'
+import {getCardContainer, resetPageTag, resetSearchTerm, updatePageTag} from '../card/container'
+import { updateCardContainerByTag, updateCardContainer, clearCardContainer } from '../card/card'
+import { createSidebarBtn } from '../../views/sidebar'
 
 function toggleSidebar() {
     var sidebar = document.querySelector("#sidebar")

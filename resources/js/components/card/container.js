@@ -1,5 +1,5 @@
 import { updateCardContainer, updateCardContainerBySearch, updateCardContainerByTag, refreshCardContainerLayout } from "./card";
-import { refreshSidebar } from "./sidebar";
+import { refreshSidebar } from "../sidebar/sidebar";
 
 let currentPageTag = null;
 let currentSearchTerm = null; 
@@ -24,7 +24,7 @@ export function updatePage() {
 }
 
 export function initPage() {
-    window.setInterval(updatePage, 5000);
+    window.setInterval(updatePage, 1000);
     window.setInterval(refreshSidebar, 5000);
     
     updatePage();
@@ -49,4 +49,17 @@ export function resetSearchTerm() {
 
 export function getCardContainer() {
     return $('#card-container');
+}
+
+export function getCardsId() {
+    let cardIdList = [];
+    const noteElement = document.querySelectorAll('.note[data-id]');
+
+    noteElement.forEach(element => {
+        cardIdList.push(
+            parseInt(element.getAttribute('data-id'))
+        );
+    })
+
+    return cardIdList;
 }

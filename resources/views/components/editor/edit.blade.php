@@ -3,10 +3,13 @@
         <div class="modal-content">
             <x-editor.base>
                 <x-slot:formId>editorForm</x-slot>
+                <x-slot:editorContainerId>editEditorContainerId</x-slot>
                 <x-slot:titleId>titleEditor</x-slot>
                 <x-slot:contentId>editPostEditor</x-slot>
                 <x-slot:bulletListModalBtnId>bulletListModalBtn</x-slot>
                 <x-slot:orderedListModalBtnId>orderedListModalBtn</x-slot>
+                <x-slot:inputImgId>inputImgEdit</x-slot>
+                <x-slot:addImageBtnId>addImgEditBtn</x-slot>
                 <x-slot:dropdownTagListId>editorTagList</x-slot>
                 <x-slot:tagsContainerId>editorTags</x-slot>
                 <x-slot:tagShowBtnId>tagNoteBtn</x-slot>

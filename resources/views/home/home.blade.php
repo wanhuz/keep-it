@@ -25,7 +25,7 @@
     <x-editor.edit></x-editor>
 @endsection
 
-<!-- Main -->
+<!--  Main -->
 @section('content')
     <div class="container-fluid mt-5">
         <div class='row'>    
@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Card container -->
-                <div id='card-container' class='row ms-5'></div>
+                <div id='card-container' class='row ms-4'></div>
             </main>
         </div>
     </div>

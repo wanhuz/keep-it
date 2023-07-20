@@ -1,7 +1,8 @@
 export function createEditorTagCheckBox(name, id) {
     const tagCheckboxHTML = `
-    <label class="dropdown-item tag-checkbox"> <input type="checkbox" name="${name}" value="${id}">
-        <span class="ps-2">${name}</span>
+    <label class="dropdown-item tag-checkbox"> 
+        <input type="checkbox" name="${name}" value="${id}" class="align-middle">
+        <span class="ps-2 align-middle">${name}</span>
     </label>
     `
     const tagCheckboxDiv = document.createElement("div");
