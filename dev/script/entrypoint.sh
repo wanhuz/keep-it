@@ -6,7 +6,7 @@ if test -e /entry/first-run; then
     composer install
     composer update
 
-    /entry/wait-for-it.sh db:3306 -t 45
+    /entry/wait-for-it.sh db:5432 -t 45
     php /var/www/artisan config:cache
     php /var/www/artisan key:generate
     php /var/www/artisan config:cache
