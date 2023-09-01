@@ -1,0 +1,55 @@
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #adb5bd;
+    pointer-events: none;
+    height: 0;
+}
+
+.ProseMirror:focus {
+    outline: none;
+}
+
+.ProseMirror p {
+    margin: 0;
+}
+
+.ProseMirror ol,
+.ProseMirror ul {
+    padding-left: 1.2em;
+}
+
+/* [data-type="taskList"] p,
+[data-type="taskList"] div {
+    display: inline;
+}
+
+[data-type='taskList'] {
+    list-style-type: none; 
+    padding: 0 !important;
+}
+
+[data-type="taskList"] p {
+    margin-left: 0.3em !important;
+} */
+
+/* Editor image container */
+.editor-img ul  {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0 !important;
+    display: flex;
+
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-top-right-radius: var(--bs-card-inner-border-radius);
+    overflow-x: hidden;
+}
+
+.editor-img li  {
+    flex-grow: calc(var(--r));
+    flex-basis: 0;
+}
+
+.editor-img img  {
+    max-width: 100%;
+}

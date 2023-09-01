@@ -12,35 +12,26 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
 
 class SettingService {
-    private function getUser() {
-        $userId = Auth::id();
-        return User::find($userId);
-    }
 
-    private function hex_to_rgba($hex) {
-        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
-        return $r . "," . $g . "," . $b;
+    private function getUser() {
+        return Auth::user();
     }
 
     public function get() {
         return $this->getUser()->settings()->get();
     }
 
-    public static function init($userId) {
+    public function init() {
         $userid = Auth::id();
 
         $defaultsettings = array(
             'app-name' => 'Keep-it',
-            'card-size-style' => 'fixed',
-            'card-size' => 'medium',
-            'card-font-size' => 'medium',
+            'card-size-style' => 'dynamic',
+            'card-size' => 'small',
+            'card-font-size' => 'small',
             'bg-color' => '242,242,242',
             'head-color' => '2,136,209',
             'side-color' => '255,255,255',
-            'header-tpc' => '1',
-            'sidebar-tpc' => '1',
-            'card-tpc' => '1',
-            'bg-img' => '',
             'favicon-img' => ''
         );
 
@@ -80,24 +71,8 @@ class SettingService {
 
                 $value = $fileInput->store($fileName); 
             }
-            else if ($setting == "bg-img") {
-                $fileName = "bg-img";
-                $fileInput = request()->file($fileName);
-                
-                Validator::validate($userSetting, [
-                    $fileName => [
-                        'required',
-                        File::image()->max($maxFileSize * 1024)
-                    ]
-                ]);
-
-                $value = $fileInput->store($fileName);
-            }
-            else if (str_contains($setting, "-tpc")) {
-                $value = $value / 100;
-            }
             else if (str_contains($setting, "-color")) {
-                $value = $this->hex_to_rgba($value);
+                $value = hexToRgba($value);
             }
             else if ($setting == "remove-favicon-img") {
                 $favicon = Setting::firstWhere("key", "=", "favicon-img");
@@ -105,19 +80,37 @@ class SettingService {
                 $favicon->save();
                 continue;
             }
-            else if ($setting == "remove-bg-img") {
-                $bgimg = Setting::firstWhere("key", "=", "bg-img");
-                $bgimg->value = "";
-                $bgimg->save();
-                continue;
-            }
 
             $setting = $user->settings()->firstWhere('key', '=', $setting);
             $setting->value = $value;
             $setting->save();
         }
-        
+
         return $userSetting;
     }
 
+    public function isUserSettingExists() {
+        $user = Auth::user();
+        $settings = $user->settings()->get();
+
+        return (!($settings->first() == null)) ? true : false;
+    }
+
 }
+
+// private function validateFavicon() {
+//     //..
+// }
+
+// private function storeFavicon() {
+//     //..
+// }
+
+// private function storeColor() {
+//     //..
+// }
+
+// private function removeFavicon() {
+
+// }
+

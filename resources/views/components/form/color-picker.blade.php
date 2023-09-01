@@ -1,4 +1,4 @@
-<input type="color" list="presetColors" name="{{$slot}}">
+<input type="color" class=" form-control form-control-color" list="presetColors" name="{{ $name }}" value="{{ $value }}">
 <datalist id="presetColors">
     <option>#D32F2F</option>
     <option>#C2185B</option>

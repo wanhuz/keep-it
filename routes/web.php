@@ -2,35 +2,47 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CustomizationController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageController; 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-Route::get('/', [PostController::class, 'index'])->middleware('auth');
-Route::post('/post', [PostController::class, 'store']);
+Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 
-Route::get('/load', [PostController::class, 'load'])->middleware('auth');
-Route::post('/update', [PostController::class, 'update']);
-Route::post('/delete', [PostController::class, 'delete']);
+// Authenticated routes...
+Route::middleware('auth')->group(function () {
 
-Route::get('/load-tag', [TagController::class, 'load'])->middleware('auth');
-Route::get('/load-note-tag', [TagController::class, 'load_notes_tag'])->middleware('auth');
-Route::post('/load-note-by-tag', [PostController::class, 'load_note_by_tag']);
-Route::post('/post-tag', [TagController::class, 'add']);
-Route::post('/add-tag', [TagController::class, 'tag_note']);
-Route::post('/delete-tag', [TagController::class, 'delete']);
-Route::post('/update-tag', [TagController::class, 'update']);
+    // Posts
+    Route::post('/post', [PostController::class, 'store']);
+    Route::get('/load', [PostController::class, 'load']);
+    Route::post('/update', [PostController::class, 'update']);
+    Route::post('/delete', [PostController::class, 'delete']);
 
-Route::get('/search', [PostController::class, 'search'])->middleware('auth');
+    // Tagging
+    Route::get('/load-tag', [TagController::class, 'load']);
+    Route::get('/load-note-tag', [TagController::class, 'load_notes_tag']);
+    Route::post('/post-tag', [TagController::class, 'store']);
+    Route::post('/add-tag', [TagController::class, 'tag']);
+    Route::post('/delete-tag', [TagController::class, 'delete']);
+    Route::post('/update-tag', [TagController::class, 'update']);
 
-Route::get('/get-setting', [SettingController::class, 'get'])->middleware('auth');
-Route::post('/post-setting', [SettingController::class, 'store']);
+    // Image
+    Route::post('/image/post', [ImageController::class, 'store']);
+    Route::get('/image/get', [ImageController::class, 'get']);
+
+    // Search
+    Route::get('/search', [PostController::class, 'search']);
+
+    // Settings
+    Route::get('/settings/home', [CustomizationController::class, 'home']);
+    Route::get('/settings/layout', [CustomizationController::class, 'layout']);
+    Route::get('/settings/theme', [CustomizationController::class, 'theme']);
+    Route::get('/settings/user', [ProfileController::class, 'user']);
+    Route::get('/settings/security', [ProfileController::class, 'security']);
+
+    Route::post('/settings/user', [ProfileController::class, 'store']);
+    Route::get('/get-setting', [CustomizationController::class, 'get']);
+    Route::post('/post-setting', [CustomizationController::class, 'store']);
+
+});

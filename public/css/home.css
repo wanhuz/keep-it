@@ -1,0 +1,98 @@
+.zoom {
+    animation: zoomIn 0.2s;
+    -moz-animation: zoomIn 0.2s; /* Firefox */
+    -webkit-animation: zoomIn 0.2s; /* Safari and Chrome */
+    -o-animation: zoomIn 0.2s; /* Opera */
+}
+
+@keyframes zoomIn {
+    from { scale:0; }
+    to { scale:1; }
+}
+@-moz-keyframes zoomIn { /* Firefox */
+    from { scale:0; }
+    to { scale:1; }
+}
+@-webkit-keyframes zoomIn { /* Safari and Chrome */
+    from { scale:0; }
+    to { scale:1; }
+}
+@-o-keyframes zoomIn { /* Opera */
+    from { scale:0; }
+    to { scale: 1; }
+}
+
+
+#simpleEditor button {
+    border: 1px solid gainsboro;
+}
+
+.card-title {
+    font-size: inherit; 
+}
+
+/* All size are in proportion to 1.8:1.0 */
+.note {
+    --large-width: 306px;
+    --medium-width: 270px;
+    --small-width: 225px;
+    --large-height: 170px;
+    --medium-height: 150px;
+    --small-height: 125px;
+
+    margin: 5px;
+}
+
+.card-tag {
+    width: fit-content; 
+    height: 24px; 
+    font-size: 12px;
+    background: #e9ecef;
+}
+
+.bg-light-dark {
+    background: #e9ecef;
+}
+
+.color-picker {
+    background-color: grey;
+}
+
+.modal-body .tab-content{
+    height: 50vh;
+    width: 50vh;
+}
+
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    position: fixed; 
+    margin-left: -230px; 
+    background-color: #7952b3;
+    transition: 0.4s;
+}
+
+.active-nav {
+    margin-left: 0;
+}
+
+.active-cont {
+    padding-left: 230px;
+}
+
+.main-container {
+    transition: 0.2s;
+}
+
+.tag-btn {
+    height: 50px;
+    border-radius: 35px;
+    margin-right: 50px;
+}
+
+.tag-btn:hover {
+    -moz-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.1);
+}
+
