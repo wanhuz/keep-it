@@ -7,8 +7,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController; 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::get('/', [HomeController::class, 'index'])->middleware('auth');
+// Route::get('/', [HomeController::class, 'index'])->middleware('auth');
+
+Route::get('/', function () {
+    return Inertia::render('App');
+});
 
 // Authenticated routes...
 Route::middleware('auth')->group(function () {
