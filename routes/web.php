@@ -7,7 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController; 
 use Illuminate\Support\Facades\Route;
-
+use App\Livewire\Counter;
+Route::get('/counter', Counter::class);
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 
 // Authenticated routes...
